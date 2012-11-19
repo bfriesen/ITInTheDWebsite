@@ -244,6 +244,10 @@
   <ItemGroup>
     <Content Include="Views\About\Index.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\bootswatch.less" />
+    <None Include="Content\variables.less" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
