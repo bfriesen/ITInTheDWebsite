@@ -184,6 +184,10 @@
     <Content Include="Content\themes\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\Carousel\Ford Mustang 1.jpg" />
+    <Content Include="Images\Carousel\Ford Mustang 2.jpg" />
+    <Content Include="Images\Carousel\Ford Shelby GT500 1.jpg" />
+    <Content Include="Images\Carousel\Nissan GT-R 1.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.8.2-vsdoc.js" />

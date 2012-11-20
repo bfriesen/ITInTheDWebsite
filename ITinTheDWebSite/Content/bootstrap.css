@@ -4919,7 +4919,7 @@ a.badge:hover {
   filter: alpha(opacity=50);
 }
 .carousel-control.right {
-  left: auto;
+  left: 1200px;
   right: 15px;
 }
 .carousel-control:hover {
