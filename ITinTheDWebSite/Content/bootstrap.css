@@ -3494,7 +3494,7 @@ input[type="submit"].btn.btn-mini {
 }
 .navbar {
   overflow: visible;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   color: #777777;
   *position: relative;
   *z-index: 2;
@@ -3616,7 +3616,7 @@ input[type="submit"].btn.btn-mini {
 .navbar-search {
   position: relative;
   float: left;
-  margin-top: 15px;
+  margin-top: 0px;
   margin-bottom: 0;
 }
 .navbar-search .search-query {
@@ -5068,7 +5068,7 @@ hr {
   font-size: 24px;
   font-weight: bold;
   text-shadow: none;
-  text-transform: uppercase;
+  text-transform: none;
 }
 .navbar .nav > li > a {
   padding: 20px 10px 20px;

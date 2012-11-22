@@ -1557,14 +1557,6 @@
             The _request context.
             </summary>
         </member>
-        <member name="M:DotNetOpenAuth.AspNet.OpenAuthSecurityManager.#ctor(System.Web.HttpContextBase)">
-            <summary>
-            Initializes a new instance of the <see cref="T:DotNetOpenAuth.AspNet.OpenAuthSecurityManager"/> class.
-            </summary>
-            <param name="requestContext">
-            The request context. 
-            </param>
-        </member>
         <member name="M:DotNetOpenAuth.AspNet.OpenAuthSecurityManager.#ctor(System.Web.HttpContextBase,DotNetOpenAuth.AspNet.IAuthenticationClient,DotNetOpenAuth.AspNet.IOpenAuthDataProvider)">
             <summary>
             Initializes a new instance of the <see cref="T:DotNetOpenAuth.AspNet.OpenAuthSecurityManager"/> class.
