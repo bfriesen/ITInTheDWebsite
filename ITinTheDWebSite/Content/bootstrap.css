@@ -172,6 +172,8 @@ a:hover {
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  height: 80px;
+  width: 120px;
 }
 .img-circle {
   -webkit-border-radius: 500px;
@@ -1007,6 +1009,7 @@ textarea::-webkit-input-placeholder {
 }
 .input-xlarge {
   width: 270px;
+  height: 120px;
 }
 .input-xxlarge {
   width: 530px;

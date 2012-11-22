@@ -591,18 +591,6 @@ tr.pager td {
     padding: 0 0.25em 0 0;
 }
 
-img.EducatorImages
-{
-    clear:both;
-    width: 100px;
-    height: 80px;
-}
-
-p.EducatorText
-{
-    float: left;
-}
-
 
 /********************
 *   Mobile Styles   *
