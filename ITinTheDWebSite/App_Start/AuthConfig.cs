@@ -18,9 +18,9 @@ namespace ITinTheDWebSite
              //   clientId: "",
                // clientSecret: "");
 
-            OAuthWebSecurity.RegisterTwitterClient(
-                consumerKey: "",
-                consumerSecret: "");
+           // OAuthWebSecurity.RegisterTwitterClient(
+               // consumerKey: "",
+             //   consumerSecret: "");
 
             //OAuthWebSecurity.RegisterFacebookClient(
             //    appId: "",
