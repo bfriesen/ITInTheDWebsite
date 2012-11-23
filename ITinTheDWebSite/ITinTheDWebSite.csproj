@@ -188,8 +188,14 @@
     <Content Include="Images\Carousel\Ford Mustang 1.jpg" />
     <Content Include="Images\Carousel\Ford Mustang 2.jpg" />
     <Content Include="Images\Carousel\Ford Shelby GT500 1.jpg" />
+    <Content Include="Images\Carousel\ITdGroup.jpg" />
     <Content Include="Images\Carousel\Nissan GT-R 1.jpg" />
+    <Content Include="Images\Carousel\OutsourceDetroit2.jpg" />
     <Content Include="Images\Carousel\QLogo.jpg" />
+    <Content Include="Images\Carousel\Quicken.jpg" />
+    <Content Include="Images\SponsorsAccordion\220px-CompuwareLogo.png" />
+    <Content Include="Images\SponsorsAccordion\GalaxESolutions.JPG" />
+    <Content Include="Images\SponsorsAccordion\MarketingAssociates.JPG" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.8.2-vsdoc.js" />
