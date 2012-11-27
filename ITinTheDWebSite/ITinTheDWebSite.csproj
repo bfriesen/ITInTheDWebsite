@@ -197,6 +197,7 @@
     <Content Include="Images\SponsorsAccordion\220px-CompuwareLogo.png" />
     <Content Include="Images\SponsorsAccordion\GalaxESolutions.JPG" />
     <Content Include="Images\SponsorsAccordion\MarketingAssociates.JPG" />
+    <Content Include="Images\Trainers\dhuston.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.8.2-vsdoc.js" />
@@ -276,6 +277,7 @@
     <Content Include="Views\Sponsors\Index.cshtml" />
     <Content Include="Views\Email\Sendit.cshtml" />
     <Content Include="Views\Shared\_ErrorReport.cshtml" />
+    <Content Include="Views\Trainers\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
