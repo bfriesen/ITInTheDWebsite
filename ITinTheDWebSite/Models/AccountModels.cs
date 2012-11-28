@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Globalization;
 using System.Web.Mvc;
 using System.Web.Security;
+using DataAnnotationsExtensions;
 
 namespace ITinTheDWebSite.Models
 {
@@ -59,8 +60,9 @@ namespace ITinTheDWebSite.Models
     public class LoginModel
     {
         [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
+        [Email]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -74,8 +76,9 @@ namespace ITinTheDWebSite.Models
     public class RegisterModel
     {
         [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
+        [Email]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
