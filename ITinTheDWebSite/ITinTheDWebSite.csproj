@@ -184,6 +184,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Application.cs" />
     <Compile Include="Models\EmailFields.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -349,6 +350,7 @@
     <Content Include="Views\Shared\_ErrorReport.cshtml" />
     <Content Include="Views\Trainers\Index.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
+    <Content Include="Views\Home\Application.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

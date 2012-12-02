@@ -28,6 +28,18 @@
                 @Html.PasswordFor(m => m.ConfirmPassword)
             </li>
         </ol>
+        <div class="btn-group" data-toggle="buttons-radio">
+        <button type="button" class="btn">Student</button>
+        <button type="button" class="btn">IT Professionals</button>
+         <button type="button" class="btn">IT Professionals</button>
+        </div>
+       
+        <br />
+        <input type="radio" name="rl" value="Student" />Student
+        <input type="radio" name="rl" value="Student" />IT Professionals
+        <input type="radio" name="rl" value="Student" />What's the third?
+        <br />
+        <br />
         <input type="submit" value="Register" />
     </fieldset>
 }

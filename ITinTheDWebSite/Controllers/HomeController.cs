@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ITinTheDWebSite.Models;
 
 namespace ITinTheDWebSite.Controllers
 {
@@ -14,6 +15,12 @@ namespace ITinTheDWebSite.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+        public ActionResult Application()
+        {
+            Application app = new Application();
+            app.LastName = Request.Form["lastname"];
+            return View(app);
         }
 
     }
