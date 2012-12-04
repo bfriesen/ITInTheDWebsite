@@ -4853,6 +4853,7 @@ a.badge:hover {
   position: relative;
   margin-bottom: 20px;
   line-height: 1;
+  width: 80%;
 }
 .carousel-inner {
   overflow: hidden;
