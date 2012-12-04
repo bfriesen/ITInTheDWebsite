@@ -34,22 +34,22 @@ namespace ITinTheDWebSite
         {
             WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
 
-            var roles = (SimpleRoleProvider)Roles.Provider;
-            var membership = (SimpleMembershipProvider)Membership.Provider;
+            //var roles = (SimpleRoleProvider)Roles.Provider;
+            //var membership = (SimpleMembershipProvider)Membership.Provider;
 
-            /* make sure user miticv is admin user! */
-            if (!roles.RoleExists("Admin"))
-            {
-                roles.CreateRole("Admin");
-            }
-            if (membership.GetUser("miticv", false) == null)
-            {
-                membership.CreateUserAndAccount("miticv", "password");
-            }
-            if (!roles.GetRolesForUser("miticv").Contains("Admin"))
-            {
-                roles.AddUsersToRoles(new[] { "miticv" }, new[] { "admin" });
-            }
+            ///* make sure user miticv is admin user! */
+            //if (!roles.RoleExists("Admin"))
+            //{
+            //    roles.CreateRole("Admin");
+            //}
+            //if (membership.GetUser("miticv", false) == null)
+            //{
+            //    membership.CreateUserAndAccount("miticv", "password");
+            //}
+            //if (!roles.GetRolesForUser("miticv").Contains("Admin"))
+            //{
+            //    roles.AddUsersToRoles(new[] { "miticv" }, new[] { "admin" });
+            //}
         }
     }
 
