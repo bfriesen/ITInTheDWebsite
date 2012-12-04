@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using WebMatrix.WebData;
+using System.Web.Security;
 
 namespace ITinTheDWebSite
 {
@@ -16,9 +17,10 @@ namespace ITinTheDWebSite
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
-        {
-            WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+        {            
+            SeedMembership();
             AreaRegistration.RegisterAllAreas();
+
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
@@ -26,5 +28,29 @@ namespace ITinTheDWebSite
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
         }
+
+
+        private void SeedMembership()
+        {
+            WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+
+            var roles = (SimpleRoleProvider)Roles.Provider;
+            var membership = (SimpleMembershipProvider)Membership.Provider;
+
+            /* make sure user miticv is admin user! */
+            if (!roles.RoleExists("Admin"))
+            {
+                roles.CreateRole("Admin");
+            }
+            if (membership.GetUser("miticv", false) == null)
+            {
+                membership.CreateUserAndAccount("miticv", "password");
+            }
+            if (!roles.GetRolesForUser("miticv").Contains("Admin"))
+            {
+                roles.AddUsersToRoles(new[] { "miticv" }, new[] { "admin" });
+            }
+        }
     }
+
 }
