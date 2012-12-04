@@ -1,23 +1,45 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-<div id="myCarousel" class="carousel slide">
-    <!-- Carousel items -->
-    <div class="carousel slide">
-        <div class="active item">
-            <a class="image" href="home.html"></a><a href="home.html">
-                <img alt="" src="../../Images/Carousel/OutsourceDetroit2.jpg"></a></div>
+   <!-- Carousel
+    ================================================== -->
+    <div id="myCarousel" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="../../Images/Carousel/OutsourceDetroit2.jpg"> alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Example headline.</h1>
+              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              @Html.ActionLink("Apply Now","Register", "Account")</li>
+              @*@<a class="btn btn-large btn-primary" href="#">Sign up today</a>@*@
+            </div>
+          </div>
+        </div>
         <div class="item">
-            <a href="home.html">
-                <img alt="" src="../../Images/Carousel/ITdGroup.jpg"></a></div>
+          <img src="../../Images/Carousel/ITdGroup.jpg"> alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Another example headline.</h1>
+              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <a class="btn btn-large btn-primary" href="#">Learn more</a>
+            </div>
+          </div>
+        </div>
         <div class="item">
-            <a href="home.html">
-                <img alt="" src="../../Images/Carousel/Quicken.jpg"></a></div>        
-    </div>
-    <!-- Carousel nav -->
-    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-</div>
+          <img src="../../Images/Carousel/Quicken.jpg"> alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>One more for good measure.</h1>
+              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <a class="btn btn-large btn-primary" href="#">Browse gallery</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    </div><!-- /.carousel -->
 <!-- Headings & Paragraph Copy -->
 <div class="row">
     <div class="span4">
