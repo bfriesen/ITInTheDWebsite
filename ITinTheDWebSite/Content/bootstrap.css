@@ -145,7 +145,7 @@ textarea {
 }
 body {
   margin: 0;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: Century Schoolbook, "Century Schoolbook", Times, serif;
   font-size: 14px;
   line-height: 20px;
   color: #777777;
@@ -3857,22 +3857,22 @@ input[type="submit"].btn.btn-mini {
   border-radius: 6px 0 6px 6px;
 }
 .navbar-inverse {
-  color: #bbbbbb;
+  color: #bf5f00;
 }
 .navbar-inverse .navbar-inner {
   background-color: #1b1b1b;
-  background-image: -moz-linear-gradient(top, #222222, #111111);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#222222), to(#111111));
-  background-image: -webkit-linear-gradient(top, #222222, #111111);
-  background-image: -o-linear-gradient(top, #222222, #111111);
-  background-image: linear-gradient(to bottom, #222222, #111111);
+  background-image: -moz-linear-gradient(top, #bf5f00, #DF7401);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#bf5f00), to(#111111));
+  background-image: -webkit-linear-gradient(top, #bf5f00, #DF7401);
+  background-image: -o-linear-gradient(top, #bf5f00, #DF7401);
+  background-image: linear-gradient(to bottom, #bf5f00, #111111);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff222222', endColorstr='#ff111111', GradientType=0);
-  border-color: #252525;
+  border-color: #bf5f00;
 }
 .navbar-inverse .brand,
 .navbar-inverse .nav > li > a {
-  color: #bbbbbb;
+  color: black;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 .navbar-inverse .brand:hover,
@@ -4850,10 +4850,12 @@ a.badge:hover {
   border-top: 1px solid #e5e5e5;
 }
 .carousel {
-  position: relative;
+  position:relative;
   margin-bottom: 20px;
   line-height: 1;
+  background-co
   width: 80%;
+  
 }
 .carousel-inner {
   overflow: hidden;
@@ -4867,9 +4869,11 @@ a.badge:hover {
   -moz-transition: 0.6s ease-in-out left;
   -o-transition: 0.6s ease-in-out left;
   transition: 0.6s ease-in-out left;
+  
 }
 .carousel .item > img {
   display: block;
+  margin: 0 auto;
   width: 100%;
   line-height: 1;
 }
