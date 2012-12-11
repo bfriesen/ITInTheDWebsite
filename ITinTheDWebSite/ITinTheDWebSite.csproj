@@ -185,6 +185,8 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Application.cs" />
     <Compile Include="Models\EmailFields.cs" />
+    <Compile Include="Models\Rss.cs" />
+    <Compile Include="Models\RssReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -253,16 +255,23 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="Content\themes\bootstrap.min.css" />
     <Content Include="Global.asax" />
+    <Content Include="Images\Carousel\1_zpse10cfba6.jpg" />
     <Content Include="Images\Carousel\220px-CompuwareLogo.png" />
     <Content Include="Images\Carousel\Fathead_MLB_RealBIG_240512044035.jpg" />
     <Content Include="Images\Carousel\Ford Mustang 1.jpg" />
     <Content Include="Images\Carousel\Ford Mustang 2.jpg" />
     <Content Include="Images\Carousel\Ford Shelby GT500 1.jpg" />
+    <Content Include="Images\Carousel\Forza-4-Hyundai-Veloster-Turbo.jpg" />
     <Content Include="Images\Carousel\ITdGroup.jpg" />
+    <Content Include="Images\Carousel\modified-hyundai-veloster-turbo-coupe-3-doors-wide-body-kit-eyelids-.jpg" />
+    <Content Include="Images\Carousel\NearlyBlackandWhiteCityColiseum-long goodbye.png" />
     <Content Include="Images\Carousel\Nissan GT-R 1.jpg" />
     <Content Include="Images\Carousel\OutsourceDetroit2.jpg" />
     <Content Include="Images\Carousel\QLogo.jpg" />
     <Content Include="Images\Carousel\Quicken.jpg" />
+    <Content Include="Images\Carousel\Veloster-Turbo-1_2354063b.jpg" />
+    <Content Include="Images\Carousel\waynesworldautobloguk-hyundai-veloster-turbo-se-31.jpg" />
+    <Content Include="Images\Carousel\xl_Hyunda-VT-624-2.png" />
     <Content Include="Images\SponsorsAccordion\220px-CompuwareLogo.png" />
     <Content Include="Images\SponsorsAccordion\GalaxESolutions.JPG" />
     <Content Include="Images\SponsorsAccordion\MarketingAssociates.JPG" />
@@ -332,6 +341,7 @@
     <Content Include="Views\About\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Content\bootswatch.less" />
     <None Include="Content\variables.less" />
     <Content Include="Views\Account\Register.cshtml" />
