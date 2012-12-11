@@ -3867,7 +3867,7 @@ background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(.5, rgba(255,
 background-image: -moz-linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
 background-image: -o-linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
 background-image: linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
-
+progid:DXImageTransform.Microsoft.gradient(startColorstr='#bf5f00', endColorstr='#bf5f00', GradientType=0); BORDER-LEFT: #bf5f00 1px solid;
 }
 .navbar-inverse .brand,
 .navbar-inverse .nav > li > a {
@@ -4940,10 +4940,10 @@ a.badge:hover {
 }
 .carousel-caption {
   position: absolute;
-  left: 0;
+  left: 1;
   right: 0;
   bottom: 0;
-  padding: 15px;
+  padding: 0px;
   background: #777777;
   background: rgba(0, 0, 0, 0.75);
 }
