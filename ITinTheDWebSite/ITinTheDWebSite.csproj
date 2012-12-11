@@ -257,18 +257,24 @@
     <Content Include="Global.asax" />
     <Content Include="Images\Carousel\1_zpse10cfba6.jpg" />
     <Content Include="Images\Carousel\220px-CompuwareLogo.png" />
+    <Content Include="Images\Carousel\bg_navbar.png" />
+    <Content Include="Images\Carousel\bg_technews_body.png" />
+    <Content Include="Images\Carousel\bg_technews_head.png" />
     <Content Include="Images\Carousel\Fathead_MLB_RealBIG_240512044035.jpg" />
     <Content Include="Images\Carousel\Ford Mustang 1.jpg" />
     <Content Include="Images\Carousel\Ford Mustang 2.jpg" />
     <Content Include="Images\Carousel\Ford Shelby GT500 1.jpg" />
     <Content Include="Images\Carousel\Forza-4-Hyundai-Veloster-Turbo.jpg" />
     <Content Include="Images\Carousel\ITdGroup.jpg" />
+    <Content Include="Images\Carousel\ITintheD_logo.png" />
     <Content Include="Images\Carousel\modified-hyundai-veloster-turbo-coupe-3-doors-wide-body-kit-eyelids-.jpg" />
     <Content Include="Images\Carousel\NearlyBlackandWhiteCityColiseum-long goodbye.png" />
     <Content Include="Images\Carousel\Nissan GT-R 1.jpg" />
     <Content Include="Images\Carousel\OutsourceDetroit2.jpg" />
+    <Content Include="Images\Carousel\overall_bg.jpg" />
     <Content Include="Images\Carousel\QLogo.jpg" />
     <Content Include="Images\Carousel\Quicken.jpg" />
+    <Content Include="Images\Carousel\technews_button.png" />
     <Content Include="Images\Carousel\Veloster-Turbo-1_2354063b.jpg" />
     <Content Include="Images\Carousel\waynesworldautobloguk-hyundai-veloster-turbo-se-31.jpg" />
     <Content Include="Images\Carousel\xl_Hyunda-VT-624-2.png" />
@@ -327,6 +333,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\images\" />
     <Folder Include="Filters\" />
+    <Folder Include="Images\CSS\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

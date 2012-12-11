@@ -767,5 +767,22 @@ tr.pager td {
     
     .carousel-inner {
         padding:1px;
-        border: 3px solid orange;
+        border: 7px solid orange;
+        -webkit-box-shadow: 0 1px 2px #FFF;
+        -moz-box-shadow: 0 1px 2px #FFF;
+        box-shadow: 10px 10px 20px #333333;
+        padding: 0;
+        border-radius: 5px;
     }
+    
+    /* checkered navbar
+........................................*/
+
+.checkered {
+background-image: -webkit-gradient(linear, 0% 100%, 100% 0%, color-stop(.33, #fff), color-stop(.33, transparent), to(transparent))
+,-webkit-gradient(linear, 100% 100%, 00% 0, color-stop(.33, #fff), color-stop(.33, transparent), to(transparent))
+,-webkit-gradient(linear, 0% 0, 0% 100%, color-stop(.5, transparent), color-stop(.5, #f00))
+,-webkit-gradient(radial, 32% 37%, 10, 32% 37%, 11, from(#f00), to(transparent))
+,-webkit-gradient(radial, 68% 37%, 10, 68% 37%, 11, from(#f00), to(transparent))
+,-webkit-gradient(radial, 50% 63%, 10, 50% 63%, 11, from(#f00), to(transparent));
+}

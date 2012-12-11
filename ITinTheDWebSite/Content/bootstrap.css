@@ -3860,16 +3860,14 @@ input[type="submit"].btn.btn-mini {
 .navbar-inverse {
   color: #bf5f00;
 }
-.navbar-inverse .navbar-inner {
-  background-color: #bf5f00;
-  background-image: -moz-linear-gradient(top, #bf5f00, #DF7401);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#bf5f00), to(#DF7401));
-  background-image: -webkit-linear-gradient(top, #bf5f00, #DF7401);
-  background-image: -o-linear-gradient(top, #bf5f00, #DF7401);
-  background-image: linear-gradient(to bottom, #BF5F00, #DF7401);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff222222', endColorstr='#ff111111', GradientType=0);
-  border-color: #bf5f00;
+.navbar-inverse .navbar-inner 
+{ 
+ background-color: #bf5f00;
+background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.5, transparent), to(transparent));
+background-image: -moz-linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+background-image: -o-linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+background-image: linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+
 }
 .navbar-inverse .brand,
 .navbar-inverse .nav > li > a {
