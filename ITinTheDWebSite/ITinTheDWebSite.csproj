@@ -196,6 +196,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Application.cs" />
+    <Compile Include="Models\ApplyOnlineModel.cs" />
     <Compile Include="Models\EmailFields.cs" />
     <Compile Include="Models\Rss.cs" />
     <Compile Include="Models\RssReader.cs" />
