@@ -1,40 +1,19 @@
-﻿@model ITinTheDWebSite.Models.Application
+﻿@model ITinTheDWebSite.Models.ApplyOnlineModel
 
 @{
     ViewBag.Title = "Index";
 }
-<h2>
-    Application Form</h2>
-<form action="" method="get">
-Last Name
-<input id="Text1" name="LastName" type="text" />
-<br />
-First name
-<input id="Text1" type="text" />
-<br />
-Age
-<input id="Text1" name="LastName" type="text" />
-<br />
-Middle Initial
-<input id="Text1" name="LastName" type="text" />
-<br />
-Telephone #
-<input id="Text1" name="LastName" type="text" />
-<br />
-<input id="Submit1" type="submit" value="submit" />
-</form>
-<form action="Profile/AddFile" enctype="multipart/form-data" method="post" />
-<div>
+<h2>Application Form</h2>
+
+@using (Html.BeginForm("SubmitForm", "Apply_Online", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{   
+   
     <fieldset>
-        <legend>Upload File</legend>
-        <br />
-        <br />
-        Upload Your Resume Here<input type="file" name="UploadFile" /><br />
-        <br />
-        <input type="submit" value="Save" /><br />
-        <br />
-        <br />
+     Please select a Transcript <input type="file" name="Transcript" />
+     Please select a Resume <input type="file" name="Resume" />
     </fieldset>
-</div>
-</form> 
+    
+    
+    <input type="submit" value="submit me!" />
+}
 

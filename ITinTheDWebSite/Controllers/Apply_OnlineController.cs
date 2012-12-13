@@ -16,11 +16,14 @@ namespace ITinTheDWebSite.Controllers
 
         public ActionResult Index()
         {
-            Application app = new Application();
+            ApplyOnlineModel app = new ApplyOnlineModel();
             return View(app);
         }
 
-
+        public ActionResult SubmitForm(HttpPostedFileBase resume, HttpPostedFileBase Transcript)
+        {
+            return View();
+        }
 
     }
 }
