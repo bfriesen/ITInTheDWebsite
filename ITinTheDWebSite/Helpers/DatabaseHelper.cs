@@ -61,7 +61,7 @@ namespace ITinTheDWebSite.Helpers
                     }
                     else
                     {
-
+                        f.FileID = UserID;
                         context.AddToFiles(f);
                         context.SaveChanges();
                         return true;

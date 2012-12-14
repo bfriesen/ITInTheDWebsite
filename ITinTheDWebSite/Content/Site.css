@@ -796,3 +796,8 @@ background-image: -webkit-gradient(linear, 0% 100%, 100% 0%, color-stop(.33, #ff
 ,-webkit-gradient(radial, 68% 37%, 10, 68% 37%, 11, from(#f00), to(transparent))
 ,-webkit-gradient(radial, 50% 63%, 10, 50% 63%, 11, from(#f00), to(transparent));
 }
+
+.chars-remaining-text-area {
+    width: 608px;
+    height: 94px;
+}

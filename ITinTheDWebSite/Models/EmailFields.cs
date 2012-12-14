@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace sbContact.Models
 {
@@ -11,13 +12,15 @@ namespace sbContact.Models
 
         [Required]
         [StringLength(100)]
+        [DisplayName("Your Name")]
         [Display(Order = 1)]
         public virtual string Name { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
         [StringLength(254)]
-        [RegularExpression(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*")]
+        [DisplayName("Your Email")]
+        [RegularExpression(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", ErrorMessage = "Please enter a valid email address")]
         [Display(Order = 2)]
         public virtual string Email { get; set; }
 

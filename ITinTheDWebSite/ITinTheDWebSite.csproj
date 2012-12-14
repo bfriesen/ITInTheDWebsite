@@ -179,6 +179,7 @@
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\FAQController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RegisterSponsorController.cs" />
     <Compile Include="Controllers\ResumeController.cs" />
     <Compile Include="Controllers\SponsorsController.cs" />
     <Compile Include="Controllers\TrainersController.cs" />
@@ -194,12 +195,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ITintheD.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ITintheDSponsor.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ITintheDSponsor.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Application.cs" />
     <Compile Include="Models\ApplyOnlineModel.cs" />
     <Compile Include="Models\EmailFields.cs" />
     <Compile Include="Models\Rss.cs" />
     <Compile Include="Models\RssReader.cs" />
+    <Compile Include="Models\SponsorModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -387,6 +394,12 @@
     </EntityDeploy>
     <Content Include="Views\Resume\Index.cshtml" />
     <Content Include="GetFile.ashx" />
+    <Content Include="Views\RegisterSponsor\Display.cshtml" />
+    <Content Include="Views\RegisterSponsor\Store.cshtml" />
+    <EntityDeploy Include="ITintheDSponsor.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ITintheDSponsor.Designer.cs</LastGenOutput>
+    </EntityDeploy>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

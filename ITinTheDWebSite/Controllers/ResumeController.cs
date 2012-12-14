@@ -40,7 +40,7 @@ namespace ITinTheDWebSite.Controllers
                         DatabaseHelper.UploadFile(f, User.Identity.Name);  // here you write file into the database. You will have to write this method or just add it right here...
           
                     }
-                    
+                    TempData["Upload"] = "Thank you for uploading your resume";
                     return RedirectToAction("Index", "Resume");
 
                 }
