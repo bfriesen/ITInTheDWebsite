@@ -370,6 +370,7 @@
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
     <None Include="Content\bootswatch.less" />
+    <None Include="Content\documents\Workshop_Outline.docx" />
     <None Include="Content\variables.less" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
