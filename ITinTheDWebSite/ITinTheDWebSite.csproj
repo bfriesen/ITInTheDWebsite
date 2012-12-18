@@ -301,6 +301,7 @@
     <Content Include="Images\SponsorsAccordion\220px-CompuwareLogo.png" />
     <Content Include="Images\SponsorsAccordion\GalaxESolutions.JPG" />
     <Content Include="Images\SponsorsAccordion\MarketingAssociates.JPG" />
+    <Content Include="Images\SponsorsAccordion\QLogo.jpg" />
     <Content Include="Images\Trainers\dhuston.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
