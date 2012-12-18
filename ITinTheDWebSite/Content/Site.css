@@ -1,8 +1,4 @@
-﻿html {
-    background-color: #e2e2e2;
-    margin: 0;
-    padding: 0;
-}
+﻿
 
 body {
     background-color: #fff;
@@ -12,6 +8,7 @@ body {
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     margin: 0;
     padding: 0;
+    background-repeat:repeat-x;
 }
 
 a {
@@ -32,7 +29,7 @@ a {
         background-color: #c7d1d6;
     }
 
-header, footer, hgroup,
+header, hgroup,
 nav, section {
     display: block;
 }
