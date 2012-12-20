@@ -1,0 +1,78 @@
+﻿@model ITinTheDWebSite.Models.ProspectModel
+
+@{
+    ViewBag.Title = "Index";
+}
+<h3>Enroll to be considered as a student in IT in the D</h3>
+<h4>@TempData["Message"]</h4>
+
+@using (Html.BeginForm("Store", "RegisterProspect", FormMethod.Post, new {enctype="multipart/form-data" }))
+{  
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>StudentProspect</legend>
+    
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+      
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Telephone)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Telephone)
+            @Html.ValidationMessageFor(model => model.Telephone)
+        </div>
+    
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EmailAddress)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EmailAddress)
+            @Html.ValidationMessageFor(model => model.EmailAddress)
+        </div>
+         
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DesiredCareerPath)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DesiredCareerPath)
+            @Html.ValidationMessageFor(model => model.DesiredCareerPath)
+        </div>
+            
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Gender)
+        </div>
+        <div class="editor-field">
+            @Html.RadioButtonFor(model => model.Gender, "Male")
+            @Html.LabelFor(model => model.Gender, "Male")
+            @Html.RadioButtonFor(model => model.Gender, "Female")
+            @Html.LabelFor(model => model.Gender, "Female")
+            @Html.ValidationMessageFor(model => model.Gender)
+        </div>
+       
+        <div class="editor-label">
+           @Html.Label("Upload Resume")
+        </div>
+        <div>
+            <input type="file" name="ResumeFile" /> 
+        </div>
+        
+        <div class="editor-label">
+           @Html.Label("Upload Transcript - Optional")
+        </div>
+        <div>
+            <input type="file" name="TranscriptFile" /> 
+        </div>
+        <p>
+            <input type="submit" value="Store" /> 
+        </p>
+
+    </fieldset>
+}

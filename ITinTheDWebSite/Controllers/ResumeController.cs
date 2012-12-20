@@ -27,7 +27,7 @@ namespace ITinTheDWebSite.Controllers
                 if (UploadFile != null && UploadFile.ContentLength > 0)
                 {
                     
-                    File f = new File();
+                    ProspectiveStudentResume f = new ProspectiveStudentResume();
                     using (MemoryStream ms = new MemoryStream())
                     {
                         UploadFile.InputStream.CopyTo(ms);
@@ -37,10 +37,10 @@ namespace ITinTheDWebSite.Controllers
                         f.ContentType = UploadFile.ContentType;
                         f.ContentLength = UploadFile.ContentLength;
 
-                        DatabaseHelper.UploadFile(f, User.Identity.Name);  // here you write file into the database. You will have to write this method or just add it right here...
-          
+                        //DatabaseHelper.UploadFile(f, User.Identity.Name);  // here you write file into the database. You will have to write this method or just add it right here...
+                        DatabaseHelper.UploadFile(f);
                     }
-                    TempData["Upload"] = "Thank you for uploading your resume";
+                    TempData["Upload"] = "Thank you for uploading your resume.";
                     return RedirectToAction("Index", "Resume");
 
                 }

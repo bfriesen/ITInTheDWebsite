@@ -9,6 +9,9 @@ namespace ITinTheDWebSite.Models
 {
     public class SponsorModel
     {
+        [Key] 
+        public int SponsorId { get; set; }
+
         [Required]
         [DisplayName("Company Name")]
         public string CompanyName { get; set; }
@@ -27,7 +30,7 @@ namespace ITinTheDWebSite.Models
 
         [Required]
         [DisplayName("Telephone Number")]
-        [RegularExpression(@"^(\d{10})$", ErrorMessage = "Please enter a 10 digit number")]
+        [RegularExpression(@"^\(?([1-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered phone format is not valid.")]
         public string Telephone { get; set; }
 
         [Required]

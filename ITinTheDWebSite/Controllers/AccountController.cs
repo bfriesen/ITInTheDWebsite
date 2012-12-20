@@ -81,6 +81,8 @@ namespace ITinTheDWebSite.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.Email, model.Password);
                     WebSecurity.Login(model.Email, model.Password);
+                    int id =  WebSecurity.CurrentUserId;
+
                     return RedirectToAction("Index", "Home");
                 }
                 catch (MembershipCreateUserException e)

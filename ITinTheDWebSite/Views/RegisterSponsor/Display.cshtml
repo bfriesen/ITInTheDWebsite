@@ -5,8 +5,9 @@
 }
 
 <h3>Become a sponsor for IT in the D</h3>
-
+<h4>@TempData["Message"]</h4>
 @using (Html.BeginForm("Store","RegisterSponsor")) {
+    @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
@@ -66,7 +67,7 @@
             <br/>
             <input style="width:37px" onblur="textCounter(this.form.recipients,this,4000);" disabled
             onfocus="this.blur();" tabindex="999" maxlength="4" size="4" value="4000"
-            name="counter" /> <small>characters remaining.</small>
+            name="counter" id="counter" /> <small>characters remaining.</small>
         </div>
 
         <p>
@@ -87,6 +88,7 @@
         }
     };
 
+    $(document).ready(function () { textCounter($("#Reason")[0],$("#counter")[0],4000)});
 //    TODO: Figure out how to call textCounter function after the dom has loaded (jquery ready function?)
 
 </script>

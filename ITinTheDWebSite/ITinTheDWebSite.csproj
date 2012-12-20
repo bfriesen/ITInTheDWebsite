@@ -179,6 +179,8 @@
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\FAQController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RegisterAcademicController.cs" />
+    <Compile Include="Controllers\RegisterProspectController.cs" />
     <Compile Include="Controllers\RegisterSponsorController.cs" />
     <Compile Include="Controllers\ResumeController.cs" />
     <Compile Include="Controllers\SponsorsController.cs" />
@@ -190,24 +192,27 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\DatabaseHelper.cs" />
+    <Compile Include="Helpers\SponsorStatus.cs" />
     <Compile Include="ITintheD.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ITintheD.edmx</DependentUpon>
     </Compile>
-    <Compile Include="ITintheDSponsor.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ITintheDSponsor.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="Models\AcademicModel.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Application.cs" />
     <Compile Include="Models\ApplyOnlineModel.cs" />
     <Compile Include="Models\EmailFields.cs" />
+    <Compile Include="Models\ProspectModel.cs" />
     <Compile Include="Models\Rss.cs" />
     <Compile Include="Models\RssReader.cs" />
     <Compile Include="Models\SponsorModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UsefulTables.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsefulTables.edmx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-responsive.css" />
@@ -399,9 +404,13 @@
     <Content Include="GetFile.ashx" />
     <Content Include="Views\RegisterSponsor\Display.cshtml" />
     <Content Include="Views\RegisterSponsor\Store.cshtml" />
-    <EntityDeploy Include="ITintheDSponsor.edmx">
+    <Content Include="Views\RegisterProspect\Display.cshtml" />
+    <Content Include="Views\RegisterProspect\Store.cshtml" />
+    <Content Include="Views\RegisterAcademic\Display.cshtml" />
+    <Content Include="Views\Home\ThankYou.cshtml" />
+    <EntityDeploy Include="UsefulTables.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ITintheDSponsor.Designer.cs</LastGenOutput>
+      <LastGenOutput>UsefulTables.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
   <PropertyGroup>

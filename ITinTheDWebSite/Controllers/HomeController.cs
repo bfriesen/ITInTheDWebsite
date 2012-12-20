@@ -23,5 +23,10 @@ namespace ITinTheDWebSite.Controllers
             return View(app);
         }
 
+        public ActionResult ThankYou()
+        {
+            return View();
+        }
+
     }
 }
