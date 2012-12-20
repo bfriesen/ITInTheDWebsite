@@ -1,4 +1,9 @@
-﻿
+﻿html {
+    background-color: white;
+    margin: 0;
+    p
+    
+}
 
 body {
     background-color: #fff;
@@ -22,7 +27,7 @@ a {
 
     a:link, a:visited,
     a:active, a:hover {
-        color: white;
+        color: black;
     }
 
     a:hover {
@@ -34,6 +39,12 @@ a {
 header, hgroup,
 nav, section {
     display: block;
+}
+
+section 
+{
+    padding: 5px;
+    background-color: White;
 }
 
 mark {
@@ -155,6 +166,8 @@ footer {
     text-align: right;
     clear: both;
     right: auto;
+    background:transparent;
+    
 }
 
     #login a {
@@ -799,4 +812,22 @@ background-image: -webkit-gradient(linear, 0% 100%, 100% 0%, color-stop(.33, #ff
 .chars-remaining-text-area {
     width: 608px;
     height: 94px;
+}
+
+body {
+  margin: 0;
+  font-family: Century Schoolbook, "Century Schoolbook", Times, serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #777777;
+  background-color: Gray;
+  background-image:url('../../Images/Carousel/');
+ 
+  
+}
+.navbar-inverse .nav .active > a,
+.navbar-inverse .nav .active > a:hover,
+.navbar-inverse .nav .active > a:focus {
+  color: black;
+  background-color: #111111;
 }

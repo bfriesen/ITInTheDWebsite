@@ -30,11 +30,7 @@ video {
 audio:not([controls]) {
   display: none;
 }
-html {
-  font-size: 100%;
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-}
+
 a:focus {
   outline: thin dotted #333;
   outline: 5px auto -webkit-focus-ring-color;
@@ -149,8 +145,9 @@ body {
   font-size: 14px;
   line-height: 20px;
   color: #777777;
-  background-color: #ffffff;
-  background-image: url('../../Images/Carousel/Nissan%20GT-R%201.jpg');
+  background-color: White;
+ 
+  
 }
 a {
   color: #777777;
@@ -3866,7 +3863,7 @@ input[type="submit"].btn.btn-mini {
 background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.5, transparent), to(transparent));
 background-image: -moz-linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
 background-image: -o-linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
-background-image: linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+background-image:  linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
 progid:DXImageTransform.Microsoft.gradient(startColorstr='#bf5f00', endColorstr='#bf5f00', GradientType=0); BORDER-LEFT: #bf5f00 1px solid;
 }
 .navbar-inverse .brand,
@@ -3886,8 +3883,8 @@ progid:DXImageTransform.Microsoft.gradient(startColorstr='#bf5f00', endColorstr=
 .navbar-inverse .nav .active > a,
 .navbar-inverse .nav .active > a:hover,
 .navbar-inverse .nav .active > a:focus {
-  color: #ffffff;
-  background-color: #111111;
+  color: black;
+  background-color: black;
 }
 .navbar-inverse .navbar-link {
   color: #bbbbbb;
@@ -3902,7 +3899,7 @@ progid:DXImageTransform.Microsoft.gradient(startColorstr='#bf5f00', endColorstr=
 .navbar-inverse .nav li.dropdown.open > .dropdown-toggle,
 .navbar-inverse .nav li.dropdown.active > .dropdown-toggle,
 .navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle {
-  background-color: #111111;
+  background-color: transparent;
   color: #ffffff;
 }
 .navbar-inverse .nav li.dropdown > .dropdown-toggle .caret {
