@@ -7,12 +7,23 @@ using WebMatrix.WebData;
 using ITinTheDWebSite.Models;
 using System.IO;
 using System.Data.SqlClient;
+using System.Web.Security;
 
 namespace ITinTheDWebSite.Helpers
 {
 
     public static class DatabaseHelper
     {
+        public static void AddUserToRole(string user, string role)
+        {
+            var roles = (SimpleRoleProvider)Roles.Provider;
+
+
+            string[] usrs = new string[] { user };
+            string[] r = new string[] { role };
+
+            if (!roles.IsUserInRole(user, role)) roles.AddUsersToRoles(usrs, r);
+        }
         //===========================================================================
         //     Get / Store Sponsor information
         //===========================================================================

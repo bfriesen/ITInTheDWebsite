@@ -34,8 +34,18 @@ namespace ITinTheDWebSite
         {
             WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
 
-            //var roles = (SimpleRoleProvider)Roles.Provider;
-            //var membership = (SimpleMembershipProvider)Membership.Provider;
+            var roles = (SimpleRoleProvider)Roles.Provider;
+            var membership = (SimpleMembershipProvider)Membership.Provider;
+
+            if (!roles.RoleExists("Admin")) roles.CreateRole("Admin");
+            if (!roles.RoleExists("Student")) roles.CreateRole("Student");
+            if (!roles.RoleExists("Sponsor")) roles.CreateRole("Sponsor");
+            if (!roles.RoleExists("Educator")) roles.CreateRole("Educator");
+
+
+
+           // int test = 0;
+          // var result = membership.GetAllUsers(1, 5, out test);
 
             ///* make sure user miticv is admin user! */
             //if (!roles.RoleExists("Admin"))

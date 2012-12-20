@@ -1,0 +1,34 @@
+﻿@model ITinTheDWebSite.Models.AdminModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<table>
+<thead>
+    <tr>
+        <td>
+        UserID        
+        </td>
+        <td>
+        USername
+        </td>
+        <td>
+        ROles
+        </td>
+    </tr>
+</thead>
+@foreach (ITinTheDWebSite.Models.UserInfo u in Model.allUsers)
+{
+    <tr>
+        <td>@u.user.UserId</td>
+        <td><a href="/admin/user?id=@u.user.UserId" >@u.user.UserName</a></td>
+        <td>
+            @foreach (string r in @u.roles)
+            {
+               @r<Span> </Span> 
+            }               
+        </td>
+    </tr>
+}
+</table>

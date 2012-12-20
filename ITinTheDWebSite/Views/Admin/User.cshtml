@@ -1,0 +1,54 @@
+﻿@model ITinTheDWebSite.Models.AdminModel
+@{
+    ViewBag.Title = "User";
+}
+<h2>
+    User</h2>
+<h2>
+    Index</h2>
+<table>
+    <thead>
+        <tr>
+            <td>
+                User ID
+            </td>
+            <td>
+                User Name
+            </td>
+            <td>
+                Roles
+            </td>
+        </tr>
+    </thead>
+    @foreach (ITinTheDWebSite.Models.UserInfo u in Model.allUsers)
+    {
+        <tr>
+            <td>@u.user.UserId
+            </td>
+            <td>@u.user.UserName
+            </td>
+            <td>
+                @{
+                    
+        var roles = (SimpleRoleProvider)Roles.Provider;
+
+            }
+                @foreach (string dr in Model.allRoles)
+                {
+                    
+                    
+                    if (roles.IsUserInRole(u.user.UserName,dr))
+                    {
+                    @Html.ActionLink("Remove " + dr, "RemoveRole", new { id = u.user.UserId, role = dr });
+                    }
+                    else
+                    {
+                    @Html.ActionLink("Add " + dr, "AddRole", new { id = u.user.UserId, role = dr });
+                    }
+                }
+            </td>
+            <td>
+            </td>
+        </tr>
+    }
+</table>

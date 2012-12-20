@@ -2,19 +2,30 @@
 @{
     ViewBag.Title = "Register";
 }
-
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
     <h2>Create a new account.</h2>
 </hgroup>
-
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
 
     <fieldset>
         <legend>Registration Form</legend>
         <ol>
+            <li>
+                @Html.LabelFor(m => m.firstName)
+                @Html.TextBoxFor(m => m.firstName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.LastName)
+                @Html.TextBoxFor(m => m.LastName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Major)
+                @Html.TextBoxFor(m => m.Major)
+            </li>
             <li>
                 @Html.LabelFor(m => m.Email)
                 @Html.TextBoxFor(m => m.Email)
@@ -26,18 +37,11 @@
             <li>
                 @Html.LabelFor(m => m.ConfirmPassword)
                 @Html.PasswordFor(m => m.ConfirmPassword)
-            </li>       
-        <br />
-        Select what type of user you are:<p />
-        <input type="radio" name="rl" value="Student" checked />Prospect &nbsp; 
-        <input type="radio" name="rl" value="Educator" />Educator  &nbsp;
-        <input type="radio" name="rl" value="Company" />Sponsor &nbsp;
-        <br />
-        <br />
-        <input type="submit" value="Register" />
+            </li>
+            <br />
+            <input type="submit" value="Register" />
     </fieldset>
 }
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

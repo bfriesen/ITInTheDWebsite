@@ -1,0 +1,49 @@
+﻿@model ITinTheDWebSite.Models.EducatorModel
+<h2>
+    Educator Registration Form</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    <fieldset>
+        
+        <ol>
+            <li>
+                @Html.LabelFor(model => model.CollegeName)
+                @Html.TextBoxFor(model => model.CollegeName)
+            </li>
+            <li>
+                @Html.LabelFor(model => model.CollegeAddress)
+                @Html.TextBoxFor(model => model.CollegeAddress)
+            </li>
+            <li>
+                @Html.LabelFor(model => model.Title)
+                @Html.TextBoxFor(model => model.Title)
+            </li>
+            <li>
+                @Html.LabelFor(model => model.AreaOfExpertise)
+                @Html.TextBoxFor(model => model.AreaOfExpertise)
+            </li>
+            <li>
+                @Html.LabelFor(model => model.EmailAddress)
+                @Html.TextBoxFor(model => model.EmailAddress)
+            </li>
+            <li>
+                @Html.LabelFor(model => model.Telephone)
+                @Html.TextBoxFor(model => model.Telephone)
+            </li>
+            <li>
+                @Html.LabelFor(model => model.Password)
+                @Html.PasswordFor(model => model.Password)
+            </li>
+            <li>
+                @Html.LabelFor(model => model.ConfirmPassword)
+                @Html.PasswordFor(model => model.ConfirmPassword)
+            </li>
+        </ol>
+        <input type="submit" value="Register" />
+    </fieldset>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

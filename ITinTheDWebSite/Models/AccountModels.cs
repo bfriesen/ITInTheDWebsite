@@ -76,6 +76,20 @@ namespace ITinTheDWebSite.Models
     public class RegisterModel
     {
         [Required]
+  
+        [Display(Name = "Fist Name")]
+        public string firstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Major")]
+        public string Major { get; set; }
+
+
+        [Required]
         [Email]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -93,6 +107,49 @@ namespace ITinTheDWebSite.Models
 
         [Required]
         [Display(Name="Requested Role")]
+        public string RequestedRole { get; set; }
+    }
+
+    public class EducatorModel
+    {
+        [Required]
+        [Display(Name = "College Name")]
+        public string CollegeName { get; set; }
+
+        [Required]
+        [Display(Name = "College Address")]
+        public string CollegeAddress { get; set; }
+
+        [Required]
+        [Display(Name = "Title")]
+        public string Title { get; set; }
+
+        [Required]
+        [Display(Name = "Area Of Expertise")]
+        public string AreaOfExpertise { get; set; }
+
+        [Required]
+        [Display(Name = "Telephone")]
+        public string Telephone { get; set; }
+
+        [Required]
+        [Email]
+        [Display(Name = "Email")]
+        public string EmailAddress { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Requested Role")]
         public string RequestedRole { get; set; }
     }
 

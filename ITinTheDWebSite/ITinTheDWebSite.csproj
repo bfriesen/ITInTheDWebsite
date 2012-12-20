@@ -172,6 +172,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\Apply_OnlineController.cs" />
     <Compile Include="Controllers\CurriculumController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
@@ -199,6 +200,7 @@
     </Compile>
     <Compile Include="Models\AcademicModel.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\Application.cs" />
     <Compile Include="Models\ApplyOnlineModel.cs" />
     <Compile Include="Models\EmailFields.cs" />
@@ -423,6 +425,10 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>UsefulTables.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Views\Account\Educator.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\User.cshtml" />
+    <Content Include="Views\Account\Sponsor.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

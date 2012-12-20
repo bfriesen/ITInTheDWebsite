@@ -9,6 +9,7 @@ using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using ITinTheDWebSite.Models;
+using ITinTheDWebSite.Helpers;
 
 namespace ITinTheDWebSite.Controllers
 {
@@ -82,6 +83,85 @@ namespace ITinTheDWebSite.Controllers
                     WebSecurity.CreateUserAndAccount(model.Email, model.Password);
                     WebSecurity.Login(model.Email, model.Password);
                     int id =  WebSecurity.CurrentUserId;
+
+                    DatabaseHelper.AddUserToRole(model.Email, "Student");
+
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (MembershipCreateUserException e)
+                {
+                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        //
+        // GET: /Account/Register
+
+        [AllowAnonymous]
+        public ActionResult Educator()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/Register
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Educator(EducatorModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Attempt to register the user
+                try
+                {
+                    WebSecurity.CreateUserAndAccount(model.EmailAddress, model.Password);
+                    WebSecurity.Login(model.EmailAddress, model.Password);
+                    int id = WebSecurity.CurrentUserId;
+
+                    DatabaseHelper.AddUserToRole(model.EmailAddress, "Educator");
+
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (MembershipCreateUserException e)
+                {
+                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        public ActionResult Sponsor()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/Register
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Sponsor(SponsorModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Attempt to register the user
+                try
+                {
+                    WebSecurity.CreateUserAndAccount(model.EmailAddress, model.Password);
+                    WebSecurity.Login(model.EmailAddress, model.Password);
+                    int id = WebSecurity.CurrentUserId;
+
+                    DatabaseHelper.AddUserToRole(model.EmailAddress, "Sponsor");
 
                     return RedirectToAction("Index", "Home");
                 }
