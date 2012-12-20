@@ -28,6 +28,8 @@ a {
     a:hover {
         background-color: #c7d1d6;
     }
+    
+    a.darklink {color: Black;}
 
 header, hgroup,
 nav, section {
