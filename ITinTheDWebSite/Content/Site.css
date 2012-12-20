@@ -816,7 +816,7 @@ background-image: -webkit-gradient(linear, 0% 100%, 100% 0%, color-stop(.33, #ff
 
 body {
   margin: 0;
-  font-family: Century Schoolbook, "Century Schoolbook", Times, serif;
+  font-family:  "Segoe UI", Verdana, Helvetica, Sans-Serif;
   font-size: 14px;
   line-height: 20px;
   color: #777777;
