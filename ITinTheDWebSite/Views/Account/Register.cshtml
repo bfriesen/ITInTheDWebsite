@@ -1,11 +1,8 @@
 ﻿@model ITinTheDWebSite.Models.RegisterModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Student Registration Page";
 }
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>Create a new account.</h2>
-</hgroup>
+<h2>Student Registration Form</h2>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()

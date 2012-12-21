@@ -1,6 +1,8 @@
 ﻿@model ITinTheDWebSite.Models.EducatorModel
-<h2>
-    Educator Registration Form</h2>
+@{
+    ViewBag.Title = "Educator Registration Page";   
+}
+<h2>Educator Registration Form</h2>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
