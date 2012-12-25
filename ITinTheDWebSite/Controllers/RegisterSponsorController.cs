@@ -11,7 +11,6 @@ using WebMatrix.WebData;
 
 namespace ITinTheDWebSite.Controllers
 {
-    [Authorize]
     public class RegisterSponsorController : Controller
     {
         //private ITintheDTestEntities1 db = new ITintheDTestEntities1();
@@ -39,7 +38,13 @@ namespace ITinTheDWebSite.Controllers
                 {
                     TempData["Message"] = "Thank you for registering to IT in the D. You will be contacted within 24-48 hours.";
                     return RedirectToAction("ThankYou", "Home");
-                }                   
+                }
+
+                else
+                {
+                    TempData["Message"] = "Registeration failed.";
+                    return RedirectToAction("Display", "RegisterSponsor");
+                }
             }
             return RedirectToAction("Display", "RegisterSponsor");
         }

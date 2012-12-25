@@ -74,7 +74,7 @@ namespace ITinTheDWebSite.Controllers
         {
             ITintheDTestEntities context = new ITintheDTestEntities();
 
-            var user = from u in context.UserProfiles orderby u.UserId select u;
+            var user = from u in context.UserProfiles where u.UserId == id select u;
             var roles = (SimpleRoleProvider)Roles.Provider;
 
 
@@ -86,11 +86,11 @@ namespace ITinTheDWebSite.Controllers
         }
 
 
-        public ActionResult AddRole(string id, string role)
+        public ActionResult AddRole(int id, string role)
         {
             ITintheDTestEntities context = new ITintheDTestEntities();
 
-            var user = from u in context.UserProfiles orderby u.UserId select u;
+            var user = from u in context.UserProfiles where u.UserId == id select u;
             var roles = (SimpleRoleProvider)Roles.Provider;
 
 

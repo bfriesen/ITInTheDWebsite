@@ -16,7 +16,7 @@
         <legend>AcademicModel</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.AcademyName)
+            @Html.LabelFor(model => model.AcademyName)    
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.AcademyName)
@@ -64,6 +64,22 @@
         </div>
 
         <div class="editor-label">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ConfirmPassword)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ConfirmPassword)
+            @Html.ValidationMessageFor(model => model.ConfirmPassword)
+        </div>
+
+        <div class="editor-label">
          <b>   @Html.LabelFor(model => model.SecondaryContactName) </b>
         </div>
         <div class="editor-field">
@@ -96,7 +112,7 @@
         </div>
 
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" value="Submit" />
         </p>
     </fieldset>
 }

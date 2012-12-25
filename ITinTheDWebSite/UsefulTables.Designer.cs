@@ -20,8 +20,8 @@ using System.Runtime.Serialization;
 
 [assembly: EdmRelationshipAttribute("ITintheDTestModel1", "fk_RoleId", "webpages_Roles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ITinTheDWebSite.webpages_Roles), "webpages_UsersInRoles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ITinTheDWebSite.webpages_UsersInRoles), true)]
 [assembly: EdmRelationshipAttribute("ITintheDTestModel1", "FK_ProspectiveAcademic_AcademicStatus1", "AcademicStatus", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ITinTheDWebSite.AcademicStatus), "ProspectiveAcademic", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ITinTheDWebSite.ProspectiveAcademic), true)]
-[assembly: EdmRelationshipAttribute("ITintheDTestModel1", "FK_ProspectiveStudent_StudentStatus1", "StudentStatu", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ITinTheDWebSite.StudentStatu), "ProspectiveStudent", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ITinTheDWebSite.ProspectiveStudent), true)]
 [assembly: EdmRelationshipAttribute("ITintheDTestModel1", "FK_ProspectiveCorporateSponsor_SponsorStatus", "SponsorStatu", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ITinTheDWebSite.SponsorStatu), "ProspectiveCorporateSponsor", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ITinTheDWebSite.ProspectiveCorporateSponsor), true)]
+[assembly: EdmRelationshipAttribute("ITintheDTestModel1", "FK_ProspectiveStudent_StudentStatus1", "StudentStatu", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ITinTheDWebSite.StudentStatu), "ProspectiveStudent", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ITinTheDWebSite.ProspectiveStudent), true)]
 
 #endregion
 
@@ -172,38 +172,6 @@ namespace ITinTheDWebSite
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<ProspectiveAcademic> ProspectiveAcademic
-        {
-            get
-            {
-                if ((_ProspectiveAcademic == null))
-                {
-                    _ProspectiveAcademic = base.CreateObjectSet<ProspectiveAcademic>("ProspectiveAcademic");
-                }
-                return _ProspectiveAcademic;
-            }
-        }
-        private ObjectSet<ProspectiveAcademic> _ProspectiveAcademic;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<ProspectiveStudent> ProspectiveStudents
-        {
-            get
-            {
-                if ((_ProspectiveStudents == null))
-                {
-                    _ProspectiveStudents = base.CreateObjectSet<ProspectiveStudent>("ProspectiveStudents");
-                }
-                return _ProspectiveStudents;
-            }
-        }
-        private ObjectSet<ProspectiveStudent> _ProspectiveStudents;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<StudentStatu> StudentStatus
         {
             get
@@ -220,22 +188,6 @@ namespace ITinTheDWebSite
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<ProspectiveCorporateSponsor> ProspectiveCorporateSponsors
-        {
-            get
-            {
-                if ((_ProspectiveCorporateSponsors == null))
-                {
-                    _ProspectiveCorporateSponsors = base.CreateObjectSet<ProspectiveCorporateSponsor>("ProspectiveCorporateSponsors");
-                }
-                return _ProspectiveCorporateSponsors;
-            }
-        }
-        private ObjectSet<ProspectiveCorporateSponsor> _ProspectiveCorporateSponsors;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<SponsorStatu> SponsorStatus
         {
             get
@@ -248,6 +200,54 @@ namespace ITinTheDWebSite
             }
         }
         private ObjectSet<SponsorStatu> _SponsorStatus;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ProspectiveAcademic> ProspectiveAcademic
+        {
+            get
+            {
+                if ((_ProspectiveAcademic == null))
+                {
+                    _ProspectiveAcademic = base.CreateObjectSet<ProspectiveAcademic>("ProspectiveAcademic");
+                }
+                return _ProspectiveAcademic;
+            }
+        }
+        private ObjectSet<ProspectiveAcademic> _ProspectiveAcademic;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ProspectiveCorporateSponsor> ProspectiveCorporateSponsor
+        {
+            get
+            {
+                if ((_ProspectiveCorporateSponsor == null))
+                {
+                    _ProspectiveCorporateSponsor = base.CreateObjectSet<ProspectiveCorporateSponsor>("ProspectiveCorporateSponsor");
+                }
+                return _ProspectiveCorporateSponsor;
+            }
+        }
+        private ObjectSet<ProspectiveCorporateSponsor> _ProspectiveCorporateSponsor;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ProspectiveStudent> ProspectiveStudent
+        {
+            get
+            {
+                if ((_ProspectiveStudent == null))
+                {
+                    _ProspectiveStudent = base.CreateObjectSet<ProspectiveStudent>("ProspectiveStudent");
+                }
+                return _ProspectiveStudent;
+            }
+        }
+        private ObjectSet<ProspectiveStudent> _ProspectiveStudent;
 
         #endregion
         #region AddTo Methods
@@ -301,22 +301,6 @@ namespace ITinTheDWebSite
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the ProspectiveAcademic EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToProspectiveAcademic(ProspectiveAcademic prospectiveAcademic)
-        {
-            base.AddObject("ProspectiveAcademic", prospectiveAcademic);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the ProspectiveStudents EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToProspectiveStudents(ProspectiveStudent prospectiveStudent)
-        {
-            base.AddObject("ProspectiveStudents", prospectiveStudent);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the StudentStatus EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToStudentStatus(StudentStatu studentStatu)
@@ -325,19 +309,35 @@ namespace ITinTheDWebSite
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the ProspectiveCorporateSponsors EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToProspectiveCorporateSponsors(ProspectiveCorporateSponsor prospectiveCorporateSponsor)
-        {
-            base.AddObject("ProspectiveCorporateSponsors", prospectiveCorporateSponsor);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the SponsorStatus EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToSponsorStatus(SponsorStatu sponsorStatu)
         {
             base.AddObject("SponsorStatus", sponsorStatu);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ProspectiveAcademic EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToProspectiveAcademic(ProspectiveAcademic prospectiveAcademic)
+        {
+            base.AddObject("ProspectiveAcademic", prospectiveAcademic);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ProspectiveCorporateSponsor EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToProspectiveCorporateSponsor(ProspectiveCorporateSponsor prospectiveCorporateSponsor)
+        {
+            base.AddObject("ProspectiveCorporateSponsor", prospectiveCorporateSponsor);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ProspectiveStudent EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToProspectiveStudent(ProspectiveStudent prospectiveStudent)
+        {
+            base.AddObject("ProspectiveStudent", prospectiveStudent);
         }
 
         #endregion
@@ -574,31 +574,17 @@ namespace ITinTheDWebSite
         /// <param name="academicId">Initial value of the AcademicId property.</param>
         /// <param name="status">Initial value of the Status property.</param>
         /// <param name="academyName">Initial value of the AcademyName property.</param>
-        /// <param name="academyAddress">Initial value of the AcademyAddress property.</param>
         /// <param name="primaryContactName">Initial value of the PrimaryContactName property.</param>
-        /// <param name="primaryTitle">Initial value of the PrimaryTitle property.</param>
-        /// <param name="primaryTelephone">Initial value of the PrimaryTelephone property.</param>
         /// <param name="primaryEmailAddress">Initial value of the PrimaryEmailAddress property.</param>
-        /// <param name="secondaryContactName">Initial value of the SecondaryContactName property.</param>
-        /// <param name="secondaryTitle">Initial value of the SecondaryTitle property.</param>
-        /// <param name="secondaryTelephone">Initial value of the SecondaryTelephone property.</param>
-        /// <param name="secondaryEmailAddress">Initial value of the SecondaryEmailAddress property.</param>
-        public static ProspectiveAcademic CreateProspectiveAcademic(global::System.Int32 id, global::System.Int32 academicId, global::System.Int32 status, global::System.String academyName, global::System.String academyAddress, global::System.String primaryContactName, global::System.String primaryTitle, global::System.String primaryTelephone, global::System.String primaryEmailAddress, global::System.String secondaryContactName, global::System.String secondaryTitle, global::System.String secondaryTelephone, global::System.String secondaryEmailAddress)
+        public static ProspectiveAcademic CreateProspectiveAcademic(global::System.Int32 id, global::System.Int32 academicId, global::System.Int32 status, global::System.String academyName, global::System.String primaryContactName, global::System.String primaryEmailAddress)
         {
             ProspectiveAcademic prospectiveAcademic = new ProspectiveAcademic();
             prospectiveAcademic.ID = id;
             prospectiveAcademic.AcademicId = academicId;
             prospectiveAcademic.Status = status;
             prospectiveAcademic.AcademyName = academyName;
-            prospectiveAcademic.AcademyAddress = academyAddress;
             prospectiveAcademic.PrimaryContactName = primaryContactName;
-            prospectiveAcademic.PrimaryTitle = primaryTitle;
-            prospectiveAcademic.PrimaryTelephone = primaryTelephone;
             prospectiveAcademic.PrimaryEmailAddress = primaryEmailAddress;
-            prospectiveAcademic.SecondaryContactName = secondaryContactName;
-            prospectiveAcademic.SecondaryTitle = secondaryTitle;
-            prospectiveAcademic.SecondaryTelephone = secondaryTelephone;
-            prospectiveAcademic.SecondaryEmailAddress = secondaryEmailAddress;
             return prospectiveAcademic;
         }
 
@@ -707,7 +693,7 @@ namespace ITinTheDWebSite
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String AcademyAddress
         {
@@ -719,7 +705,7 @@ namespace ITinTheDWebSite
             {
                 OnAcademyAddressChanging(value);
                 ReportPropertyChanging("AcademyAddress");
-                _AcademyAddress = StructuralObject.SetValidValue(value, false);
+                _AcademyAddress = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("AcademyAddress");
                 OnAcademyAddressChanged();
             }
@@ -755,7 +741,7 @@ namespace ITinTheDWebSite
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String PrimaryTitle
         {
@@ -767,7 +753,7 @@ namespace ITinTheDWebSite
             {
                 OnPrimaryTitleChanging(value);
                 ReportPropertyChanging("PrimaryTitle");
-                _PrimaryTitle = StructuralObject.SetValidValue(value, false);
+                _PrimaryTitle = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("PrimaryTitle");
                 OnPrimaryTitleChanged();
             }
@@ -779,7 +765,7 @@ namespace ITinTheDWebSite
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String PrimaryTelephone
         {
@@ -791,7 +777,7 @@ namespace ITinTheDWebSite
             {
                 OnPrimaryTelephoneChanging(value);
                 ReportPropertyChanging("PrimaryTelephone");
-                _PrimaryTelephone = StructuralObject.SetValidValue(value, false);
+                _PrimaryTelephone = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("PrimaryTelephone");
                 OnPrimaryTelephoneChanged();
             }
@@ -827,7 +813,7 @@ namespace ITinTheDWebSite
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String SecondaryContactName
         {
@@ -839,7 +825,7 @@ namespace ITinTheDWebSite
             {
                 OnSecondaryContactNameChanging(value);
                 ReportPropertyChanging("SecondaryContactName");
-                _SecondaryContactName = StructuralObject.SetValidValue(value, false);
+                _SecondaryContactName = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("SecondaryContactName");
                 OnSecondaryContactNameChanged();
             }
@@ -851,7 +837,7 @@ namespace ITinTheDWebSite
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String SecondaryTitle
         {
@@ -863,7 +849,7 @@ namespace ITinTheDWebSite
             {
                 OnSecondaryTitleChanging(value);
                 ReportPropertyChanging("SecondaryTitle");
-                _SecondaryTitle = StructuralObject.SetValidValue(value, false);
+                _SecondaryTitle = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("SecondaryTitle");
                 OnSecondaryTitleChanged();
             }
@@ -875,7 +861,7 @@ namespace ITinTheDWebSite
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String SecondaryTelephone
         {
@@ -887,7 +873,7 @@ namespace ITinTheDWebSite
             {
                 OnSecondaryTelephoneChanging(value);
                 ReportPropertyChanging("SecondaryTelephone");
-                _SecondaryTelephone = StructuralObject.SetValidValue(value, false);
+                _SecondaryTelephone = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("SecondaryTelephone");
                 OnSecondaryTelephoneChanged();
             }
@@ -899,7 +885,7 @@ namespace ITinTheDWebSite
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String SecondaryEmailAddress
         {
@@ -911,7 +897,7 @@ namespace ITinTheDWebSite
             {
                 OnSecondaryEmailAddressChanging(value);
                 ReportPropertyChanging("SecondaryEmailAddress");
-                _SecondaryEmailAddress = StructuralObject.SetValidValue(value, false);
+                _SecondaryEmailAddress = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("SecondaryEmailAddress");
                 OnSecondaryEmailAddressChanged();
             }
@@ -982,25 +968,17 @@ namespace ITinTheDWebSite
         /// <param name="sponsorId">Initial value of the SponsorId property.</param>
         /// <param name="status">Initial value of the Status property.</param>
         /// <param name="companyName">Initial value of the CompanyName property.</param>
-        /// <param name="companyAddress">Initial value of the CompanyAddress property.</param>
         /// <param name="contactName">Initial value of the ContactName property.</param>
-        /// <param name="title">Initial value of the Title property.</param>
-        /// <param name="telephone">Initial value of the Telephone property.</param>
         /// <param name="emailAddress">Initial value of the EmailAddress property.</param>
-        /// <param name="reason">Initial value of the Reason property.</param>
-        public static ProspectiveCorporateSponsor CreateProspectiveCorporateSponsor(global::System.Int32 id, global::System.Int32 sponsorId, global::System.Int32 status, global::System.String companyName, global::System.String companyAddress, global::System.String contactName, global::System.String title, global::System.String telephone, global::System.String emailAddress, global::System.String reason)
+        public static ProspectiveCorporateSponsor CreateProspectiveCorporateSponsor(global::System.Int32 id, global::System.Int32 sponsorId, global::System.Int32 status, global::System.String companyName, global::System.String contactName, global::System.String emailAddress)
         {
             ProspectiveCorporateSponsor prospectiveCorporateSponsor = new ProspectiveCorporateSponsor();
             prospectiveCorporateSponsor.ID = id;
             prospectiveCorporateSponsor.SponsorId = sponsorId;
             prospectiveCorporateSponsor.Status = status;
             prospectiveCorporateSponsor.CompanyName = companyName;
-            prospectiveCorporateSponsor.CompanyAddress = companyAddress;
             prospectiveCorporateSponsor.ContactName = contactName;
-            prospectiveCorporateSponsor.Title = title;
-            prospectiveCorporateSponsor.Telephone = telephone;
             prospectiveCorporateSponsor.EmailAddress = emailAddress;
-            prospectiveCorporateSponsor.Reason = reason;
             return prospectiveCorporateSponsor;
         }
 
@@ -1109,7 +1087,7 @@ namespace ITinTheDWebSite
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String CompanyAddress
         {
@@ -1121,7 +1099,7 @@ namespace ITinTheDWebSite
             {
                 OnCompanyAddressChanging(value);
                 ReportPropertyChanging("CompanyAddress");
-                _CompanyAddress = StructuralObject.SetValidValue(value, false);
+                _CompanyAddress = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("CompanyAddress");
                 OnCompanyAddressChanged();
             }
@@ -1157,7 +1135,7 @@ namespace ITinTheDWebSite
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Title
         {
@@ -1169,7 +1147,7 @@ namespace ITinTheDWebSite
             {
                 OnTitleChanging(value);
                 ReportPropertyChanging("Title");
-                _Title = StructuralObject.SetValidValue(value, false);
+                _Title = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Title");
                 OnTitleChanged();
             }
@@ -1181,7 +1159,7 @@ namespace ITinTheDWebSite
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Telephone
         {
@@ -1193,7 +1171,7 @@ namespace ITinTheDWebSite
             {
                 OnTelephoneChanging(value);
                 ReportPropertyChanging("Telephone");
-                _Telephone = StructuralObject.SetValidValue(value, false);
+                _Telephone = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Telephone");
                 OnTelephoneChanged();
             }
@@ -1229,7 +1207,7 @@ namespace ITinTheDWebSite
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Reason
         {
@@ -1241,7 +1219,7 @@ namespace ITinTheDWebSite
             {
                 OnReasonChanging(value);
                 ReportPropertyChanging("Reason");
-                _Reason = StructuralObject.SetValidValue(value, false);
+                _Reason = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Reason");
                 OnReasonChanged();
             }
@@ -1261,7 +1239,7 @@ namespace ITinTheDWebSite
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("ITintheDTestModel1", "FK_ProspectiveCorporateSponsor_SponsorStatus", "SponsorStatu")]
-        public SponsorStatu SponsorStatu
+        public SponsorStatu SponsorStatus
         {
             get
             {
@@ -1277,7 +1255,7 @@ namespace ITinTheDWebSite
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<SponsorStatu> SponsorStatuReference
+        public EntityReference<SponsorStatu> SponsorStatusReference
         {
             get
             {
@@ -1312,25 +1290,15 @@ namespace ITinTheDWebSite
         /// <param name="userId">Initial value of the UserId property.</param>
         /// <param name="status">Initial value of the Status property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="telephone">Initial value of the Telephone property.</param>
         /// <param name="emailAddress">Initial value of the EmailAddress property.</param>
-        /// <param name="desiredCareerPath">Initial value of the DesiredCareerPath property.</param>
-        /// <param name="gender">Initial value of the Gender property.</param>
-        /// <param name="resumeUploaded">Initial value of the ResumeUploaded property.</param>
-        /// <param name="transcriptUploaded">Initial value of the TranscriptUploaded property.</param>
-        public static ProspectiveStudent CreateProspectiveStudent(global::System.Int32 id, global::System.Int32 userId, global::System.Int32 status, global::System.String name, global::System.String telephone, global::System.String emailAddress, global::System.String desiredCareerPath, global::System.String gender, global::System.String resumeUploaded, global::System.String transcriptUploaded)
+        public static ProspectiveStudent CreateProspectiveStudent(global::System.Int32 id, global::System.Int32 userId, global::System.Int32 status, global::System.String name, global::System.String emailAddress)
         {
             ProspectiveStudent prospectiveStudent = new ProspectiveStudent();
             prospectiveStudent.ID = id;
             prospectiveStudent.UserId = userId;
             prospectiveStudent.Status = status;
             prospectiveStudent.Name = name;
-            prospectiveStudent.Telephone = telephone;
             prospectiveStudent.EmailAddress = emailAddress;
-            prospectiveStudent.DesiredCareerPath = desiredCareerPath;
-            prospectiveStudent.Gender = gender;
-            prospectiveStudent.ResumeUploaded = resumeUploaded;
-            prospectiveStudent.TranscriptUploaded = transcriptUploaded;
             return prospectiveStudent;
         }
 
@@ -1439,7 +1407,7 @@ namespace ITinTheDWebSite
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Telephone
         {
@@ -1451,7 +1419,7 @@ namespace ITinTheDWebSite
             {
                 OnTelephoneChanging(value);
                 ReportPropertyChanging("Telephone");
-                _Telephone = StructuralObject.SetValidValue(value, false);
+                _Telephone = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Telephone");
                 OnTelephoneChanged();
             }
@@ -1487,7 +1455,7 @@ namespace ITinTheDWebSite
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String DesiredCareerPath
         {
@@ -1499,7 +1467,7 @@ namespace ITinTheDWebSite
             {
                 OnDesiredCareerPathChanging(value);
                 ReportPropertyChanging("DesiredCareerPath");
-                _DesiredCareerPath = StructuralObject.SetValidValue(value, false);
+                _DesiredCareerPath = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("DesiredCareerPath");
                 OnDesiredCareerPathChanged();
             }
@@ -1511,7 +1479,7 @@ namespace ITinTheDWebSite
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Gender
         {
@@ -1523,7 +1491,7 @@ namespace ITinTheDWebSite
             {
                 OnGenderChanging(value);
                 ReportPropertyChanging("Gender");
-                _Gender = StructuralObject.SetValidValue(value, false);
+                _Gender = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Gender");
                 OnGenderChanged();
             }
@@ -1535,7 +1503,7 @@ namespace ITinTheDWebSite
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String ResumeUploaded
         {
@@ -1547,7 +1515,7 @@ namespace ITinTheDWebSite
             {
                 OnResumeUploadedChanging(value);
                 ReportPropertyChanging("ResumeUploaded");
-                _ResumeUploaded = StructuralObject.SetValidValue(value, false);
+                _ResumeUploaded = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("ResumeUploaded");
                 OnResumeUploadedChanged();
             }
@@ -1559,7 +1527,7 @@ namespace ITinTheDWebSite
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String TranscriptUploaded
         {
@@ -1571,7 +1539,7 @@ namespace ITinTheDWebSite
             {
                 OnTranscriptUploadedChanging(value);
                 ReportPropertyChanging("TranscriptUploaded");
-                _TranscriptUploaded = StructuralObject.SetValidValue(value, false);
+                _TranscriptUploaded = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("TranscriptUploaded");
                 OnTranscriptUploadedChanged();
             }
@@ -1591,7 +1559,7 @@ namespace ITinTheDWebSite
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("ITintheDTestModel1", "FK_ProspectiveStudent_StudentStatus1", "StudentStatu")]
-        public StudentStatu StudentStatu
+        public StudentStatu StudentStatus
         {
             get
             {
@@ -1607,7 +1575,7 @@ namespace ITinTheDWebSite
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<StudentStatu> StudentStatuReference
+        public EntityReference<StudentStatu> StudentStatusReference
         {
             get
             {
@@ -2083,7 +2051,7 @@ namespace ITinTheDWebSite
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("ITintheDTestModel1", "FK_ProspectiveCorporateSponsor_SponsorStatus", "ProspectiveCorporateSponsor")]
-        public EntityCollection<ProspectiveCorporateSponsor> ProspectiveCorporateSponsors
+        public EntityCollection<ProspectiveCorporateSponsor> ProspectiveCorporateSponsor
         {
             get
             {
@@ -2189,7 +2157,7 @@ namespace ITinTheDWebSite
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("ITintheDTestModel1", "FK_ProspectiveStudent_StudentStatus1", "ProspectiveStudent")]
-        public EntityCollection<ProspectiveStudent> ProspectiveStudents
+        public EntityCollection<ProspectiveStudent> ProspectiveStudent
         {
             get
             {

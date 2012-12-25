@@ -41,6 +41,7 @@
                     {
                     @Html.ActionLink("Remove " + dr, "RemoveRole", new { id = u.user.UserId, role = dr });
                     }
+                    
                     else
                     {
                     @Html.ActionLink("Add " + dr, "AddRole", new { id = u.user.UserId, role = dr });

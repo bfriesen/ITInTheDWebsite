@@ -8,7 +8,7 @@ using WebMatrix.WebData;
 using ITinTheDWebSite.Helpers;
 
 namespace ITinTheDWebSite.Controllers
-{   [Authorize]
+{
     public class RegisterProspectController : Controller
     {
         //
@@ -31,6 +31,12 @@ namespace ITinTheDWebSite.Controllers
                 {
                     TempData["Message"] = "Thank you for registering to IT in the D. You will be contacted within 24-48 hours.";
                     return RedirectToAction("ThankYou", "Home");
+                }
+
+                else
+                {
+                    TempData["Message"] = "Registeration failed.";
+                    return RedirectToAction("Display", "RegisterProspect");
                 }
             }
             return RedirectToAction("Display", "RegisterProspect");

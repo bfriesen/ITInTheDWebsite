@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ITinTheDWebSite.Models;
 using ITinTheDWebSite.Helpers;
+using WebMatrix.WebData;
 
 
 namespace ITinTheDWebSite.Controllers
@@ -33,6 +34,12 @@ namespace ITinTheDWebSite.Controllers
                 {
                     TempData["Message"] = "Thank you for registering to IT in the D. You will be contacted within 24-48 hours.";
                     return RedirectToAction("ThankYou", "Home");
+                }
+
+                else
+                {
+                    TempData["Message"] = "Registeration failed.";
+                    return RedirectToAction("Display", "RegisterAcademic");
                 }
             }
             return RedirectToAction("Display", "RegisterAcademic");

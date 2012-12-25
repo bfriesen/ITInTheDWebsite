@@ -57,6 +57,7 @@ namespace ITinTheDWebSite.Models
         public string ConfirmPassword { get; set; }
     }
 
+    [Table("UserProfile")]
     public class LoginModel
     {
         [Required]
@@ -76,7 +77,6 @@ namespace ITinTheDWebSite.Models
     public class RegisterModel
     {
         [Required]
-  
         [Display(Name = "Fist Name")]
         public string firstName { get; set; }
 
@@ -87,7 +87,6 @@ namespace ITinTheDWebSite.Models
         [Required]
         [Display(Name = "Major")]
         public string Major { get; set; }
-
 
         [Required]
         [Email]
@@ -105,7 +104,6 @@ namespace ITinTheDWebSite.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
         [Display(Name="Requested Role")]
         public string RequestedRole { get; set; }
     }
@@ -148,7 +146,6 @@ namespace ITinTheDWebSite.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
         [Display(Name = "Requested Role")]
         public string RequestedRole { get; set; }
     }

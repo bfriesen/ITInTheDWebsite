@@ -45,9 +45,9 @@ else
         <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle" href="#">Register
             <b class="caret"></b></a>
             <ul class="dropdown-menu">
-                <li>@Html.ActionLink("Student", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                <li>@Html.ActionLink("Sponsor", "Sponsor", "Account")</li>
-                <li>@Html.ActionLink("Educator", "Educator", "Account")</li>
+                <li>@Html.ActionLink("Prospect Student", "Display", "RegisterProspect")</li>
+                <li>@Html.ActionLink("Academic Institution", "Display", "RegisterAcademic", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                <li>@Html.ActionLink("Sponsor", "Display", "RegisterSponsor")</li>
             </ul>
             <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>

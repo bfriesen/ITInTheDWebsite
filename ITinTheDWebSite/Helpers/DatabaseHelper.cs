@@ -34,7 +34,7 @@ namespace ITinTheDWebSite.Helpers
             {
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
                 {
-                    var corporatesponsor = from r in context.ProspectiveCorporateSponsors
+                    var corporatesponsor = from r in context.ProspectiveCorporateSponsor
                                            where r.SponsorId == UserId
                                            select r;
 
@@ -63,29 +63,36 @@ namespace ITinTheDWebSite.Helpers
 
         public static bool StoreSponsorData(SponsorModel sponsor)
         {
-            int UserId = WebSecurity.CurrentUserId;
+            int UserId = WebSecurity.GetUserId(sponsor.EmailAddress);
+
+            bool edit = false;
+
             try
             {
+                ProspectiveCorporateSponsor CurrentSponsor;
+
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
                 {
-                    var SponsorData = from r in context.ProspectiveCorporateSponsors
+                    var SponsorData = from r in context.ProspectiveCorporateSponsor
                                       where r.SponsorId == UserId
                                       select r;
-                    if (SponsorData.Count() > 0)
+                    if (SponsorData.Count() > 0 && UserId > 0)
                     {
-                        ProspectiveCorporateSponsor CurrentSponsor = SponsorData.FirstOrDefault();
+                        CurrentSponsor = SponsorData.FirstOrDefault();
                         CurrentSponsor.CompanyAddress = sponsor.CompanyAddress;
                         CurrentSponsor.CompanyName = sponsor.CompanyName;
                         CurrentSponsor.ContactName = sponsor.ContactName;
                         CurrentSponsor.EmailAddress = sponsor.EmailAddress;
                         CurrentSponsor.Title = sponsor.Title;
                         CurrentSponsor.Telephone = sponsor.Telephone;
-                        CurrentSponsor.Reason = sponsor.Reason;
+                        CurrentSponsor.Reason = sponsor.Reason + ' ';
                         CurrentSponsor.SponsorId = UserId;
+
+                        edit = true;
                     }
                     else
                     {
-                        ProspectiveCorporateSponsor CurrentSponsor = new ProspectiveCorporateSponsor();
+                        CurrentSponsor = new ProspectiveCorporateSponsor();
 
                         CurrentSponsor.Status = (int)SponsorStatus.Initial;
                         CurrentSponsor.CompanyAddress = sponsor.CompanyAddress;
@@ -94,14 +101,26 @@ namespace ITinTheDWebSite.Helpers
                         CurrentSponsor.EmailAddress = sponsor.EmailAddress;
                         CurrentSponsor.Title = sponsor.Title;
                         CurrentSponsor.Telephone = sponsor.Telephone;
-                        CurrentSponsor.Reason = sponsor.Reason;
-                        CurrentSponsor.SponsorId = UserId;
+                        CurrentSponsor.Reason = sponsor.Reason + ' ';
+                        
 
-                        context.AddToProspectiveCorporateSponsors(CurrentSponsor);
+                        context.AddToProspectiveCorporateSponsor(CurrentSponsor);
                     }
+
                     try
                     {
+                        if (edit == false)
+                        {
+                            WebSecurity.CreateUserAndAccount(sponsor.EmailAddress, sponsor.Password);
+                            WebSecurity.Login(sponsor.EmailAddress, sponsor.Password);
+
+                            DatabaseHelper.AddUserToRole(sponsor.EmailAddress, "Sponsor");
+
+                            CurrentSponsor.SponsorId = WebSecurity.GetUserId(sponsor.EmailAddress);
+                        }
+
                         context.SaveChanges();
+
                         return true;
                     }
                     catch(Exception e)
@@ -121,6 +140,9 @@ namespace ITinTheDWebSite.Helpers
                 return false;
             }
         }
+
+
+
         //===========================================================================
         //     Get / Store Academic information
         //===========================================================================
@@ -165,17 +187,22 @@ namespace ITinTheDWebSite.Helpers
         public static bool StoreAcademicData(AcademicModel academic)
         {
             int UserId = WebSecurity.CurrentUserId;
+
+            bool edit = false;
+
             try
             {
+                ProspectiveAcademic CurrentAcademic;
+
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
                 {
                     var AcademicData = from r in context.ProspectiveAcademic
                                        where r.AcademicId == UserId
                                        select r;
-                    if (AcademicData.Count() > 0)
+                    if (AcademicData.Count() > 0 && UserId > 0)
                     {
                         //add = false;
-                        ProspectiveAcademic CurrentAcademic = AcademicData.FirstOrDefault();
+                        CurrentAcademic = AcademicData.FirstOrDefault();
                         CurrentAcademic.AcademyAddress = academic.AcademyAddress;
                         CurrentAcademic.AcademyName = academic.AcademyName;
                         CurrentAcademic.PrimaryContactName = academic.PrimaryContactName;
@@ -189,10 +216,12 @@ namespace ITinTheDWebSite.Helpers
                         CurrentAcademic.SecondaryTelephone = academic.SecondaryTelephone;
 
                         CurrentAcademic.AcademicId = UserId;
+
+                        edit = true;
                     }
                     else
                     {
-                        ProspectiveAcademic CurrentAcademic = new ProspectiveAcademic();
+                        CurrentAcademic = new ProspectiveAcademic();
 
                         CurrentAcademic.Status = (int)AcademicStatus.Initial;
                         CurrentAcademic.AcademyAddress = academic.AcademyAddress;
@@ -207,12 +236,21 @@ namespace ITinTheDWebSite.Helpers
                         CurrentAcademic.SecondaryTitle = academic.SecondaryTitle;
                         CurrentAcademic.SecondaryTelephone = academic.SecondaryTelephone;
 
-                        CurrentAcademic.AcademicId = UserId;
-
                         context.AddToProspectiveAcademic(CurrentAcademic);
                     }
+
                     try
                     {
+                        if (edit == false)
+                        {
+                            WebSecurity.CreateUserAndAccount(academic.PrimaryEmailAddress, academic.Password);
+                            WebSecurity.Login(academic.PrimaryEmailAddress, academic.Password);
+
+                            DatabaseHelper.AddUserToRole(academic.PrimaryEmailAddress, "Educator");
+
+                            CurrentAcademic.AcademicId = WebSecurity.GetUserId(academic.PrimaryEmailAddress);
+                        }
+
                         context.SaveChanges();
                         return true;
                     }
@@ -246,7 +284,7 @@ namespace ITinTheDWebSite.Helpers
             {
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
                 {
-                    var ExistingProspect = from r in context.ProspectiveStudents
+                    var ExistingProspect = from r in context.ProspectiveStudent
                                            where r.UserId == UserId
                                            select r;
 
@@ -276,17 +314,23 @@ namespace ITinTheDWebSite.Helpers
         public static bool StoreProspectData(ProspectModel prospect)
         {
             int UserId = WebSecurity.CurrentUserId;
+
+            ProspectiveStudent CurrentStudent;
+
+            bool edit = false;
+
             try
             {
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
                 {
-                    var ProspectData = from r in context.ProspectiveStudents
+                    var ProspectData = from r in context.ProspectiveStudent
                                        where r.UserId == UserId
                                        select r;
-                    if (ProspectData.Count() > 0)
+                    if (ProspectData.Count() > 0 && UserId > 0)
                     {
+                        edit = true;
 
-                        ProspectiveStudent CurrentStudent = ProspectData.FirstOrDefault();
+                        CurrentStudent = ProspectData.FirstOrDefault();
                         CurrentStudent.UserId = UserId;
                         CurrentStudent.Name = prospect.Name;
                         CurrentStudent.Telephone = prospect.Telephone;
@@ -335,7 +379,7 @@ namespace ITinTheDWebSite.Helpers
                     }
                     else
                     {
-                        ProspectiveStudent CurrentStudent = new ProspectiveStudent();
+                        CurrentStudent = new ProspectiveStudent();
 
                         // Need to make sure the prospect supplied a resume file 
                         if (prospect.ResumeFile != null && prospect.ResumeFile.ContentLength > 0)
@@ -381,14 +425,13 @@ namespace ITinTheDWebSite.Helpers
 
 
                                 CurrentStudent.Status = (int)StudentStatus.Initial;
-                                CurrentStudent.UserId = UserId;
                                 CurrentStudent.Name = prospect.Name;
                                 CurrentStudent.Telephone = prospect.Telephone;
                                 CurrentStudent.EmailAddress = prospect.EmailAddress;
                                 CurrentStudent.DesiredCareerPath = prospect.DesiredCareerPath;
                                 CurrentStudent.Gender = prospect.Gender;
 
-                                context.AddToProspectiveStudents(CurrentStudent);
+                                context.AddToProspectiveStudent(CurrentStudent);
                             }
                         }
                         else
@@ -397,8 +440,20 @@ namespace ITinTheDWebSite.Helpers
                         }
                     }
 
+                    DatabaseHelper.AddUserToRole(prospect.EmailAddress, "Student");
+
                     try
                     {
+                        if (edit == true)
+                        {
+                            WebSecurity.CreateUserAndAccount(prospect.EmailAddress, prospect.Password);
+                            WebSecurity.Login(prospect.EmailAddress, prospect.Password);
+
+                            DatabaseHelper.AddUserToRole(prospect.EmailAddress, "Sponsor");
+
+                            CurrentStudent.UserId = WebSecurity.GetUserId(prospect.EmailAddress);
+                        }
+
                         context.SaveChanges();
                         return true;
                     }
