@@ -99,80 +99,138 @@ namespace ITinTheDWebSite.Controllers
         }
 
         //
-        // GET: /Account/Register
+        // GET: /RegisterProspect/
 
         [AllowAnonymous]
-        public ActionResult Educator()
+        public ActionResult DisplayProspect()
         {
-            return View();
+            ProspectModel prospect = new ProspectModel();
+            DatabaseHelper.GetProspectData(prospect);
+            return View(prospect);
         }
 
-        //
-        // POST: /Account/Register
-
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Educator(EducatorModel model)
+        [AllowAnonymous]
+        public ActionResult StoreProspect(ProspectModel prospect)
         {
             if (ModelState.IsValid)
             {
-                // Attempt to register the user
-                try
+                bool edit = false;
+
+                if (DatabaseHelper.StoreProspectData(prospect, ref edit))
                 {
-                    WebSecurity.CreateUserAndAccount(model.EmailAddress, model.Password);
-                    WebSecurity.Login(model.EmailAddress, model.Password);
-                    int id = WebSecurity.CurrentUserId;
+                    if (edit == true)
+                    {
+                        TempData["Message"] = "Successfully edited your information.";
+                        return RedirectToAction("Manage", "Account");
+                    }
 
-                    DatabaseHelper.AddUserToRole(model.EmailAddress, "Educator");
-
-                    return RedirectToAction("Index", "Home");
+                    else
+                    {
+                        TempData["Message"] = "Thank you for registering to IT in the D. You will be contacted within 24-48 hours.";
+                        return RedirectToAction("ThankYou", "Home");
+                    }
                 }
-                catch (MembershipCreateUserException e)
+
+                else
                 {
-                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                    TempData["Message"] = "Registeration failed.";
+                    return RedirectToAction("DisplayProspect", "Account");
                 }
             }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
-
-        [AllowAnonymous]
-        public ActionResult Sponsor()
-        {
-            return View();
+            return RedirectToAction("DisplayProspect", "Account");
         }
 
         //
-        // POST: /Account/Register
+        // GET: /RegisterAcademic/Displayc
+
+        [AllowAnonymous]
+        public ActionResult DisplayAcademic()
+        {
+            AcademicModel academic = new AcademicModel();
+            DatabaseHelper.GetAcademicdData(academic);
+            return View(academic);
+        }
+        //
+        // POST: /RegisterAcademic/Store
 
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Sponsor(SponsorModel model)
+        [AllowAnonymous]
+        public ActionResult StoreAcademic(AcademicModel academic)
         {
             if (ModelState.IsValid)
             {
-                // Attempt to register the user
-                try
+                bool edit = false;
+
+                if (DatabaseHelper.StoreAcademicData(academic, ref edit))
                 {
-                    WebSecurity.CreateUserAndAccount(model.EmailAddress, model.Password);
-                    WebSecurity.Login(model.EmailAddress, model.Password);
-                    int id = WebSecurity.CurrentUserId;
+                    if (edit == true)
+                    {
+                        TempData["Message"] = "Successfully edited your information.";
+                        return RedirectToAction("Manage", "Account");
+                    }
 
-                    DatabaseHelper.AddUserToRole(model.EmailAddress, "Sponsor");
-
-                    return RedirectToAction("Index", "Home");
+                    else
+                    {
+                        TempData["Message"] = "Thank you for registering to IT in the D. You will be contacted within 24-48 hours.";
+                        return RedirectToAction("ThankYou", "Home");
+                    }
                 }
-                catch (MembershipCreateUserException e)
+
+                else
                 {
-                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                    TempData["Message"] = "Registeration failed.";
+                    return RedirectToAction("DisplayAcademic", "Home");
                 }
             }
+            return RedirectToAction("DisplayAcademic", "Home");
+        }
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
+        [AllowAnonymous]
+        public ActionResult DisplaySponsor()
+        {
+            SponsorModel spons = new SponsorModel();
+            DatabaseHelper.GetSponsorData(spons);
+            return View(spons);
+
+        }
+
+        //
+        // POST: /RegisterSponsor/Store
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public ActionResult StoreSponsor(SponsorModel sponsor)
+        {
+            if (ModelState.IsValid)
+            {
+                bool edit = false;
+
+                if (DatabaseHelper.StoreSponsorData(sponsor, ref edit))
+                {
+                    if (edit == true)
+                    {
+                        TempData["Message"] = "Successfully edited your information.";
+                        return RedirectToAction("Manage", "Account");
+                    }
+
+                    else
+                    {
+                        TempData["Message"] = "Thank you for registering to IT in the D. You will be contacted within 24-48 hours.";
+                        return RedirectToAction("ThankYou", "Home");
+                    }
+                }
+
+                else
+                {
+                    TempData["Message"] = "Registeration failed.";
+                    return RedirectToAction("DisplaySponsor", "Account");
+                }
+            }
+            return RedirectToAction("DisplaySponsor", "Account");
         }
 
         //

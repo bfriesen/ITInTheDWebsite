@@ -1,19 +1,17 @@
 ﻿@model ITinTheDWebSite.Models.ProspectModel
-
 @{
     ViewBag.Title = "Index";
 }
-<h3>Enroll to be considered as a student in IT in the D</h3>
+<h3>
+    Enroll to be considered as a student in IT in the D</h3>
 <h4>@TempData["Message"]</h4>
-
-@using (Html.BeginForm("Store", "RegisterProspect", FormMethod.Post, new {enctype="multipart/form-data" }))
+@using (Html.BeginForm("StoreProspect", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {  
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>StudentProspect</legend>
-    
         <div class="editor-label">
             @Html.LabelFor(model => model.Name)
         </div>
@@ -21,7 +19,6 @@
             @Html.EditorFor(model => model.Name)
             @Html.ValidationMessageFor(model => model.Name)
         </div>
-    
         <div class="editor-label">
             @Html.LabelFor(model => model.EmailAddress)
         </div>
@@ -29,7 +26,6 @@
             @Html.EditorFor(model => model.EmailAddress)
             @Html.ValidationMessageFor(model => model.EmailAddress)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.Password)
         </div>
@@ -37,7 +33,6 @@
             @Html.EditorFor(model => model.Password)
             @Html.ValidationMessageFor(model => model.Password)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.ConfirmPassword)
         </div>
@@ -45,7 +40,6 @@
             @Html.EditorFor(model => model.ConfirmPassword)
             @Html.ValidationMessageFor(model => model.ConfirmPassword)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.Telephone)
         </div>
@@ -53,7 +47,6 @@
             @Html.EditorFor(model => model.Telephone)
             @Html.ValidationMessageFor(model => model.Telephone)
         </div>
-         
         <div class="editor-label">
             @Html.LabelFor(model => model.DesiredCareerPath)
         </div>
@@ -61,7 +54,6 @@
             @Html.EditorFor(model => model.DesiredCareerPath)
             @Html.ValidationMessageFor(model => model.DesiredCareerPath)
         </div>
-            
         <div class="editor-label">
             @Html.LabelFor(model => model.Gender)
         </div>
@@ -72,23 +64,38 @@
             @Html.LabelFor(model => model.Gender, "Female")
             @Html.ValidationMessageFor(model => model.Gender)
         </div>
-       
         <div class="editor-label">
-           @Html.Label("Upload Resume")
+            @Html.Label("Upload Resume")
         </div>
         <div>
-            <input type="file" name="ResumeFile" /> 
+            <input type="file" name="ResumeFile" />
+            @if (Model.ResumeUploaded == "Yes")
+            {
+                <img src="../../Images/Files%20Upload%20Check/SQLDatabase_CheckMark.PNG" / style="width: 32px; height: 32px;">
+            }
+
+            else if (Model.ResumeUploaded == "No")
+            {
+                <img src="../../Images/Files%20Upload%20Check/SQLDatabse_CheckX.PNG" / style="width: 32px; height: 32px;">
+            }
         </div>
-        
         <div class="editor-label">
-           @Html.Label("Upload Transcript - Optional")
+            @Html.Label("Upload Transcript - Optional")
         </div>
         <div>
-            <input type="file" name="TranscriptFile" /> 
+            <input type="file" name="TranscriptFile" />
+            @if (Model.TranscriptUploaded == "Yes")
+            {
+                <img src="../../Images/Files%20Upload%20Check/SQLDatabase_CheckMark.PNG" / style="width: 32px; height: 32px;">
+            }
+
+            else if (Model.TranscriptUploaded == "No")
+            {
+                <img src="../../Images/Files%20Upload%20Check/SQLDatabse_CheckX.PNG" / style="width: 32px; height: 32px;">
+            }
         </div>
         <p>
-            <input type="submit" value="Submit" /> 
+            <input type="submit" value="Submit" />
         </p>
-
     </fieldset>
 }

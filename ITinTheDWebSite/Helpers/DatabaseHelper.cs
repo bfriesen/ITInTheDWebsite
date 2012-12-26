@@ -61,11 +61,11 @@ namespace ITinTheDWebSite.Helpers
             }
         }
 
-        public static bool StoreSponsorData(SponsorModel sponsor)
+        public static bool StoreSponsorData(SponsorModel sponsor, ref bool edit)
         {
             int UserId = WebSecurity.GetUserId(sponsor.EmailAddress);
 
-            bool edit = false;
+            edit = false;
 
             try
             {
@@ -224,11 +224,11 @@ namespace ITinTheDWebSite.Helpers
             }
         }
 
-        public static bool StoreAcademicData(AcademicModel academic)
+        public static bool StoreAcademicData(AcademicModel academic, ref bool edit)
         {
             int UserId = WebSecurity.CurrentUserId;
 
-            bool edit = false;
+            edit = false;
 
             try
             {
@@ -379,6 +379,8 @@ namespace ITinTheDWebSite.Helpers
                         prospect.EmailAddress = ExistingProspect.FirstOrDefault().EmailAddress;
                         prospect.DesiredCareerPath = ExistingProspect.FirstOrDefault().DesiredCareerPath;
                         prospect.Gender = ExistingProspect.FirstOrDefault().Gender;
+                        prospect.ResumeUploaded = ExistingProspect.FirstOrDefault().ResumeUploaded;
+                        prospect.TranscriptUploaded = ExistingProspect.FirstOrDefault().TranscriptUploaded;
 
                         return (prospect);
                     }
@@ -395,13 +397,13 @@ namespace ITinTheDWebSite.Helpers
 
         }
 
-        public static bool StoreProspectData(ProspectModel prospect)
+        public static bool StoreProspectData(ProspectModel prospect, ref bool edit)
         {
             int UserId = WebSecurity.CurrentUserId;
 
             ProspectiveStudent CurrentStudent;
 
-            bool edit = false;
+            edit = false;
 
             try
             {
@@ -437,6 +439,9 @@ namespace ITinTheDWebSite.Helpers
                                 Resume.ContentLength = prospect.ResumeFile.ContentLength;
 
                                 DatabaseHelper.UploadFile(Resume, prospect);
+
+                                CurrentStudent.ResumeUploaded = "Yes";
+                                prospect.ResumeUploaded = "Yes";
                             }
                         }
 
@@ -457,6 +462,7 @@ namespace ITinTheDWebSite.Helpers
                                 DatabaseHelper.UploadTranscript(Transcript, prospect);
 
                                 CurrentStudent.TranscriptUploaded = "Yes";
+                                prospect.TranscriptUploaded = "Yes";
                             }
                         }
 
@@ -502,31 +508,40 @@ namespace ITinTheDWebSite.Helpers
                                     DatabaseHelper.UploadFile(Resume, prospect);
 
                                     CurrentStudent.ResumeUploaded = "Yes";
-
-                                    // store transcripts if supplied
-                                    if (prospect.TranscriptFile != null && prospect.TranscriptFile.ContentLength > 0)
-                                    {
-
-                                        ProspectiveStudentTranscript Transcript = new ProspectiveStudentTranscript();
-                                        using (MemoryStream ts = new MemoryStream())
-                                        {
-                                            prospect.TranscriptFile.InputStream.CopyTo(ts);
-
-                                            Transcript.FileContent = ts.ToArray();
-                                            Transcript.FileName = Path.GetFileName(prospect.TranscriptFile.FileName);
-                                            Transcript.ContentType = prospect.TranscriptFile.ContentType;
-                                            Transcript.ContentLength = prospect.TranscriptFile.ContentLength;
-
-                                            DatabaseHelper.UploadTranscript(Transcript, prospect);
-
-                                            CurrentStudent.TranscriptUploaded = "Yes";
-                                        }
-                                    }
-                                    else
-                                    {
-                                        CurrentStudent.TranscriptUploaded = "No";
-                                    }
+                                    prospect.ResumeUploaded = "Yes";
                                 }
+                            }
+
+                            else
+                            {
+                                CurrentStudent.ResumeUploaded = "No";
+                                prospect.ResumeUploaded = "No";
+                            }
+
+                            // store transcripts if supplied
+                            if (prospect.TranscriptFile != null && prospect.TranscriptFile.ContentLength > 0)
+                            {
+
+                                ProspectiveStudentTranscript Transcript = new ProspectiveStudentTranscript();
+                                using (MemoryStream ts = new MemoryStream())
+                                {
+                                    prospect.TranscriptFile.InputStream.CopyTo(ts);
+
+                                    Transcript.FileContent = ts.ToArray();
+                                    Transcript.FileName = Path.GetFileName(prospect.TranscriptFile.FileName);
+                                    Transcript.ContentType = prospect.TranscriptFile.ContentType;
+                                    Transcript.ContentLength = prospect.TranscriptFile.ContentLength;
+
+                                    DatabaseHelper.UploadTranscript(Transcript, prospect);
+
+                                    CurrentStudent.TranscriptUploaded = "Yes";
+                                    prospect.TranscriptUploaded = "Yes";
+                                }
+                            }
+                            else
+                            {
+                                CurrentStudent.TranscriptUploaded = "No";
+                                prospect.TranscriptUploaded = "No";
                             }
                         }
 

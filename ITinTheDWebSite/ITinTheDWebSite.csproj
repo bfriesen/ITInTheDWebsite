@@ -179,9 +179,6 @@
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\FAQController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RegisterAcademicController.cs" />
-    <Compile Include="Controllers\RegisterProspectController.cs" />
-    <Compile Include="Controllers\RegisterSponsorController.cs" />
     <Compile Include="Controllers\ResumeController.cs" />
     <Compile Include="Controllers\SponsorsController.cs" />
     <Compile Include="Controllers\TrainersController.cs" />
@@ -198,16 +195,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ITintheD.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\AcademicModel.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\Application.cs" />
     <Compile Include="Models\ApplyOnlineModel.cs" />
     <Compile Include="Models\EmailFields.cs" />
-    <Compile Include="Models\ProspectModel.cs" />
     <Compile Include="Models\Rss.cs" />
     <Compile Include="Models\RssReader.cs" />
-    <Compile Include="Models\SponsorModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsefulTables.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -316,6 +310,8 @@
     <Content Include="Images\Carousel\waynesworldautobloguk-hyundai-veloster-turbo-se-31.jpg" />
     <Content Include="Images\Carousel\WoodwardGarden1.jpg" />
     <Content Include="Images\Carousel\xl_Hyunda-VT-624-2.png" />
+    <Content Include="Images\Files Upload Check\SQLDatabase_CheckMark.PNG" />
+    <Content Include="Images\Files Upload Check\SQLDatabse_CheckX.PNG" />
     <Content Include="Images\SponsorsAccordion\220px-CompuwareLogo.png" />
     <Content Include="Images\SponsorsAccordion\GalaxESolutions.JPG" />
     <Content Include="Images\SponsorsAccordion\MarketingAssociates.JPG" />
@@ -415,11 +411,6 @@
     </EntityDeploy>
     <Content Include="Views\Resume\Index.cshtml" />
     <Content Include="GetFile.ashx" />
-    <Content Include="Views\RegisterSponsor\Display.cshtml" />
-    <Content Include="Views\RegisterSponsor\Store.cshtml" />
-    <Content Include="Views\RegisterProspect\Display.cshtml" />
-    <Content Include="Views\RegisterProspect\Store.cshtml" />
-    <Content Include="Views\RegisterAcademic\Display.cshtml" />
     <Content Include="Views\Home\ThankYou.cshtml" />
     <EntityDeploy Include="UsefulTables.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -429,6 +420,12 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\User.cshtml" />
     <Content Include="Views\Account\Sponsor.cshtml" />
+    <Content Include="Views\Account\DisplayAcademic.cshtml" />
+    <Content Include="Views\Account\StoreAcademic.cshtml" />
+    <Content Include="Views\Account\DisplayProspect.cshtml" />
+    <Content Include="Views\Account\StoreProspect.cshtml" />
+    <Content Include="Views\Account\DisplaySponsor.cshtml" />
+    <Content Include="Views\Account\StoreSponsor.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

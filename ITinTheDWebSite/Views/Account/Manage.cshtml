@@ -2,31 +2,146 @@
 @{
     ViewBag.Title = "Manage Account";
 }
-
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="/resources/demos/style.css" />
+    <script>
+        $(function () {
+            $("#tabs").tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
+            $("#tabs li").removeClass("ui-corner-top").addClass("ui-corner-left");
+        });
+    </script>
+    <style>
+        .ui-tabs-vertical
+        {
+            width: 55em;
+        }
+        .ui-tabs-vertical .ui-tabs-nav
+        {
+            padding: .2em .1em .2em .2em;
+            float: left;
+            width: 12em;
+        }
+        .ui-tabs-vertical .ui-tabs-nav li
+        {
+            clear: left;
+            width: 100%;
+            border-bottom-width: 1px !important;
+            border-right-width: 0 !important;
+            margin: 0 -1px .2em 0;
+        }
+        .ui-tabs-vertical .ui-tabs-nav li a
+        {
+            display: block;
+        }
+        .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active
+        {
+            padding-bottom: 0;
+            padding-right: .1em;
+            border-right-width: 1px;
+            border-right-width: 1px;
+        }
+        .ui-tabs-vertical .ui-tabs-panel
+        {
+            padding: 1em;
+            float: right;
+            width: 40em;
+        }
+    </style>
+</head>
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
 </hgroup>
+@{
+    string userName = "";
+    string userNameFixed = "";
+    for (int x = 0; x < User.Identity.Name.Length; x++)
+    {
+        if (User.Identity.Name[x] == '@')
+        {
+            break;
+        }
 
-<p class="message-success">@ViewBag.StatusMessage</p>
+        else
+        {
+            if (x == 0)
+            {
+                userName += User.Identity.Name[x];
+                userName = userName.ToUpper();
+            }
 
-<p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
+            else
+            {
+                userNameFixed += User.Identity.Name[x];
+            }
+        }
+    }
 
-@if (ViewBag.HasLocalPassword)
-{
-    @Html.Partial("_ChangePasswordPartial")
+    userNameFixed = userNameFixed.ToLower();
+
+    userName += userNameFixed;
 }
-else
-{ 
-    @Html.Partial("_SetPasswordPartial")
-}
+<body>
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-1">Account Info</a></li>
+            <li><a href="#tabs-2">Password</a></li>
+        </ul>
+        <div id="tabs-1">
+            <h2>
+                Change Account Info</h2>
+            @if (User.IsInRole("Admin"))
+            {
 
-<section id="externalLogins">
-    @Html.Action("RemoveExternalLogins")
+            }
 
-    <h3>Add an external login</h3>
-    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-</section>
+            else if (User.IsInRole("Student"))
+            {
+                ITinTheDWebSite.Models.ProspectModel prospect = new ITinTheDWebSite.Models.ProspectModel();
+                
+                Html.RenderPartial("DisplayProspect", ITinTheDWebSite.Helpers.DatabaseHelper.GetProspectData(prospect));
+            }
 
+            else if (User.IsInRole("Educator"))
+            {
+                ITinTheDWebSite.Models.AcademicModel academic = new ITinTheDWebSite.Models.AcademicModel();
+                
+                Html.RenderPartial("DisplayAcademic", ITinTheDWebSite.Helpers.DatabaseHelper.GetAcademicdData(academic));
+            }
+
+            else if (User.IsInRole("Sponsor"))
+            {
+                ITinTheDWebSite.Models.SponsorModel sponsor = new ITinTheDWebSite.Models.SponsorModel();
+                
+                Html.RenderPartial("DisplaySponsor", ITinTheDWebSite.Helpers.DatabaseHelper.GetSponsorData(sponsor));
+            }
+
+            else
+            {
+
+            }
+        </div>
+        <div id="tabs-2">
+            <p class="message-success">@ViewBag.StatusMessage</p>
+            <p>
+                You're logged in as <strong>@userName</strong>.</p>
+            @if (ViewBag.HasLocalPassword)
+            {
+                @Html.Partial("_ChangePasswordPartial")
+            }
+            else
+            { 
+                @Html.Partial("_SetPasswordPartial")
+            }
+            <section id="externalLogins">
+                @Html.Action("RemoveExternalLogins")
+                <h3>
+                    Add an external login</h3>
+                @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+            </section>
+        </div>
+    </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

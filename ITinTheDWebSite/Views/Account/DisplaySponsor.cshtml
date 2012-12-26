@@ -6,7 +6,7 @@
 
 <h3>Become a sponsor for IT in the D</h3>
 <h4>@TempData["Message"]</h4>
-@using (Html.BeginForm("Store","RegisterSponsor")) {
+@using (Html.BeginForm("StoreSponsor","Account")) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
@@ -104,8 +104,8 @@
         }
     };
 
-    $(document).ready(function () { textCounter($("#Reason")[0],$("#counter")[0],4000)});
-//    TODO: Figure out how to call textCounter function after the dom has loaded (jquery ready function?)
+    $(document).ready(function () { textCounter($("#Reason")[0], $("#counter")[0], 4000) });
+    //    TODO: Figure out how to call textCounter function after the dom has loaded (jquery ready function?)
 
 </script>
 
