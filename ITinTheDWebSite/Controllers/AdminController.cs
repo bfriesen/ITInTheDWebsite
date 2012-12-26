@@ -6,16 +6,17 @@ using System.Web.Mvc;
 using WebMatrix.WebData;
 using System.Web.Security;
 using ITinTheDWebSite.Models;
+using ITinTheDWebSite.Helpers;
 
 namespace ITinTheDWebSite.Controllers
 {
 
-    [Authorize(Roles="Admin")] 
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         //
         // GET: /Admin/
-        
+
         public ActionResult Index(int currentPage = 1)
         {
 
@@ -29,7 +30,7 @@ namespace ITinTheDWebSite.Controllers
             {
                 allUsers = new List<UserInfo>(),
                 allRoles = roles.GetAllRoles()
-                
+
             };
 
             using (ITintheDTestEntities context = new ITintheDTestEntities())
@@ -64,7 +65,7 @@ namespace ITinTheDWebSite.Controllers
                     result.allUsers.Add(new UserInfo(p));
                 }
             }
-            
+
 
             return View(result);
         }
@@ -78,13 +79,56 @@ namespace ITinTheDWebSite.Controllers
             var roles = (SimpleRoleProvider)Roles.Provider;
 
 
-            string[] usrs = new string[]  { user.FirstOrDefault().UserName };
+            string[] usrs = new string[] { user.FirstOrDefault().UserName };
             string[] r = new string[] { role };
             if (roles.IsUserInRole(user.FirstOrDefault().UserName, role)) roles.RemoveUsersFromRoles(usrs, r);
 
+
+
+            switch (role)
+            {
+                case "Sponsor":
+                    if (DatabaseHelper.RemoveSponsorData(id))
+                    {
+                        TempData["Message"] = "Account successfully deleted.";
+                        return RedirectToAction("User", "Admin", new { id = user.FirstOrDefault().UserId });
+                    }
+                    break;
+                case "Student":
+
+                    int x = 1;
+
+                    if(DatabaseHelper.RemoveTranscript(id))
+                    {
+                        TempData["Message"] += x++ + ". Transcript successfully deleted. ";
+                    }
+
+                    if (DatabaseHelper.RemoveFile(id))
+                    {
+                        TempData["Message"] += x++ + ". File successfully deleted.";
+                    }
+
+                    if (DatabaseHelper.RemoveProspectiveData(id))
+                    {
+                        TempData["Message"] += x++ + ". Account successfully deleted. ";
+                    }
+
+                    return RedirectToAction("User", "Admin", new { id = user.FirstOrDefault().UserId });
+                    break;
+                case "Educator":
+                    if (DatabaseHelper.RemoveAcademicData(id))
+                    {
+                        TempData["Message"] = "Account successfully deleted.";
+                        return RedirectToAction("User", "Admin", new { id = user.FirstOrDefault().UserId });
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            TempData["Message"] = "Account deletion failed.";
             return RedirectToAction("User", "Admin", new { id = user.FirstOrDefault().UserId });
         }
-
 
         public ActionResult AddRole(int id, string role)
         {

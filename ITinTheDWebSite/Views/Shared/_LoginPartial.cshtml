@@ -1,6 +1,7 @@
 ﻿@if (Request.IsAuthenticated)
 {
     string userName = "";
+    string userNameFixed = "";
     for (int x = 0; x < User.Identity.Name.Length; x++)
     {
         if (User.Identity.Name[x] == '@')
@@ -15,9 +16,23 @@
                 
             }
             
-            userName += User.Identity.Name[x];
+            else if (x == 0)
+            {
+                userName += User.Identity.Name[x];
+                userName = userName.ToUpper();
+            }
+            
+            else
+            {
+                userNameFixed += User.Identity.Name[x];
+            }
         }
     }
+
+    userNameFixed = userNameFixed.ToLower();
+
+    userName += userNameFixed;
+    
     <text> Hello, @Html.ActionLink(userName , "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })!
     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
     {

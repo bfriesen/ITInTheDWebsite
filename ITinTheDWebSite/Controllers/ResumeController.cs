@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.IO;
 using ITinTheDWebSite.Helpers;
+using ITinTheDWebSite.Models;
 
 namespace ITinTheDWebSite.Controllers
 {
@@ -28,6 +29,7 @@ namespace ITinTheDWebSite.Controllers
                 {
                     
                     ProspectiveStudentResume f = new ProspectiveStudentResume();
+                    ProspectModel prospect = new ProspectModel();
                     using (MemoryStream ms = new MemoryStream())
                     {
                         UploadFile.InputStream.CopyTo(ms);
@@ -38,7 +40,7 @@ namespace ITinTheDWebSite.Controllers
                         f.ContentLength = UploadFile.ContentLength;
 
                         //DatabaseHelper.UploadFile(f, User.Identity.Name);  // here you write file into the database. You will have to write this method or just add it right here...
-                        DatabaseHelper.UploadFile(f);
+                        DatabaseHelper.UploadFile(f, prospect);
                     }
                     TempData["Upload"] = "Thank you for uploading your resume.";
                     return RedirectToAction("Index", "Resume");

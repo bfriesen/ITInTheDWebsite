@@ -85,7 +85,7 @@ namespace ITinTheDWebSite.Helpers
                         CurrentSponsor.EmailAddress = sponsor.EmailAddress;
                         CurrentSponsor.Title = sponsor.Title;
                         CurrentSponsor.Telephone = sponsor.Telephone;
-                        CurrentSponsor.Reason = sponsor.Reason + ' ';
+                        CurrentSponsor.Reason = sponsor.Reason;
                         CurrentSponsor.SponsorId = UserId;
 
                         edit = true;
@@ -101,8 +101,7 @@ namespace ITinTheDWebSite.Helpers
                         CurrentSponsor.EmailAddress = sponsor.EmailAddress;
                         CurrentSponsor.Title = sponsor.Title;
                         CurrentSponsor.Telephone = sponsor.Telephone;
-                        CurrentSponsor.Reason = sponsor.Reason + ' ';
-                        
+                        CurrentSponsor.Reason = sponsor.Reason;
 
                         context.AddToProspectiveCorporateSponsor(CurrentSponsor);
                     }
@@ -123,7 +122,7 @@ namespace ITinTheDWebSite.Helpers
 
                         return true;
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         string errorMessage = e.Message;
 
@@ -133,7 +132,7 @@ namespace ITinTheDWebSite.Helpers
                 }
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string exMessage = ex.Message;
 
@@ -141,7 +140,48 @@ namespace ITinTheDWebSite.Helpers
             }
         }
 
+        public static bool RemoveSponsorData(int UserId)
+        {
+            try
+            {
+                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
+                {
+                    var SponsorData = from r in context.ProspectiveCorporateSponsor
+                                      where r.SponsorId == UserId
+                                      select r;
 
+                    if (SponsorData.Count() > 0 && UserId > 0)
+                    {
+                        context.DeleteObject(SponsorData.FirstOrDefault());
+                    }
+
+                    else
+                    {
+                        return false;
+                    }
+
+                    try
+                    {
+                        context.SaveChanges();
+
+                        return true;
+                    }
+
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+
+                }
+            }
+
+            catch (Exception ex)
+            {
+                string exMessage = ex.Message;
+
+                return false;
+            }
+        }
 
         //===========================================================================
         //     Get / Store Academic information
@@ -254,14 +294,16 @@ namespace ITinTheDWebSite.Helpers
                         context.SaveChanges();
                         return true;
                     }
-                    catch (Exception ex) {
-                       if (ex is SqlException) {
-                          // Handle more specific SqlException exception here.
-                           string mess = ex.Message;
-                       }
- 
-                           return false;
-                          // Handle generic ones here.
+                    catch (Exception ex)
+                    {
+                        if (ex is SqlException)
+                        {
+                            // Handle more specific SqlException exception here.
+                            string mess = ex.Message;
+                        }
+
+                        return false;
+                        // Handle generic ones here.
 
                     }
 
@@ -270,6 +312,48 @@ namespace ITinTheDWebSite.Helpers
 
             catch
             {
+                return false;
+            }
+        }
+
+        public static bool RemoveAcademicData(int UserId)
+        {
+            try
+            {
+                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
+                {
+                    var SponsorData = from r in context.ProspectiveAcademic
+                                      where r.AcademicId == UserId
+                                      select r;
+
+                    if (SponsorData.Count() > 0 && UserId > 0)
+                    {
+                        context.DeleteObject(SponsorData.FirstOrDefault());
+                    }
+
+                    else
+                    {
+                        return false;
+                    }
+
+                    try
+                    {
+                        context.SaveChanges();
+
+                        return true;
+                    }
+
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                string exMessage = ex.Message;
+
                 return false;
             }
         }
@@ -352,7 +436,7 @@ namespace ITinTheDWebSite.Helpers
                                 Resume.ContentType = prospect.ResumeFile.ContentType;
                                 Resume.ContentLength = prospect.ResumeFile.ContentLength;
 
-                                DatabaseHelper.UploadFile(Resume);
+                                DatabaseHelper.UploadFile(Resume, prospect);
                             }
                         }
 
@@ -370,7 +454,7 @@ namespace ITinTheDWebSite.Helpers
                                 Transcript.ContentType = prospect.TranscriptFile.ContentType;
                                 Transcript.ContentLength = prospect.TranscriptFile.ContentLength;
 
-                                DatabaseHelper.UploadTRanscript(Transcript);
+                                DatabaseHelper.UploadTranscript(Transcript, prospect);
 
                                 CurrentStudent.TranscriptUploaded = "Yes";
                             }
@@ -381,77 +465,69 @@ namespace ITinTheDWebSite.Helpers
                     {
                         CurrentStudent = new ProspectiveStudent();
 
-                        // Need to make sure the prospect supplied a resume file 
-                        if (prospect.ResumeFile != null && prospect.ResumeFile.ContentLength > 0)
-                        {
-                            ProspectiveStudentResume Resume = new ProspectiveStudentResume();
+                        CurrentStudent.Status = (int)StudentStatus.Initial;
+                        CurrentStudent.Name = prospect.Name;
+                        CurrentStudent.Telephone = prospect.Telephone;
+                        CurrentStudent.EmailAddress = prospect.EmailAddress;
+                        CurrentStudent.DesiredCareerPath = prospect.DesiredCareerPath;
+                        CurrentStudent.Gender = prospect.Gender;
 
-                            using (MemoryStream ms = new MemoryStream())
-                            {
-                                prospect.ResumeFile.InputStream.CopyTo(ms);
-
-                                Resume.FileContent = ms.ToArray();
-                                Resume.FileName = Path.GetFileName(prospect.ResumeFile.FileName);
-                                Resume.ContentType = prospect.ResumeFile.ContentType;
-                                Resume.ContentLength = prospect.ResumeFile.ContentLength;
-
-                                DatabaseHelper.UploadFile(Resume);
-
-                                CurrentStudent.ResumeUploaded = "Yes";
-
-                                // store transcripts if supplied
-                                if (prospect.TranscriptFile != null && prospect.TranscriptFile.ContentLength > 0)
-                                {
-
-                                    ProspectiveStudentTranscript Transcript = new ProspectiveStudentTranscript();
-                                    using (MemoryStream ts = new MemoryStream())
-                                    {
-                                        prospect.TranscriptFile.InputStream.CopyTo(ts);
-
-                                        Transcript.FileContent = ts.ToArray();
-                                        Transcript.FileName = Path.GetFileName(prospect.TranscriptFile.FileName);
-                                        Transcript.ContentType = prospect.TranscriptFile.ContentType;
-                                        Transcript.ContentLength = prospect.TranscriptFile.ContentLength;
-
-                                        DatabaseHelper.UploadTRanscript(Transcript);
-
-                                        CurrentStudent.TranscriptUploaded = "Yes";
-                                    }
-                                }
-                                else
-                                {
-                                    CurrentStudent.TranscriptUploaded = "No";
-                                }
-
-
-                                CurrentStudent.Status = (int)StudentStatus.Initial;
-                                CurrentStudent.Name = prospect.Name;
-                                CurrentStudent.Telephone = prospect.Telephone;
-                                CurrentStudent.EmailAddress = prospect.EmailAddress;
-                                CurrentStudent.DesiredCareerPath = prospect.DesiredCareerPath;
-                                CurrentStudent.Gender = prospect.Gender;
-
-                                context.AddToProspectiveStudent(CurrentStudent);
-                            }
-                        }
-                        else
-                        {
-                            return false;
-                        }
+                        context.AddToProspectiveStudent(CurrentStudent);
                     }
-
-                    DatabaseHelper.AddUserToRole(prospect.EmailAddress, "Student");
 
                     try
                     {
-                        if (edit == true)
+                        if (edit == false)
                         {
                             WebSecurity.CreateUserAndAccount(prospect.EmailAddress, prospect.Password);
                             WebSecurity.Login(prospect.EmailAddress, prospect.Password);
 
-                            DatabaseHelper.AddUserToRole(prospect.EmailAddress, "Sponsor");
+                            DatabaseHelper.AddUserToRole(prospect.EmailAddress, "Student");
 
                             CurrentStudent.UserId = WebSecurity.GetUserId(prospect.EmailAddress);
+
+                            if (prospect.ResumeFile != null && prospect.ResumeFile.ContentLength > 0)
+                            {
+                                ProspectiveStudentResume Resume = new ProspectiveStudentResume();
+
+                                using (MemoryStream ms = new MemoryStream())
+                                {
+                                    prospect.ResumeFile.InputStream.CopyTo(ms);
+
+                                    Resume.FileContent = ms.ToArray();
+                                    Resume.FileName = Path.GetFileName(prospect.ResumeFile.FileName);
+                                    Resume.ContentType = prospect.ResumeFile.ContentType;
+                                    Resume.ContentLength = prospect.ResumeFile.ContentLength;
+
+                                    DatabaseHelper.UploadFile(Resume, prospect);
+
+                                    CurrentStudent.ResumeUploaded = "Yes";
+
+                                    // store transcripts if supplied
+                                    if (prospect.TranscriptFile != null && prospect.TranscriptFile.ContentLength > 0)
+                                    {
+
+                                        ProspectiveStudentTranscript Transcript = new ProspectiveStudentTranscript();
+                                        using (MemoryStream ts = new MemoryStream())
+                                        {
+                                            prospect.TranscriptFile.InputStream.CopyTo(ts);
+
+                                            Transcript.FileContent = ts.ToArray();
+                                            Transcript.FileName = Path.GetFileName(prospect.TranscriptFile.FileName);
+                                            Transcript.ContentType = prospect.TranscriptFile.ContentType;
+                                            Transcript.ContentLength = prospect.TranscriptFile.ContentLength;
+
+                                            DatabaseHelper.UploadTranscript(Transcript, prospect);
+
+                                            CurrentStudent.TranscriptUploaded = "Yes";
+                                        }
+                                    }
+                                    else
+                                    {
+                                        CurrentStudent.TranscriptUploaded = "No";
+                                    }
+                                }
+                            }
                         }
 
                         context.SaveChanges();
@@ -470,10 +546,52 @@ namespace ITinTheDWebSite.Helpers
             }
         }
 
-        public static bool UploadTRanscript(ProspectiveStudentTranscript f)
+        public static bool RemoveProspectiveData(int UserId)
+        {
+            try
+            {
+                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
+                {
+                    var SponsorData = from r in context.ProspectiveStudent
+                                      where r.UserId == UserId
+                                      select r;
+
+                    if (SponsorData.Count() > 0 && UserId > 0)
+                    {
+                        context.DeleteObject(SponsorData.FirstOrDefault());
+                    }
+
+                    else
+                    {
+                        return false;
+                    }
+
+                    try
+                    {
+                        context.SaveChanges();
+
+                        return true;
+                    }
+
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                string exMessage = ex.Message;
+
+                return false;
+            }
+        }
+
+        public static bool UploadTranscript(ProspectiveStudentTranscript f, ProspectModel prospect)
         {
 
-            int UserId = WebSecurity.CurrentUserId;
+            int UserId = WebSecurity.GetUserId(prospect.EmailAddress);
 
             try
             {
@@ -510,16 +628,56 @@ namespace ITinTheDWebSite.Helpers
 
         }
 
-        public static bool UploadFile(ProspectiveStudentResume f)
+        public static bool RemoveTranscript(int UserId)
         {
+            try
+            {
+                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
+                {
+                    var UserTranscript = from r in context.ProspectiveStudentTranscripts
+                                         where r.UserId == UserId
+                                         select r;
 
-            int UserId = WebSecurity.CurrentUserId;
+                    if (UserTranscript.Count() > 0 && UserId > 0)
+                    {
+                        context.DeleteObject(UserTranscript.FirstOrDefault());
+                    }
+
+                    else
+                    {
+                        return false;
+                    }
+
+                    try
+                    {
+                        context.SaveChanges();
+
+                        return true;
+                    }
+
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                string exMessage = ex.Message;
+
+                return false;
+            }
+        }
+
+        public static bool UploadFile(ProspectiveStudentResume f, ProspectModel prospect)
+        {
+            int UserId = WebSecurity.GetUserId(prospect.EmailAddress);
 
             try
             {
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
                 {
-
                     var UserResume = from r in context.ProspectiveStudentResumes
                                      where r.UserId == UserId
                                      select r;
@@ -548,6 +706,48 @@ namespace ITinTheDWebSite.Helpers
                 return false;
             }
 
+        }
+
+        public static bool RemoveFile(int UserId)
+        {
+            try
+            {
+                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
+                {
+                    var UserResume = from r in context.ProspectiveStudentResumes
+                                     where r.UserId == UserId
+                                     select r;
+
+                    if (UserResume.Count() > 0 && UserId > 0)
+                    {
+                        context.DeleteObject(UserResume.FirstOrDefault());
+                    }
+
+                    else
+                    {
+                        return false;
+                    }
+
+                    try
+                    {
+                        context.SaveChanges();
+
+                        return true;
+                    }
+
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                string exMessage = ex.Message;
+
+                return false;
+            }
         }
 
         public static File GetResume(int id)
