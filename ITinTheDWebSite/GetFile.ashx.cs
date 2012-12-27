@@ -17,7 +17,7 @@ namespace ITinTheDWebSite
             if (context.Request.QueryString["id"] != null)
             {
                 int id = int.Parse(context.Request.QueryString["id"]);
-                File f = DatabaseHelper.GetResume(id);       // Retrieve File with this ID from the database
+                ProspectiveStudentResume f = DatabaseHelper.GetResume(id);       // Retrieve File with this ID from the database
                 context.Response.Clear();
                 context.Response.AddHeader("Content-Length", f.ContentLength.ToString());
                 context.Response.ContentType = f.ContentType;

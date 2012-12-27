@@ -71,6 +71,8 @@
             @if (Model.ResumeUploaded == "Yes")
             {
                 <img src="../../Images/Files%20Upload%20Check/SQLDatabase_CheckMark.PNG" / style="width: 32px; height: 32px;">
+                
+                ITinTheDWebSite.Helpers.DatabaseHelper.GetResume(WebSecurity.GetUserId(User.Identity.Name));
             }
 
             else if (Model.ResumeUploaded == "No")
@@ -86,6 +88,8 @@
             @if (Model.TranscriptUploaded == "Yes")
             {
                 <img src="../../Images/Files%20Upload%20Check/SQLDatabase_CheckMark.PNG" / style="width: 32px; height: 32px;">
+                
+                ITinTheDWebSite.Helpers.DatabaseHelper.GetTranscript(WebSecurity.GetUserId(User.Identity.Name));
             }
 
             else if (Model.TranscriptUploaded == "No")

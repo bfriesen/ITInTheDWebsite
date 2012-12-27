@@ -36,8 +36,8 @@ namespace ITinTheDWebSite.Helpers
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
                 {
                     var currentAdmin = from r in context.SiteAdmin
-                                           where r.UserId == UserId
-                                           select r;
+                                       where r.UserId == UserId
+                                       select r;
 
                     if (currentAdmin.Count() > 0)
                     {
@@ -75,8 +75,8 @@ namespace ITinTheDWebSite.Helpers
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
                 {
                     var AdminData = from r in context.SiteAdmin
-                                      where r.UserId == UserId
-                                      select r;
+                                    where r.UserId == UserId
+                                    select r;
                     if (AdminData.Count() > 0 && UserId > 0)
                     {
                         CurrentAdmin = AdminData.FirstOrDefault();
@@ -141,8 +141,8 @@ namespace ITinTheDWebSite.Helpers
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
                 {
                     var AdminData = from r in context.SiteAdmin
-                                      where r.UserId == UserId
-                                      select r;
+                                    where r.UserId == UserId
+                                    select r;
 
                     if (AdminData.Count() > 0 && UserId > 0)
                     {
@@ -838,6 +838,38 @@ namespace ITinTheDWebSite.Helpers
             }
         }
 
+        public static ProspectiveStudentTranscript GetTranscript(int UserId)
+        {
+            ProspectiveStudentTranscript f = new ProspectiveStudentTranscript();
+
+            try
+            {
+                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
+                {
+
+                    var transcript = from r in context.ProspectiveStudentTranscripts
+                                     where r.UserId == UserId
+                                     select r;
+
+                    if (transcript.Count() > 0)
+                    {
+                        return (transcript.FirstOrDefault());
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                }
+            }
+
+            catch
+            {
+                return (null);
+            }
+
+        }
+
         public static bool UploadFile(ProspectiveStudentResume f, ProspectModel prospect)
         {
             int UserId = WebSecurity.GetUserId(prospect.EmailAddress);
@@ -918,32 +950,36 @@ namespace ITinTheDWebSite.Helpers
             }
         }
 
-        public static File GetResume(int id)
+        public static ProspectiveStudentResume GetResume(int UserId)
         {
+            ProspectiveStudentResume f = new ProspectiveStudentResume();
 
-            using (ITintheDTestEntities context = new ITintheDTestEntities())
+            try
             {
-
-                var resume = from f in context.Files
-                             //where f.FileID.Equals(id)
-                             where f.FileID == id
-                             select f;
-
-                if (resume.Count() > 0)
+                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
                 {
+                    var resume = from r in context.ProspectiveStudentResumes
+                                 where r.UserId == UserId
+                                 select r;
 
-                    return resume.FirstOrDefault();
-                }
-                else
-                {
-                    return null;
-                    //throw new Exception("SOrry this user .... ");
-                }
+                    if (resume.Count() > 0)
+                    {
+                        //return File(resume.FirstOrDefault().FileContent, resume.FirstOrDefault().ContentType);
+                        return (resume.FirstOrDefault());
+                    }
+                    else
+                    {
+                        return null;
+                    }
 
+                }
             }
 
+            catch
+            {
+                return (null);
+            }
         }
-
     }
 
 }
