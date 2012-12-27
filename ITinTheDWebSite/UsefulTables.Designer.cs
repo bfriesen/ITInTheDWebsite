@@ -248,6 +248,22 @@ namespace ITinTheDWebSite
             }
         }
         private ObjectSet<ProspectiveStudent> _ProspectiveStudent;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<SiteAdmin> SiteAdmin
+        {
+            get
+            {
+                if ((_SiteAdmin == null))
+                {
+                    _SiteAdmin = base.CreateObjectSet<SiteAdmin>("SiteAdmin");
+                }
+                return _SiteAdmin;
+            }
+        }
+        private ObjectSet<SiteAdmin> _SiteAdmin;
 
         #endregion
         #region AddTo Methods
@@ -338,6 +354,14 @@ namespace ITinTheDWebSite
         public void AddToProspectiveStudent(ProspectiveStudent prospectiveStudent)
         {
             base.AddObject("ProspectiveStudent", prospectiveStudent);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the SiteAdmin EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSiteAdmin(SiteAdmin siteAdmin)
+        {
+            base.AddObject("SiteAdmin", siteAdmin);
         }
 
         #endregion
@@ -1958,6 +1982,187 @@ namespace ITinTheDWebSite
         private global::System.String _ContentType;
         partial void OnContentTypeChanging(global::System.String value);
         partial void OnContentTypeChanged();
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="ITintheDTestModel1", Name="SiteAdmin")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class SiteAdmin : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new SiteAdmin object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="userId">Initial value of the UserId property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="emailAddress">Initial value of the EmailAddress property.</param>
+        public static SiteAdmin CreateSiteAdmin(global::System.Int32 id, global::System.Int32 userId, global::System.String name, global::System.String emailAddress)
+        {
+            SiteAdmin siteAdmin = new SiteAdmin();
+            siteAdmin.ID = id;
+            siteAdmin.UserId = userId;
+            siteAdmin.Name = name;
+            siteAdmin.EmailAddress = emailAddress;
+            return siteAdmin;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 UserId
+        {
+            get
+            {
+                return _UserId;
+            }
+            set
+            {
+                OnUserIdChanging(value);
+                ReportPropertyChanging("UserId");
+                _UserId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserId");
+                OnUserIdChanged();
+            }
+        }
+        private global::System.Int32 _UserId;
+        partial void OnUserIdChanging(global::System.Int32 value);
+        partial void OnUserIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Telephone
+        {
+            get
+            {
+                return _Telephone;
+            }
+            set
+            {
+                OnTelephoneChanging(value);
+                ReportPropertyChanging("Telephone");
+                _Telephone = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Telephone");
+                OnTelephoneChanged();
+            }
+        }
+        private global::System.String _Telephone;
+        partial void OnTelephoneChanging(global::System.String value);
+        partial void OnTelephoneChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String EmailAddress
+        {
+            get
+            {
+                return _EmailAddress;
+            }
+            set
+            {
+                OnEmailAddressChanging(value);
+                ReportPropertyChanging("EmailAddress");
+                _EmailAddress = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("EmailAddress");
+                OnEmailAddressChanged();
+            }
+        }
+        private global::System.String _EmailAddress;
+        partial void OnEmailAddressChanging(global::System.String value);
+        partial void OnEmailAddressChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Company
+        {
+            get
+            {
+                return _Company;
+            }
+            set
+            {
+                OnCompanyChanging(value);
+                ReportPropertyChanging("Company");
+                _Company = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Company");
+                OnCompanyChanged();
+            }
+        }
+        private global::System.String _Company;
+        partial void OnCompanyChanging(global::System.String value);
+        partial void OnCompanyChanged();
 
         #endregion
     

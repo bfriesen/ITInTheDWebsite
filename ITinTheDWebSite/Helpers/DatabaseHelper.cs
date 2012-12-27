@@ -18,12 +18,165 @@ namespace ITinTheDWebSite.Helpers
         {
             var roles = (SimpleRoleProvider)Roles.Provider;
 
-
             string[] usrs = new string[] { user };
             string[] r = new string[] { role };
 
             if (!roles.IsUserInRole(user, role)) roles.AddUsersToRoles(usrs, r);
         }
+
+        //===========================================================================
+        //     Get / Store Sponsor information
+        //===========================================================================
+        public static RegisterModel GetAdminData(RegisterModel regAdmin)
+        {
+            int UserId = WebSecurity.CurrentUserId;
+
+            try
+            {
+                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
+                {
+                    var currentAdmin = from r in context.SiteAdmin
+                                           where r.UserId == UserId
+                                           select r;
+
+                    if (currentAdmin.Count() > 0)
+                    {
+                        regAdmin.Name = currentAdmin.FirstOrDefault().Name;
+                        regAdmin.EmailAddress = currentAdmin.FirstOrDefault().EmailAddress;
+                        regAdmin.CompanyName = currentAdmin.FirstOrDefault().Company;
+                        regAdmin.Telephone = currentAdmin.FirstOrDefault().Telephone;
+                        regAdmin.EmailAddress = currentAdmin.FirstOrDefault().EmailAddress;
+
+                        return (regAdmin);
+                    }
+
+                    else
+                    {
+                        return (null);
+                    }
+                }
+            }
+            catch
+            {
+                return (null);
+            }
+        }
+
+        public static bool StoreAdminData(RegisterModel regAdmin, ref bool edit)
+        {
+            int UserId = WebSecurity.GetUserId(regAdmin.EmailAddress);
+
+            edit = false;
+
+            try
+            {
+                SiteAdmin CurrentAdmin;
+
+                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
+                {
+                    var AdminData = from r in context.SiteAdmin
+                                      where r.UserId == UserId
+                                      select r;
+                    if (AdminData.Count() > 0 && UserId > 0)
+                    {
+                        CurrentAdmin = AdminData.FirstOrDefault();
+                        CurrentAdmin.Company = regAdmin.CompanyName;
+                        CurrentAdmin.EmailAddress = regAdmin.EmailAddress;
+                        CurrentAdmin.Name = regAdmin.Name;
+                        CurrentAdmin.Telephone = regAdmin.Telephone;
+                        CurrentAdmin.UserId = UserId;
+
+                        edit = true;
+                    }
+                    else
+                    {
+                        CurrentAdmin = new SiteAdmin();
+
+                        CurrentAdmin.Company = regAdmin.CompanyName;
+                        CurrentAdmin.Name = regAdmin.Name;
+                        CurrentAdmin.EmailAddress = regAdmin.EmailAddress;
+                        CurrentAdmin.Telephone = regAdmin.Telephone;
+
+                        context.AddToSiteAdmin(CurrentAdmin);
+                    }
+
+                    try
+                    {
+                        if (edit == false)
+                        {
+                            WebSecurity.CreateUserAndAccount(regAdmin.EmailAddress, regAdmin.Password);
+                            WebSecurity.Login(regAdmin.EmailAddress, regAdmin.Password);
+
+                            DatabaseHelper.AddUserToRole(regAdmin.EmailAddress, "Admin");
+
+                            CurrentAdmin.UserId = WebSecurity.GetUserId(regAdmin.EmailAddress);
+                        }
+
+                        context.SaveChanges();
+
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        string errorMessage = e.Message;
+
+                        return false;
+                    }
+
+                }
+            }
+
+            catch (Exception ex)
+            {
+                string exMessage = ex.Message;
+
+                return false;
+            }
+        }
+
+        public static bool RemoveAdminData(int UserId)
+        {
+            try
+            {
+                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
+                {
+                    var AdminData = from r in context.SiteAdmin
+                                      where r.UserId == UserId
+                                      select r;
+
+                    if (AdminData.Count() > 0 && UserId > 0)
+                    {
+                        context.DeleteObject(AdminData.FirstOrDefault());
+                    }
+
+                    else
+                    {
+                        return false;
+                    }
+
+                    try
+                    {
+                        context.SaveChanges();
+
+                        return true;
+                    }
+
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+
+                }
+            }
+
+            catch (Exception ex)
+            {
+                string exMessage = ex.Message;
+
+                return false;
+            }
+        }
+
         //===========================================================================
         //     Get / Store Sponsor information
         //===========================================================================

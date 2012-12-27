@@ -2,33 +2,104 @@
 @{
     ViewBag.Title = "Index";
 }
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="/resources/demos/style.css" />
+    <script>
+        $(function () {
+            $("#tabs").tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
+            $("#tabs li").removeClass("ui-corner-top").addClass("ui-corner-left");
+        });
+    </script>
+    <style>
+        .ui-tabs-vertical
+        {
+            width: 55em;
+        }
+        .ui-tabs-vertical .ui-tabs-nav
+        {
+            padding: .2em .1em .2em .2em;
+            float: left;
+            width: 12em;
+        }
+        .ui-tabs-vertical .ui-tabs-nav li
+        {
+            clear: left;
+            width: 100%;
+            border-bottom-width: 1px !important;
+            border-right-width: 0 !important;
+            margin: 0 -1px .2em 0;
+        }
+        .ui-tabs-vertical .ui-tabs-nav li a
+        {
+            display: block;
+        }
+        .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active
+        {
+            padding-bottom: 0;
+            padding-right: .1em;
+            border-right-width: 1px;
+            border-right-width: 1px;
+        }
+        .ui-tabs-vertical .ui-tabs-panel
+        {
+            padding: 1em;
+            float: right;
+            width: 40em;
+        }
+    </style>
+</head>
+<h2>
+    Index</h2>
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Users</a></li>
+        <li><a href="#tabs-2">Register an Admin</a></li>
+    </ul>
+    <div id="tabs-1">
+        <table>
+            <thead>
+                <tr>
+                    <td>
+                        UserID
+                    </td>
+                    <td>
+                        Username
+                    </td>
+                    <td>
+                        Roles
+                    </td>
+                </tr>
+            </thead>
+        
+        <h2>
+            Users</h2>
+        @foreach (ITinTheDWebSite.Models.UserInfo u in Model.allUsers)
+        {
+            <tr>
+                <td>@u.user.UserId
+                </td>
+                <td>
+                    <a href="/admin/user?id=@u.user.UserId" >@u.user.UserName</a>
+                </td>
+                <td>
+                    @foreach (string r in @u.roles)
+                    {
+                        @r<span> </span> 
+                    }
+                </td>
+            </tr>
+        }
+        </table>
+    </div>
+    <div id="tabs-2">
+        <h2>
+            Register an Admin</h2>
+        @{
+            ITinTheDWebSite.Models.RegisterModel adminReg = new ITinTheDWebSite.Models.RegisterModel();
 
-<h2>Index</h2>
-<table>
-<thead>
-    <tr>
-        <td>
-        UserID        
-        </td>
-        <td>
-        USername
-        </td>
-        <td>
-        ROles
-        </td>
-    </tr>
-</thead>
-@foreach (ITinTheDWebSite.Models.UserInfo u in Model.allUsers)
-{
-    <tr>
-        <td>@u.user.UserId</td>
-        <td><a href="/admin/user?id=@u.user.UserId" >@u.user.UserName</a></td>
-        <td>
-            @foreach (string r in @u.roles)
-            {
-               @r<Span> </Span> 
-            }               
-        </td>
-    </tr>
-}
-</table>
+            Html.RenderPartial("../Admin/DisplayAdminRegister", adminReg);
+        }
+    </div>
+</div>

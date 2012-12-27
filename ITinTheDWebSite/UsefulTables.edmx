@@ -13,6 +13,7 @@
           <EntitySet Name="ProspectiveStudent" EntityType="ITintheDTestModel1.Store.ProspectiveStudent" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ProspectiveStudentResume" EntityType="ITintheDTestModel1.Store.ProspectiveStudentResume" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ProspectiveStudentTranscript" EntityType="ITintheDTestModel1.Store.ProspectiveStudentTranscript" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SiteAdmin" EntityType="ITintheDTestModel1.Store.SiteAdmin" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SponsorStatus" EntityType="ITintheDTestModel1.Store.SponsorStatus" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="StudentStatus" EntityType="ITintheDTestModel1.Store.StudentStatus" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="webpages_Roles" EntityType="ITintheDTestModel1.Store.webpages_Roles" store:Type="Tables" Schema="dbo" />
@@ -118,6 +119,17 @@
           <Property Name="FileContent" Type="varbinary(max)" Nullable="false" />
           <Property Name="ContentType" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ContentLength" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SiteAdmin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Telephone" Type="varchar" MaxLength="14" />
+          <Property Name="EmailAddress" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Company" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="SponsorStatus">
           <Key>
@@ -228,6 +240,7 @@
             <End Role="StudentStatu" EntitySet="StudentStatus" />
             <End Role="ProspectiveStudent" EntitySet="ProspectiveStudent" />
           </AssociationSet>
+          <EntitySet Name="SiteAdmin" EntityType="ITintheDTestModel1.SiteAdmin" />
         </EntityContainer>
         <EntityType Name="Faq">
           <Key>
@@ -399,6 +412,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SiteAdmin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Telephone" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Company" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -509,6 +533,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SiteAdmin">
+            <EntityTypeMapping TypeName="ITintheDTestModel1.SiteAdmin">
+              <MappingFragment StoreEntitySet="SiteAdmin">
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -557,6 +593,7 @@
           <ConnectorPoint PointX="10.875" PointY="7.547841796875" />
           <ConnectorPoint PointX="11.625" PointY="7.547841796875" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="ITintheDTestModel1.SiteAdmin" Width="1.5" PointX="0.75" PointY="3.75" Height="2.1725878906250031" />
         </Diagram>
     </Diagrams>
   </Designer>

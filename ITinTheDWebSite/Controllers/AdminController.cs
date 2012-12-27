@@ -19,23 +19,15 @@ namespace ITinTheDWebSite.Controllers
 
         public ActionResult Index(int currentPage = 1)
         {
-
-            //var membership = (SimpleMembershipProvider)Membership.Provider;
-
-            //int allUsers = 0;
-
-            //MembershipUserCollection users = membership.GetAllUsers(currentPage, 100, out allUsers);
             var roles = (SimpleRoleProvider)Roles.Provider;
             AdminModel result = new AdminModel
             {
                 allUsers = new List<UserInfo>(),
                 allRoles = roles.GetAllRoles()
-
             };
 
             using (ITintheDTestEntities context = new ITintheDTestEntities())
             {
-
                 var user = from u in context.UserProfiles orderby u.UserId select u;
 
                 foreach (UserProfile p in user)
@@ -66,7 +58,6 @@ namespace ITinTheDWebSite.Controllers
                 }
             }
 
-
             return View(result);
         }
 
@@ -78,12 +69,9 @@ namespace ITinTheDWebSite.Controllers
             var user = from u in context.UserProfiles where u.UserId == id select u;
             var roles = (SimpleRoleProvider)Roles.Provider;
 
-
             string[] usrs = new string[] { user.FirstOrDefault().UserName };
             string[] r = new string[] { role };
             if (roles.IsUserInRole(user.FirstOrDefault().UserName, role)) roles.RemoveUsersFromRoles(usrs, r);
-
-
 
             switch (role)
             {
@@ -122,6 +110,13 @@ namespace ITinTheDWebSite.Controllers
                         return RedirectToAction("User", "Admin", new { id = user.FirstOrDefault().UserId });
                     }
                     break;
+                case "Admin":
+                    if (DatabaseHelper.RemoveAdminData(id))
+                    {
+                        TempData["Message"] = "Account successfully deleted.";
+                        return RedirectToAction("User", "Admin", new { id = user.FirstOrDefault().UserId });
+                    }
+                    break;
                 default:
                     break;
             }
@@ -143,6 +138,100 @@ namespace ITinTheDWebSite.Controllers
             if (!roles.IsUserInRole(user.FirstOrDefault().UserName, role)) roles.AddUsersToRoles(usrs, r);
 
             return RedirectToAction("User", "Admin", new { id = user.FirstOrDefault().UserId });
+        }
+
+        //
+        // GET: /Account/Register
+
+        [Authorize(Roles = "Admin")]
+        [AllowAnonymous]
+        public ActionResult DisplayAdminRegister()
+        {
+            RegisterModel adminReg = new RegisterModel();
+            if (DatabaseHelper.GetAdminData(adminReg) == null)
+            {
+                TempData["RegistrationMessage"] = "Admin registration form.";
+            }
+
+            return View(adminReg);
+        }
+
+        //
+        // POST: /Account/Register
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult StoreAdmin(RegisterModel adminReg)
+        {
+            if (ModelState.IsValid)
+            {
+                bool edit = false;
+
+                if (DatabaseHelper.StoreAdminData(adminReg, ref edit))
+                {
+                    if (edit == true)
+                    {
+                        TempData["Message"] = "Successfully edited your information.";
+                        return RedirectToAction("Account", "Manage");
+                    }
+
+                    else
+                    {
+                        TempData["Message"] = "Successfully registered an Admin";
+                        return RedirectToAction("DisplayAdminRegister", "Admin");
+                    }
+                }
+
+                else
+                {
+                    TempData["Message"] = "Registeration failed.";
+                    return RedirectToAction("DisplayAdminRegister", "Admin");
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            TempData["Message"] = "Registeration failed.";
+            return RedirectToAction("DisplayAdminRegister", "Admin");
+        }
+
+        private static string ErrorCodeToString(MembershipCreateStatus createStatus)
+        {
+            // See http://go.microsoft.com/fwlink/?LinkID=177550 for
+            // a full list of status codes.
+            switch (createStatus)
+            {
+                case MembershipCreateStatus.DuplicateUserName:
+                    return "User name already exists. Please enter a different user name.";
+
+                case MembershipCreateStatus.DuplicateEmail:
+                    return "A user name for that e-mail address already exists. Please enter a different e-mail address.";
+
+                case MembershipCreateStatus.InvalidPassword:
+                    return "The password provided is invalid. Please enter a valid password value.";
+
+                case MembershipCreateStatus.InvalidEmail:
+                    return "The e-mail address provided is invalid. Please check the value and try again.";
+
+                case MembershipCreateStatus.InvalidAnswer:
+                    return "The password retrieval answer provided is invalid. Please check the value and try again.";
+
+                case MembershipCreateStatus.InvalidQuestion:
+                    return "The password retrieval question provided is invalid. Please check the value and try again.";
+
+                case MembershipCreateStatus.InvalidUserName:
+                    return "The user name provided is invalid. Please check the value and try again.";
+
+                case MembershipCreateStatus.ProviderError:
+                    return "The authentication provider returned an error. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
+
+                case MembershipCreateStatus.UserRejected:
+                    return "The user creation request has been canceled. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
+
+                default:
+                    return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
+            }
         }
     }
 }

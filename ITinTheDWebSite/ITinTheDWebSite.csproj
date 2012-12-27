@@ -388,7 +388,6 @@
     <None Include="Content\documents\AttendancePolicy.pdf" />
     <None Include="Content\documents\Workshop_Outline.docx" />
     <None Include="Content\variables.less" />
-    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
@@ -426,6 +425,8 @@
     <Content Include="Views\Account\StoreProspect.cshtml" />
     <Content Include="Views\Account\DisplaySponsor.cshtml" />
     <Content Include="Views\Account\StoreSponsor.cshtml" />
+    <Content Include="Views\Admin\DisplayAdminRegister.cshtml" />
+    <Content Include="Views\Admin\StoreAdmin.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

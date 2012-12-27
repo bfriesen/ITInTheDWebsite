@@ -93,27 +93,29 @@
                 Change Account Info</h2>
             @if (User.IsInRole("Admin"))
             {
+                ITinTheDWebSite.Models.RegisterModel adminReg = new ITinTheDWebSite.Models.RegisterModel();
 
+                Html.RenderPartial("../Admin/DisplayAdminRegister", ITinTheDWebSite.Helpers.DatabaseHelper.GetAdminData(adminReg));
             }
 
             else if (User.IsInRole("Student"))
             {
                 ITinTheDWebSite.Models.ProspectModel prospect = new ITinTheDWebSite.Models.ProspectModel();
-                
+
                 Html.RenderPartial("DisplayProspect", ITinTheDWebSite.Helpers.DatabaseHelper.GetProspectData(prospect));
             }
 
             else if (User.IsInRole("Educator"))
             {
                 ITinTheDWebSite.Models.AcademicModel academic = new ITinTheDWebSite.Models.AcademicModel();
-                
+
                 Html.RenderPartial("DisplayAcademic", ITinTheDWebSite.Helpers.DatabaseHelper.GetAcademicdData(academic));
             }
 
             else if (User.IsInRole("Sponsor"))
             {
                 ITinTheDWebSite.Models.SponsorModel sponsor = new ITinTheDWebSite.Models.SponsorModel();
-                
+
                 Html.RenderPartial("DisplaySponsor", ITinTheDWebSite.Helpers.DatabaseHelper.GetSponsorData(sponsor));
             }
 

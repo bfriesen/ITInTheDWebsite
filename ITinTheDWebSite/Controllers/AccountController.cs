@@ -57,55 +57,17 @@ namespace ITinTheDWebSite.Controllers
         }
 
         //
-        // GET: /Account/Register
-
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Account/Register
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterModel model)
-        {
-            
-
-            if (ModelState.IsValid)
-            {
-                // Attempt to register the user
-                try
-                {
-                    WebSecurity.CreateUserAndAccount(model.Email, model.Password);
-                    WebSecurity.Login(model.Email, model.Password);
-                    int id =  WebSecurity.CurrentUserId;
-
-                    DatabaseHelper.AddUserToRole(model.Email, "Student");
-
-                    return RedirectToAction("Index", "Home");
-                }
-                catch (MembershipCreateUserException e)
-                {
-                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
-                }
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
-
-        //
         // GET: /RegisterProspect/
 
         [AllowAnonymous]
         public ActionResult DisplayProspect()
         {
             ProspectModel prospect = new ProspectModel();
-            DatabaseHelper.GetProspectData(prospect);
+            if (DatabaseHelper.GetProspectData(prospect) == null)
+            {
+                TempData["RegistrationMessage"] = "Prospective student registration form.";
+            }
+
             return View(prospect);
         }
 
@@ -139,6 +101,8 @@ namespace ITinTheDWebSite.Controllers
                     return RedirectToAction("DisplayProspect", "Account");
                 }
             }
+
+            TempData["Message"] = "Registeration failed.";
             return RedirectToAction("DisplayProspect", "Account");
         }
 
@@ -149,7 +113,11 @@ namespace ITinTheDWebSite.Controllers
         public ActionResult DisplayAcademic()
         {
             AcademicModel academic = new AcademicModel();
-            DatabaseHelper.GetAcademicdData(academic);
+            if (DatabaseHelper.GetAcademicdData(academic) == null)
+            {
+                TempData["RegistrationMessage"] = "Prospective student registration form.";
+            }
+
             return View(academic);
         }
         //
@@ -185,6 +153,8 @@ namespace ITinTheDWebSite.Controllers
                     return RedirectToAction("DisplayAcademic", "Home");
                 }
             }
+
+            TempData["Message"] = "Registeration failed.";
             return RedirectToAction("DisplayAcademic", "Home");
         }
 
@@ -192,7 +162,11 @@ namespace ITinTheDWebSite.Controllers
         public ActionResult DisplaySponsor()
         {
             SponsorModel spons = new SponsorModel();
-            DatabaseHelper.GetSponsorData(spons);
+            if (DatabaseHelper.GetSponsorData(spons) == null)
+            {
+                TempData["RegistrationMessage"] = "Prospective student registration form.";
+            }
+
             return View(spons);
 
         }
@@ -230,6 +204,8 @@ namespace ITinTheDWebSite.Controllers
                     return RedirectToAction("DisplaySponsor", "Account");
                 }
             }
+
+            TempData["Message"] = "Registeration failed.";
             return RedirectToAction("DisplaySponsor", "Account");
         }
 
@@ -503,46 +479,7 @@ namespace ITinTheDWebSite.Controllers
             {
                 OAuthWebSecurity.RequestAuthentication(Provider, ReturnUrl);
             }
-        }
-
-        private static string ErrorCodeToString(MembershipCreateStatus createStatus)
-        {
-            // See http://go.microsoft.com/fwlink/?LinkID=177550 for
-            // a full list of status codes.
-            switch (createStatus)
-            {
-                case MembershipCreateStatus.DuplicateUserName:
-                    return "User name already exists. Please enter a different user name.";
-
-                case MembershipCreateStatus.DuplicateEmail:
-                    return "A user name for that e-mail address already exists. Please enter a different e-mail address.";
-
-                case MembershipCreateStatus.InvalidPassword:
-                    return "The password provided is invalid. Please enter a valid password value.";
-
-                case MembershipCreateStatus.InvalidEmail:
-                    return "The e-mail address provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidAnswer:
-                    return "The password retrieval answer provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidQuestion:
-                    return "The password retrieval question provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidUserName:
-                    return "The user name provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.ProviderError:
-                    return "The authentication provider returned an error. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-
-                case MembershipCreateStatus.UserRejected:
-                    return "The user creation request has been canceled. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-
-                default:
-                    return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-            }
-        }
-        
+        }        
         
         #endregion
     }

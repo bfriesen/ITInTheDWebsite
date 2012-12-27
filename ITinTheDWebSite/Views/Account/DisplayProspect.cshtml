@@ -2,8 +2,7 @@
 @{
     ViewBag.Title = "Index";
 }
-<h3>
-    Enroll to be considered as a student in IT in the D</h3>
+<h3>@TempData["RegistrationMessage"]</h3>
 <h4>@TempData["Message"]</h4>
 @using (Html.BeginForm("StoreProspect", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {  

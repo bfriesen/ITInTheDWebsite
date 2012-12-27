@@ -1,10 +1,10 @@
 ﻿@model ITinTheDWebSite.Models.SponsorModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Sponsor form";
 }
 
-<h3>Become a sponsor for IT in the D</h3>
+<h3>@TempData["RegistrationMessage"]</h3>
 <h4>@TempData["Message"]</h4>
 @using (Html.BeginForm("StoreSponsor","Account")) {
     @Html.AntiForgeryToken()

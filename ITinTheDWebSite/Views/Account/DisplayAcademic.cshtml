@@ -4,7 +4,7 @@
     ViewBag.Title = "Display";
 }
 
-<h3>Register as an academic institution for IT in the D</h3>
+<h3>@TempData["RegistrationMessage"]</h3>
 <h4>@TempData["Message"]</h4>
 
 @using (Html.BeginForm("StoreAcademic","Account")) {
