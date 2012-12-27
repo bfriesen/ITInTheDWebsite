@@ -3,23 +3,27 @@
 @{
 ViewBag.Title = "Events";
 }
- 
-<h2>Technology Events Happening in Metro Detroit </h2>
+ <html>
+ <head>
 
-<table>
+ </head>
+ <body>
+<section id="Technology Events">
+    <div class="page-header">
+        <h1>Technology Events in Metro Detroit</h1>
+    </div>
+
+<table class="table table-striped">
 <tr>
-<th>
-   Headline
+<th width="150">
+   Event Link
 </th>
-<th>
-   Description
+<th width="300">
+   Details
 </th>
-<th>
-   Link
-</th>
-</tr>
- 
+</tr> 
 @foreach (var item in Model) {
+
 <tr>
 <td>
    <a href="@item.Link" target="_blank">@Html.Encode(item.Title)</a>
@@ -27,9 +31,10 @@ ViewBag.Title = "Events";
 <td>
   @System.Web.HttpUtility.HtmlDecode(item.Description)
 </td>
-<td>
-   <a href="@item.Link" target="_blank">More</a>
-</td>
-</tr>
+</tr>   
+    
+    
 }
 </table>
+</body>
+</html>
