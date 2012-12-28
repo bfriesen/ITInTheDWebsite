@@ -450,6 +450,8 @@
     <Content Include="Views\Admin\DisplayAdminRegister.cshtml" />
     <Content Include="Views\Admin\StoreAdmin.cshtml" />
     <Content Include="GetFileTranscript.ashx" />
+    <Content Include="Views\Home\DisplayPrivacy.cshtml" />
+    <Content Include="Views\Home\DisplayTerms.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

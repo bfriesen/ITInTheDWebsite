@@ -16,17 +16,20 @@ namespace ITinTheDWebSite.Controllers
         {
             return View();
         }
-        public ActionResult Application()
-        {
-            Application app = new Application();
-            app.LastName = Request.Form["lastname"];
-            return View(app);
-        }
 
         public ActionResult ThankYou()
         {
             return View();
         }
 
+        public ActionResult DisplayPrivacy()
+        {
+            return View();
+        }
+
+        public ActionResult DisplayTerms()
+        {
+            return View();
+        }
     }
 }
