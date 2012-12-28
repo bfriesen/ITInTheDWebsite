@@ -78,7 +78,7 @@ namespace ITinTheDWebSite.Controllers
                 case "Sponsor":
                     if (DatabaseHelper.RemoveSponsorData(id))
                     {
-                        TempData["Message"] = "Account successfully deleted.";
+                        TempData["Message"] = "Role successfully deleted.";
                         return RedirectToAction("User", "Admin", new { id = user.FirstOrDefault().UserId });
                     }
                     break;
@@ -98,7 +98,7 @@ namespace ITinTheDWebSite.Controllers
 
                     if (DatabaseHelper.RemoveProspectiveData(id))
                     {
-                        TempData["Message"] += x++ + ". Account successfully deleted. ";
+                        TempData["Message"] += x++ + ". Role successfully deleted. ";
                     }
 
                     return RedirectToAction("User", "Admin", new { id = user.FirstOrDefault().UserId });
@@ -106,14 +106,14 @@ namespace ITinTheDWebSite.Controllers
                 case "Educator":
                     if (DatabaseHelper.RemoveAcademicData(id))
                     {
-                        TempData["Message"] = "Account successfully deleted.";
+                        TempData["Message"] = "Role successfully deleted.";
                         return RedirectToAction("User", "Admin", new { id = user.FirstOrDefault().UserId });
                     }
                     break;
                 case "Admin":
                     if (DatabaseHelper.RemoveAdminData(id))
                     {
-                        TempData["Message"] = "Account successfully deleted.";
+                        TempData["Message"] = "Role successfully deleted.";
                         return RedirectToAction("User", "Admin", new { id = user.FirstOrDefault().UserId });
                     }
                     break;
@@ -121,7 +121,7 @@ namespace ITinTheDWebSite.Controllers
                     break;
             }
 
-            TempData["Message"] = "Account deletion failed.";
+            TempData["Message"] = "Role deletion failed.";
             return RedirectToAction("User", "Admin", new { id = user.FirstOrDefault().UserId });
         }
 

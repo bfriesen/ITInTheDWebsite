@@ -4,6 +4,7 @@
 }
 <h3>@TempData["RegistrationMessage"]</h3>
 <h4>@TempData["Message"]</h4>
+<h6>* Denotes required fields.</h6>
 @using (Html.BeginForm("StoreProspect", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {  
     @Html.AntiForgeryToken()
@@ -57,13 +58,12 @@
             @Html.LabelFor(model => model.Gender)
         </div>
         <div class="editor-field">
-            @Html.RadioButtonFor(model => model.Gender, "Male")
-            @Html.LabelFor(model => model.Gender, "Male")
-            @Html.RadioButtonFor(model => model.Gender, "Female")
-            @Html.LabelFor(model => model.Gender, "Female")
+            @Html.RadioButtonFor(model => model.Gender, "Male") Male <br />
+            @Html.RadioButtonFor(model => model.Gender, "Female") Female
             @Html.ValidationMessageFor(model => model.Gender)
         </div>
         <div class="editor-label">
+        <br />
             @Html.Label("Upload Resume")
         </div>
         <div>
