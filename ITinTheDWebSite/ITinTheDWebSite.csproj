@@ -182,8 +182,11 @@
     <Compile Include="Controllers\ResumeController.cs" />
     <Compile Include="Controllers\SponsorsController.cs" />
     <Compile Include="Controllers\TrainersController.cs" />
-    <Compile Include="GetFile.ashx.cs">
-      <DependentUpon>GetFile.ashx</DependentUpon>
+    <Compile Include="GetFileTranscript.ashx.cs">
+      <DependentUpon>GetFileTranscript.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="GetFileResume.ashx.cs">
+      <DependentUpon>GetFileResume.ashx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -311,6 +314,7 @@
     <Content Include="Images\Carousel\waynesworldautobloguk-hyundai-veloster-turbo-se-31.jpg" />
     <Content Include="Images\Carousel\WoodwardGarden1.jpg" />
     <Content Include="Images\Carousel\xl_Hyunda-VT-624-2.png" />
+    <Content Include="Images\facebook_icon.png" />
     <Content Include="Images\Files Upload Check\SQLDatabase_CheckMark.PNG" />
     <Content Include="Images\Files Upload Check\SQLDatabse_CheckX.PNG" />
     <Content Include="Images\SponsorsAccordion\220px-CompuwareLogo.png" />
@@ -334,6 +338,7 @@
     <Content Include="Images\Trainers\StennisShayla.jpg" />
     <Content Include="Images\Trainers\WalkerAndrea.jpg" />
     <Content Include="Images\Trainers\WalkerSonya.png" />
+    <Content Include="Images\twitter_icon.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
@@ -426,7 +431,7 @@
       <LastGenOutput>ITintheD.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Views\Resume\Index.cshtml" />
-    <Content Include="GetFile.ashx" />
+    <Content Include="GetFileResume.ashx" />
     <Content Include="Views\Home\ThankYou.cshtml" />
     <EntityDeploy Include="UsefulTables.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -444,6 +449,7 @@
     <Content Include="Views\Account\StoreSponsor.cshtml" />
     <Content Include="Views\Admin\DisplayAdminRegister.cshtml" />
     <Content Include="Views\Admin\StoreAdmin.cshtml" />
+    <Content Include="GetFileTranscript.ashx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

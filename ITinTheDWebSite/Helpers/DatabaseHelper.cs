@@ -105,7 +105,6 @@ namespace ITinTheDWebSite.Helpers
                         if (edit == false)
                         {
                             WebSecurity.CreateUserAndAccount(regAdmin.EmailAddress, regAdmin.Password);
-                            WebSecurity.Login(regAdmin.EmailAddress, regAdmin.Password);
 
                             DatabaseHelper.AddUserToRole(regAdmin.EmailAddress, "Admin");
 

@@ -9,7 +9,7 @@ namespace ITinTheDWebSite
     /// <summary>
     /// Summary description for GetFile
     /// </summary>
-    public class GetFile : IHttpHandler
+    public class GetFileResume : IHttpHandler
     {
 
         public void ProcessRequest(HttpContext context)

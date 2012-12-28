@@ -115,7 +115,7 @@ namespace ITinTheDWebSite.Controllers
             AcademicModel academic = new AcademicModel();
             if (DatabaseHelper.GetAcademicdData(academic) == null)
             {
-                TempData["RegistrationMessage"] = "Prospective student registration form.";
+                TempData["RegistrationMessage"] = "Academic institution registration form.";
             }
 
             return View(academic);
@@ -164,7 +164,7 @@ namespace ITinTheDWebSite.Controllers
             SponsorModel spons = new SponsorModel();
             if (DatabaseHelper.GetSponsorData(spons) == null)
             {
-                TempData["RegistrationMessage"] = "Prospective student registration form.";
+                TempData["RegistrationMessage"] = "Sponsor registration form.";
             }
 
             return View(spons);

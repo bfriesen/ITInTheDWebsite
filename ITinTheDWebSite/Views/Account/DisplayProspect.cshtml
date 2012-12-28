@@ -72,7 +72,9 @@
             {
                 <img src="../../Images/Files%20Upload%20Check/SQLDatabase_CheckMark.PNG" / style="width: 32px; height: 32px;">
                 
-                ITinTheDWebSite.Helpers.DatabaseHelper.GetResume(WebSecurity.GetUserId(User.Identity.Name));
+                string FileName = ITinTheDWebSite.Helpers.DatabaseHelper.GetResume(WebSecurity.GetUserId(User.Identity.Name)).FileName;
+                
+                <a href="/GetFileResume.ashx?id=@WebSecurity.GetUserId(User.Identity.Name)">Get Resume (@FileName)</a> 
             }
 
             else if (Model.ResumeUploaded == "No")
@@ -89,7 +91,9 @@
             {
                 <img src="../../Images/Files%20Upload%20Check/SQLDatabase_CheckMark.PNG" / style="width: 32px; height: 32px;">
                 
-                ITinTheDWebSite.Helpers.DatabaseHelper.GetTranscript(WebSecurity.GetUserId(User.Identity.Name));
+                string FileName = ITinTheDWebSite.Helpers.DatabaseHelper.GetTranscript(WebSecurity.GetUserId(User.Identity.Name)).FileName;
+                
+                <a href="/GetFileTranscript.ashx?id=@WebSecurity.GetUserId(User.Identity.Name)">Get Transcript (@FileName)</a> 
             }
 
             else if (Model.TranscriptUploaded == "No")

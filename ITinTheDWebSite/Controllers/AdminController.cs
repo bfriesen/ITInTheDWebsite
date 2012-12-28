@@ -143,8 +143,8 @@ namespace ITinTheDWebSite.Controllers
         //
         // GET: /Account/Register
 
-        [Authorize(Roles = "Admin")]
-        [AllowAnonymous]
+       // [Authorize(Roles = "Admin")]
+       // [AllowAnonymous]
         public ActionResult DisplayAdminRegister()
         {
             RegisterModel adminReg = new RegisterModel();
@@ -159,9 +159,9 @@ namespace ITinTheDWebSite.Controllers
         //
         // POST: /Account/Register
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult StoreAdmin(RegisterModel adminReg)
         {
