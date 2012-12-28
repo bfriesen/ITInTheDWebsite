@@ -48,6 +48,40 @@
                     }
                 }
             </td>
+
         </tr>
     }
 </table>
+@{
+    foreach(ITinTheDWebSite.Models.UserInfo u2 in Model.allUsers)
+    {
+    var roles2 = (SimpleRoleProvider)Roles.Provider;
+                if (roles2.IsUserInRole(u2.user.UserName, "Student"))
+                {
+                    ITinTheDWebSite.Models.ProspectModel prospect = new ITinTheDWebSite.Models.ProspectModel();
+
+                    Html.RenderPartial("../Account/DisplayProspect", ITinTheDWebSite.Helpers.DatabaseHelper.GetProspectData(prospect, u2.user.UserId));
+                }
+
+                else if (roles2.IsUserInRole(u2.user.UserName, "Educator"))
+                {
+                    ITinTheDWebSite.Models.AcademicModel academic = new ITinTheDWebSite.Models.AcademicModel();
+
+                    Html.RenderPartial("../Account/DisplayAcademic", ITinTheDWebSite.Helpers.DatabaseHelper.GetAcademicdData(academic, u2.user.UserId));
+                }
+        
+                else if (roles2.IsUserInRole(u2.user.UserName, "Sponsor"))
+                {
+                    ITinTheDWebSite.Models.SponsorModel sponsor = new ITinTheDWebSite.Models.SponsorModel();
+
+                    Html.RenderPartial("../Account/DisplaySponsor", ITinTheDWebSite.Helpers.DatabaseHelper.GetSponsorData(sponsor, u2.user.UserId));
+                }
+        
+                if (roles2.IsUserInRole(u2.user.UserName, "Admin"))
+                {
+                    ITinTheDWebSite.Models.RegisterModel adminReg = new ITinTheDWebSite.Models.RegisterModel();
+
+                    Html.RenderPartial("DisplayadminRegister", ITinTheDWebSite.Helpers.DatabaseHelper.GetAdminData(adminReg, u2.user.UserId));
+                }
+    }
+}

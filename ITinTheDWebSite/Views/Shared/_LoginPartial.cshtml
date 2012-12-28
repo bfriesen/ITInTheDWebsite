@@ -12,7 +12,7 @@
     
     if (User.IsInRole("Student"))
     {
-        @Html.ActionLink("Apply Online", "Index", "Apply_Online")
+        @Html.ActionLink("Apply Online", "DisplayProspectFiles", "Account")
     }
 
     else if (User.IsInRole("Admin"))

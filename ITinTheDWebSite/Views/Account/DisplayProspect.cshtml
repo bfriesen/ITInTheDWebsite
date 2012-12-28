@@ -23,7 +23,14 @@
             @Html.LabelFor(model => model.EmailAddress)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.EmailAddress)
+            @if (Model.EmailAddress == null)
+            {
+                @Html.EditorFor(model => model.EmailAddress)
+            }
+            else
+            {
+                @Html.TextBoxFor(model => model.EmailAddress, new { @readonly = true })
+            }
             @Html.ValidationMessageFor(model => model.EmailAddress)
         </div>
         <div class="editor-label">
@@ -72,9 +79,9 @@
             {
                 <img src="../../Images/Files%20Upload%20Check/SQLDatabase_CheckMark.PNG" / style="width: 32px; height: 32px;">
                 
-                string FileName = ITinTheDWebSite.Helpers.DatabaseHelper.GetResume(WebSecurity.GetUserId(User.Identity.Name)).FileName;
+                string FileName = ITinTheDWebSite.Helpers.DatabaseHelper.GetResume(WebSecurity.GetUserId(Model.EmailAddress)).FileName;
                 
-                <a href="/GetFileResume.ashx?id=@WebSecurity.GetUserId(User.Identity.Name)">Get Resume (@FileName)</a> 
+                <a href="/GetFileResume.ashx?id=@WebSecurity.GetUserId(Model.EmailAddress)">Get Resume (@FileName)</a> 
             }
 
             else if (Model.ResumeUploaded == "No")
@@ -83,7 +90,7 @@
             }
         </div>
         <div class="editor-label">
-            @Html.Label("Upload Transcript - Optional")
+            @Html.Label("Upload Transcript")
         </div>
         <div>
             <input type="file" name="TranscriptFile" />
@@ -91,9 +98,9 @@
             {
                 <img src="../../Images/Files%20Upload%20Check/SQLDatabase_CheckMark.PNG" / style="width: 32px; height: 32px;">
                 
-                string FileName = ITinTheDWebSite.Helpers.DatabaseHelper.GetTranscript(WebSecurity.GetUserId(User.Identity.Name)).FileName;
+                string FileName = ITinTheDWebSite.Helpers.DatabaseHelper.GetTranscript(WebSecurity.GetUserId(Model.EmailAddress)).FileName;
                 
-                <a href="/GetFileTranscript.ashx?id=@WebSecurity.GetUserId(User.Identity.Name)">Get Transcript (@FileName)</a> 
+                <a href="/GetFileTranscript.ashx?id=@WebSecurity.GetUserId(Model.EmailAddress)">Get Transcript (@FileName)</a> 
             }
 
             else if (Model.TranscriptUploaded == "No")

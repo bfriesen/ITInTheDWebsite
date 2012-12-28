@@ -1,19 +1,18 @@
 ﻿@model ITinTheDWebSite.Models.SponsorModel
-
 @{
     ViewBag.Title = "Sponsor form";
 }
-
 <h3>@TempData["RegistrationMessage"]</h3>
 <h4>@TempData["Message"]</h4>
-<h6>* Denotes required fields.</h6>
-@using (Html.BeginForm("StoreSponsor","Account")) {
+<h6>
+    * Denotes required fields.</h6>
+@using (Html.BeginForm("StoreSponsor", "Account"))
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>CorporateSponsor</legend>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.CompanyName)
         </div>
@@ -21,7 +20,6 @@
             @Html.EditorFor(model => model.CompanyName)
             @Html.ValidationMessageFor(model => model.CompanyName)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.CompanyAddress)
         </div>
@@ -29,7 +27,6 @@
             @Html.EditorFor(model => model.CompanyAddress)
             @Html.ValidationMessageFor(model => model.CompanyAddress)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.ContactName)
         </div>
@@ -37,7 +34,6 @@
             @Html.EditorFor(model => model.ContactName)
             @Html.ValidationMessageFor(model => model.ContactName)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.Title)
         </div>
@@ -45,7 +41,6 @@
             @Html.EditorFor(model => model.Title)
             @Html.ValidationMessageFor(model => model.Title)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.Telephone)
         </div>
@@ -53,15 +48,20 @@
             @Html.EditorFor(model => model.Telephone)
             @Html.ValidationMessageFor(model => model.Telephone)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.EmailAddress)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.EmailAddress)
+            @if (Model.EmailAddress == null)
+            {
+                @Html.EditorFor(model => model.EmailAddress)
+            }
+            else
+            {
+                @Html.TextBoxFor(model => model.EmailAddress, new { @readonly = true })
+            }
             @Html.ValidationMessageFor(model => model.EmailAddress)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.Password)
         </div>
@@ -69,7 +69,6 @@
             @Html.EditorFor(model => model.Password)
             @Html.ValidationMessageFor(model => model.Password)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.ConfirmPassword)
         </div>
@@ -77,22 +76,20 @@
             @Html.EditorFor(model => model.ConfirmPassword)
             @Html.ValidationMessageFor(model => model.ConfirmPassword)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.Reason)
             @Html.TextAreaFor(m => m.Reason, new { @class = "chars-remaining-text-area", @cols = 15, @rows = 1, @onblur = "textCounter(this,this.form.counter,4000);", @onkeyup = "textCounter(this,this.form.counter,4000);" })
-            <br/>
-            <input style="width:37px" onblur="textCounter(this.form.recipients,this,4000);" disabled
-            onfocus="this.blur();" tabindex="999" maxlength="4" size="4" value="4000"
-            name="counter" id="counter" /> <small>characters remaining.</small>
+            <br />
+            <input style="width: 37px" onblur="textCounter(this.form.recipients,this,4000);"
+                disabled onfocus="this.blur();" tabindex="999" maxlength="4" size="4" value="4000"
+                name="counter" id="counter" />
+            <small>characters remaining.</small>
         </div>
-
         <p>
             <input type="submit" value="Submit" />
         </p>
     </fieldset>
 }
-
 <script type="text/javascript">
     function textCounter(field, countfield, maxlimit) {
         if (field.value.length > maxlimit) {
@@ -109,7 +106,6 @@
     //    TODO: Figure out how to call textCounter function after the dom has loaded (jquery ready function?)
 
 </script>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

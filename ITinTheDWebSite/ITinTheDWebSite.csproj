@@ -173,7 +173,6 @@
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\Apply_OnlineController.cs" />
     <Compile Include="Controllers\CurriculumController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
@@ -201,7 +200,6 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\Application.cs" />
-    <Compile Include="Models\ApplyOnlineModel.cs" />
     <Compile Include="Models\EmailFields.cs" />
     <Compile Include="Models\Rss.cs" />
     <Compile Include="Models\RssReader.cs" />
@@ -424,7 +422,6 @@
     <Content Include="Views\Shared\_ErrorReport.cshtml" />
     <Content Include="Views\Trainers\Index.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
-    <Content Include="Views\Apply_Online\Index.cshtml" />
     <Content Include="Views\Curriculum\Index.cshtml" />
     <EntityDeploy Include="ITintheD.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -452,6 +449,8 @@
     <Content Include="GetFileTranscript.ashx" />
     <Content Include="Views\Home\DisplayPrivacy.cshtml" />
     <Content Include="Views\Home\DisplayTerms.cshtml" />
+    <Content Include="Views\Account\DisplayProspectFiles.cshtml" />
+    <Content Include="Views\Account\StoreProspectFiles.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

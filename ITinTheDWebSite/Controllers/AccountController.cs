@@ -63,7 +63,7 @@ namespace ITinTheDWebSite.Controllers
         public ActionResult DisplayProspect()
         {
             ProspectModel prospect = new ProspectModel();
-            if (DatabaseHelper.GetProspectData(prospect) == null)
+            if (DatabaseHelper.GetProspectData(prospect, -1) == null)
             {
                 TempData["RegistrationMessage"] = "Prospective student registration form.";
             }
@@ -106,6 +106,54 @@ namespace ITinTheDWebSite.Controllers
             return RedirectToAction("DisplayProspect", "Account");
         }
 
+        // Get Resume and/or Transcript.
+
+        [Authorize(Roles = "Student")]
+        public ActionResult DisplayProspectFiles()
+        {
+            ProspectModel prospect = new ProspectModel();
+            prospect = DatabaseHelper.GetProspectData(prospect, -1);
+
+            return View(prospect);
+        }
+
+        //HttpPostedFileBase resume, HttpPostedFileBase Transcript
+
+        public ActionResult StoreProspectFiles(ProspectModel prospect)
+        {
+            prospect = DatabaseHelper.GetProspectData(prospect, -1);
+
+            var resumeUploaded = DatabaseHelper.GetProspectData(prospect, -1).ResumeFile;
+
+            bool edit = false;
+            if (resumeUploaded == null)
+            {
+                TempData["Message"] = "Required files are not uploaded, please upload required files and try again.";
+                return RedirectToAction("DisplayProspectFiles", "Account");
+            }
+
+            else
+            {
+                if (DatabaseHelper.StoreProspectData(prospect, ref edit))
+                {
+                    if (DatabaseHelper.GetProspectData(prospect, WebSecurity.GetUserId(prospect.EmailAddress)).ResumeUploaded == "No")
+                    {
+                        TempData["Message"] = "Uploading files failed.";
+                        return RedirectToAction("DisplayProspectFiles", "Account");
+                    }
+
+                    TempData["Message"] = "Successfully uploaded your files.";
+                    return RedirectToAction("DisplayProspectFiles", "Account");
+                }
+
+                else
+                {
+                    TempData["Message"] = "Uploading files failed.";
+                    return RedirectToAction("DisplayProspectFiles", "Account");
+                }
+            }
+        }
+
         //
         // GET: /RegisterAcademic/Displayc
 
@@ -113,13 +161,14 @@ namespace ITinTheDWebSite.Controllers
         public ActionResult DisplayAcademic()
         {
             AcademicModel academic = new AcademicModel();
-            if (DatabaseHelper.GetAcademicdData(academic) == null)
+            if (DatabaseHelper.GetAcademicdData(academic, -1) == null)
             {
                 TempData["RegistrationMessage"] = "Academic institution registration form.";
             }
 
             return View(academic);
         }
+
         //
         // POST: /RegisterAcademic/Store
 
@@ -162,7 +211,7 @@ namespace ITinTheDWebSite.Controllers
         public ActionResult DisplaySponsor()
         {
             SponsorModel spons = new SponsorModel();
-            if (DatabaseHelper.GetSponsorData(spons) == null)
+            if (DatabaseHelper.GetSponsorData(spons, -1) == null)
             {
                 TempData["RegistrationMessage"] = "Sponsor registration form.";
             }
@@ -479,10 +528,10 @@ namespace ITinTheDWebSite.Controllers
             {
                 OAuthWebSecurity.RequestAuthentication(Provider, ReturnUrl);
             }
-        }        
-        
+        }
+
         #endregion
     }
 
-  
+
 }

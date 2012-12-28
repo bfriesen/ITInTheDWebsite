@@ -27,9 +27,12 @@ namespace ITinTheDWebSite.Helpers
         //===========================================================================
         //     Get / Store Sponsor information
         //===========================================================================
-        public static RegisterModel GetAdminData(RegisterModel regAdmin)
+        public static RegisterModel GetAdminData(RegisterModel regAdmin, int UserId)
         {
-            int UserId = WebSecurity.CurrentUserId;
+            if (UserId == -1)
+            {
+                UserId = WebSecurity.CurrentUserId;
+            }
 
             try
             {
@@ -179,9 +182,12 @@ namespace ITinTheDWebSite.Helpers
         //===========================================================================
         //     Get / Store Sponsor information
         //===========================================================================
-        public static SponsorModel GetSponsorData(SponsorModel spons)
+        public static SponsorModel GetSponsorData(SponsorModel spons, int UserId)
         {
-            int UserId = WebSecurity.CurrentUserId;
+            if (UserId == -1)
+            {
+                UserId = WebSecurity.CurrentUserId;
+            }
             try
             {
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
@@ -338,9 +344,13 @@ namespace ITinTheDWebSite.Helpers
         //===========================================================================
         //     Get / Store Academic information
         //===========================================================================
-        public static AcademicModel GetAcademicdData(AcademicModel academic)
+        public static AcademicModel GetAcademicdData(AcademicModel academic, int UserId)
         {
-            int UserId = WebSecurity.CurrentUserId;
+            if (UserId == -1)
+            {
+                UserId = WebSecurity.CurrentUserId;
+            }
+
             try
             {
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
@@ -513,9 +523,12 @@ namespace ITinTheDWebSite.Helpers
         //===========================================================================
         //     Get / Store Student information
         //===========================================================================
-        public static ProspectModel GetProspectData(ProspectModel prospect)
+        public static ProspectModel GetProspectData(ProspectModel prospect, int UserId)
         {
-            int UserId = WebSecurity.CurrentUserId;
+            if (UserId == -1)
+            {
+                UserId = WebSecurity.CurrentUserId;
+            }
             try
             {
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
@@ -617,7 +630,6 @@ namespace ITinTheDWebSite.Helpers
                                 prospect.TranscriptUploaded = "Yes";
                             }
                         }
-
                     }
                     else
                     {

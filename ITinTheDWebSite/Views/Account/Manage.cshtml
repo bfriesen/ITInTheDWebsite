@@ -69,28 +69,28 @@
             {
                 ITinTheDWebSite.Models.RegisterModel adminReg = new ITinTheDWebSite.Models.RegisterModel();
 
-                Html.RenderPartial("../Admin/DisplayAdminRegister", ITinTheDWebSite.Helpers.DatabaseHelper.GetAdminData(adminReg));
+                Html.RenderPartial("../Admin/DisplayAdminRegister", ITinTheDWebSite.Helpers.DatabaseHelper.GetAdminData(adminReg, -1));
             }
 
             else if (User.IsInRole("Student"))
             {
                 ITinTheDWebSite.Models.ProspectModel prospect = new ITinTheDWebSite.Models.ProspectModel();
 
-                Html.RenderPartial("DisplayProspect", ITinTheDWebSite.Helpers.DatabaseHelper.GetProspectData(prospect));
+                Html.RenderPartial("DisplayProspect", ITinTheDWebSite.Helpers.DatabaseHelper.GetProspectData(prospect, -1));
             }
 
             else if (User.IsInRole("Educator"))
             {
                 ITinTheDWebSite.Models.AcademicModel academic = new ITinTheDWebSite.Models.AcademicModel();
 
-                Html.RenderPartial("DisplayAcademic", ITinTheDWebSite.Helpers.DatabaseHelper.GetAcademicdData(academic));
+                Html.RenderPartial("DisplayAcademic", ITinTheDWebSite.Helpers.DatabaseHelper.GetAcademicdData(academic, -1));
             }
 
             else if (User.IsInRole("Sponsor"))
             {
                 ITinTheDWebSite.Models.SponsorModel sponsor = new ITinTheDWebSite.Models.SponsorModel();
 
-                Html.RenderPartial("DisplaySponsor", ITinTheDWebSite.Helpers.DatabaseHelper.GetSponsorData(sponsor));
+                Html.RenderPartial("DisplaySponsor", ITinTheDWebSite.Helpers.DatabaseHelper.GetSponsorData(sponsor, -1));
             }
 
             else

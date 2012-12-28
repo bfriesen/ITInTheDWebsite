@@ -1,0 +1,59 @@
+﻿@model ITinTheDWebSite.Models.ProspectModel
+@{
+    ViewBag.Title = "DisplayProspectFiles";
+}
+<h2>Apply to IT in the D.</h2>
+<h4>@TempData["Message"]</h4>
+@using (Html.BeginForm("StoreProspectFiles", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{  
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Apply</legend>
+        <div class="editor-label">
+        <br />
+            @Html.Label("Upload Resume - Required *")
+        </div>
+        <div>
+            <input type="file" name="ResumeFile" />
+            @if (Model.ResumeUploaded == "Yes")
+            {
+                <img src="../../Images/Files%20Upload%20Check/SQLDatabase_CheckMark.PNG" / style="width: 32px; height: 32px;">
+                
+                string FileName = ITinTheDWebSite.Helpers.DatabaseHelper.GetResume(WebSecurity.GetUserId(Model.EmailAddress)).FileName;
+                
+                <a href="/GetFileResume.ashx?id=@WebSecurity.GetUserId(Model.EmailAddress)">Get Resume
+                    (@FileName)</a> 
+            }
+
+            else if (Model.ResumeUploaded == "No")
+            {
+                <img src="../../Images/Files%20Upload%20Check/SQLDatabse_CheckX.PNG" / style="width: 32px; height: 32px;">
+            }
+        </div>
+        <div class="editor-label">
+            @Html.Label("Upload Transcript - Optional")
+        </div>
+        <div>
+            <input type="file" name="TranscriptFile" />
+            @if (Model.TranscriptUploaded == "Yes")
+            {
+                <img src="../../Images/Files%20Upload%20Check/SQLDatabase_CheckMark.PNG" / style="width: 32px; height: 32px;">
+                
+                string FileName = ITinTheDWebSite.Helpers.DatabaseHelper.GetTranscript(WebSecurity.GetUserId(Model.EmailAddress)).FileName;
+                
+                <a href="/GetFileTranscript.ashx?id=@WebSecurity.GetUserId(Model.EmailAddress)">Get
+                    Transcript (@FileName)</a> 
+            }
+
+            else if (Model.TranscriptUploaded == "No")
+            {
+                <img src="../../Images/Files%20Upload%20Check/SQLDatabse_CheckX.PNG" / style="width: 32px; height: 32px;">
+            }
+        </div>
+        <p>
+            <input type="submit" value="Submit" />
+        </p>
+    </fieldset>
+}

@@ -59,7 +59,14 @@
             @Html.LabelFor(model => model.PrimaryEmailAddress)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.PrimaryEmailAddress)
+            @if (Model.EmailAddress == null)
+            {
+                @Html.EditorFor(model => model.PrimaryEmailAddress)
+            }
+            else
+            {
+                @Html.TextBoxFor(model => model.PrimaryEmailAddress, new { @readonly = true })
+            }
             @Html.ValidationMessageFor(model => model.PrimaryEmailAddress)
         </div>
 

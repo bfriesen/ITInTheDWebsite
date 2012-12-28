@@ -21,7 +21,14 @@
             @Html.LabelFor(model => model.EmailAddress)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.EmailAddress)
+            @if (Model.EmailAddress == null)
+            {
+                @Html.EditorFor(model => model.EmailAddress)
+            }
+            else
+            {
+                @Html.TextBoxFor(model => model.EmailAddress, new { @readonly = true })
+            }
             @Html.ValidationMessageFor(model => model.EmailAddress)
         </div>
         <div class="editor-label">
@@ -53,7 +60,6 @@
             @Html.ValidationMessageFor(model => model.Telephone)
         </div>
         <p>
-            <
             <input type="submit" value="Submit" />
         </p>
     </fieldset>

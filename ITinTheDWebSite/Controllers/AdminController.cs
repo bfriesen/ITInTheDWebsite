@@ -61,7 +61,6 @@ namespace ITinTheDWebSite.Controllers
             return View(result);
         }
 
-
         public ActionResult RemoveRole(int id, string role)
         {
             ITintheDTestEntities context = new ITintheDTestEntities();
@@ -132,12 +131,22 @@ namespace ITinTheDWebSite.Controllers
             var user = from u in context.UserProfiles where u.UserId == id select u;
             var roles = (SimpleRoleProvider)Roles.Provider;
 
-
             string[] usrs = new string[] { user.FirstOrDefault().UserName };
             string[] r = new string[] { role };
             if (!roles.IsUserInRole(user.FirstOrDefault().UserName, role)) roles.AddUsersToRoles(usrs, r);
 
             return RedirectToAction("User", "Admin", new { id = user.FirstOrDefault().UserId });
+        }
+
+        public ActionResult DisplayEditRole(int id, string role)
+        {
+            AcademicModel academic = new AcademicModel();
+            if (DatabaseHelper.GetAcademicdData(academic, id) == null)
+            {
+                TempData["RegistrationMessage"] = "Academic institution registration form.";
+            }
+
+            return RedirectToAction("User", "Admin", new { id  });
         }
 
         //
@@ -148,7 +157,7 @@ namespace ITinTheDWebSite.Controllers
         public ActionResult DisplayAdminRegister()
         {
             RegisterModel adminReg = new RegisterModel();
-            if (DatabaseHelper.GetAdminData(adminReg) == null)
+            if (DatabaseHelper.GetAdminData(adminReg, -1) == null)
             {
                 TempData["RegistrationMessage"] = "Admin registration form.";
             }
