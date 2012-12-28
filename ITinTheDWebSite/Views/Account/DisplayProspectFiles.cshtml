@@ -4,6 +4,7 @@
 }
 <h2>Apply to IT in the D.</h2>
 <h4>@TempData["Message"]</h4>
+<h6>* Denotes required fields.</h6>
 @using (Html.BeginForm("StoreProspectFiles", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {  
     @Html.AntiForgeryToken()
