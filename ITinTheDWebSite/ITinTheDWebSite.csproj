@@ -407,6 +407,7 @@
     <None Include="Content\bootswatch.less" />
     <None Include="Content\documents\AttendancePolicy.pdf" />
     <None Include="Content\documents\Workshop_Outline.docx" />
+    <None Include="Content\documents\Workshop_OutlineOriginal.docx" />
     <None Include="Content\variables.less" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
