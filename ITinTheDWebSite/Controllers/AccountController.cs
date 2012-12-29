@@ -126,7 +126,7 @@ namespace ITinTheDWebSite.Controllers
             var resumeUploaded = DatabaseHelper.GetProspectData(prospect, -1).ResumeFile;
 
             bool edit = false;
-            if (resumeUploaded == null)
+            if (resumeUploaded == null || resumeUploaded.ContentLength == 0)
             {
                 TempData["Message"] = "Required files are not uploaded, please upload required files and try again.";
                 return RedirectToAction("DisplayProspectFiles", "Account");

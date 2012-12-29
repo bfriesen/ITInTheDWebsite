@@ -11,9 +11,15 @@ using System.Web.Security;
 
 namespace ITinTheDWebSite.Helpers
 {
-
     public static class DatabaseHelper
     {
+        //====================================================================================
+        //      Add a user to role.                                                         //
+        //                                                                                  //
+        //      Adds user to the role passed by the function if they are not in that        //
+        //      role already.                                                               //
+        //====================================================================================
+
         public static void AddUserToRole(string user, string role)
         {
             var roles = (SimpleRoleProvider)Roles.Provider;
@@ -21,49 +27,19 @@ namespace ITinTheDWebSite.Helpers
             string[] usrs = new string[] { user };
             string[] r = new string[] { role };
 
+            // If user is not in the role passed by function then add them in it.
+
             if (!roles.IsUserInRole(user, role)) roles.AddUsersToRoles(usrs, r);
         }
 
-        //===========================================================================
-        //     Get / Store Sponsor information
-        //===========================================================================
-        public static RegisterModel GetAdminData(RegisterModel regAdmin, int UserId)
-        {
-            if (UserId == -1)
-            {
-                UserId = WebSecurity.CurrentUserId;
-            }
-
-            try
-            {
-                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
-                {
-                    var currentAdmin = from r in context.SiteAdmin
-                                       where r.UserId == UserId
-                                       select r;
-
-                    if (currentAdmin.Count() > 0)
-                    {
-                        regAdmin.Name = currentAdmin.FirstOrDefault().Name;
-                        regAdmin.EmailAddress = currentAdmin.FirstOrDefault().EmailAddress;
-                        regAdmin.CompanyName = currentAdmin.FirstOrDefault().Company;
-                        regAdmin.Telephone = currentAdmin.FirstOrDefault().Telephone;
-                        regAdmin.EmailAddress = currentAdmin.FirstOrDefault().EmailAddress;
-
-                        return (regAdmin);
-                    }
-
-                    else
-                    {
-                        return (null);
-                    }
-                }
-            }
-            catch
-            {
-                return (null);
-            }
-        }
+        //==================================================================================//
+        //      Store Admin information                                                     //
+        //                                                                                  //
+        //      Register the admin information if it is empty. Otherwise edit it.           //
+        //                                                                                  //
+        //      Note: If the edit is true then the account is being edited.                 //
+        //      Otherwise it is being registered.                                           //
+        //==================================================================================//
 
         public static bool StoreAdminData(RegisterModel regAdmin, ref bool edit)
         {
@@ -77,9 +53,16 @@ namespace ITinTheDWebSite.Helpers
 
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
                 {
+                    // Put everything we find in the database in the var variable. All the
+                    // information will be gotten using the User ID.
+
                     var AdminData = from r in context.SiteAdmin
                                     where r.UserId == UserId
                                     select r;
+
+                    // If the user has some information then edit it.
+                    // Otherwise register the account.
+
                     if (AdminData.Count() > 0 && UserId > 0)
                     {
                         CurrentAdmin = AdminData.FirstOrDefault();
@@ -91,6 +74,7 @@ namespace ITinTheDWebSite.Helpers
 
                         edit = true;
                     }
+
                     else
                     {
                         CurrentAdmin = new SiteAdmin();
@@ -105,6 +89,8 @@ namespace ITinTheDWebSite.Helpers
 
                     try
                     {
+                        // If the account is edited then save changes. Otherwise register the account.
+
                         if (edit == false)
                         {
                             WebSecurity.CreateUserAndAccount(regAdmin.EmailAddress, regAdmin.Password);
@@ -118,13 +104,13 @@ namespace ITinTheDWebSite.Helpers
 
                         return true;
                     }
-                    catch (Exception e)
+
+                    catch (Exception ex)
                     {
-                        string errorMessage = e.Message;
+                        string errorMessage = ex.Message;
 
                         return false;
                     }
-
                 }
             }
 
@@ -136,15 +122,89 @@ namespace ITinTheDWebSite.Helpers
             }
         }
 
+        //==================================================================================//
+        //      Get Admin information                                                       //
+        //                                                                                  //
+        //      Gets the admin information if it is not empty.                              //
+        //                                                                                  //
+        //      Note: If the User ID is -1 then it is being checked out by the user.        //
+        //      If not then it is being checked by the admin.                               //
+        //==================================================================================//
+
+        public static RegisterModel GetAdminData(RegisterModel regAdmin, int UserId)
+        {
+            // If the User ID is -1 then it is being checked out by the user. We will then
+            // get the current user ID.
+
+            if (UserId == -1)
+            {
+                UserId = WebSecurity.CurrentUserId;
+            }
+
+            try
+            {
+                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
+                {
+                    // Put everything we find in the database in the var variable. All the
+                    // information will be gotten using the User ID.
+
+                    var currentAdmin = from r in context.SiteAdmin
+                                       where r.UserId == UserId
+                                       select r;
+
+                    // If the user has some information then edit it.
+                    // Otherwise return nothing.
+
+                    if (currentAdmin.Count() > 0)
+                    {
+                        regAdmin.Name = currentAdmin.FirstOrDefault().Name;
+                        regAdmin.EmailAddress = currentAdmin.FirstOrDefault().EmailAddress;
+                        regAdmin.CompanyName = currentAdmin.FirstOrDefault().Company;
+                        regAdmin.Telephone = currentAdmin.FirstOrDefault().Telephone;
+                        regAdmin.EmailAddress = currentAdmin.FirstOrDefault().EmailAddress;
+
+                        // Return the modal that is filled with information from the database.
+
+                        return (regAdmin);
+                    }
+
+                    else
+                    {
+                        return (null);
+                    }
+                }
+            }
+
+            catch
+            {
+                return (null);
+            }
+        }
+
+        //==================================================================================//
+        //      Remove Admin information                                                    //
+        //                                                                                  //
+        //      Removes the admin information if it is not empty.                           //
+        //                                                                                  //
+        //      Note: If the User ID is -1 then it is being checked out by the user.        //
+        //      If not then it is being checked by the admin.                               //
+        //==================================================================================//
+
         public static bool RemoveAdminData(int UserId)
         {
             try
             {
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
                 {
+                    // Put everything we find in the database in the var variable. All the
+                    // information will be gotten using the User ID.
+
                     var AdminData = from r in context.SiteAdmin
                                     where r.UserId == UserId
                                     select r;
+
+                    // If the user has some information then remove it.
+                    // Otherwise return false.
 
                     if (AdminData.Count() > 0 && UserId > 0)
                     {
@@ -167,7 +227,6 @@ namespace ITinTheDWebSite.Helpers
                     {
                         return false;
                     }
-
                 }
             }
 
@@ -179,45 +238,14 @@ namespace ITinTheDWebSite.Helpers
             }
         }
 
-        //===========================================================================
-        //     Get / Store Sponsor information
-        //===========================================================================
-        public static SponsorModel GetSponsorData(SponsorModel spons, int UserId)
-        {
-            if (UserId == -1)
-            {
-                UserId = WebSecurity.CurrentUserId;
-            }
-            try
-            {
-                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
-                {
-                    var corporatesponsor = from r in context.ProspectiveCorporateSponsor
-                                           where r.SponsorId == UserId
-                                           select r;
-
-                    if (corporatesponsor.Count() > 0)
-                    {
-                        spons.CompanyName = corporatesponsor.FirstOrDefault().CompanyName;
-                        spons.CompanyAddress = corporatesponsor.FirstOrDefault().CompanyAddress;
-                        spons.ContactName = corporatesponsor.FirstOrDefault().ContactName;
-                        spons.Title = corporatesponsor.FirstOrDefault().Title;
-                        spons.Telephone = corporatesponsor.FirstOrDefault().Telephone;
-                        spons.EmailAddress = corporatesponsor.FirstOrDefault().EmailAddress;
-                        spons.Reason = corporatesponsor.FirstOrDefault().Reason;
-                        return (spons);
-                    }
-                    else
-                    {
-                        return (null);
-                    }
-                }
-            }
-            catch
-            {
-                return (null);
-            }
-        }
+        //==================================================================================//
+        //      Store Sponsor information                                                   //
+        //                                                                                  //
+        //      Register the sponsor information if it is empty. Otherwise edit it.         //
+        //                                                                                  //
+        //      Note: If the edit is true then the account is being edited.                 //
+        //      Otherwise it is being registered.                                           //
+        //==================================================================================//
 
         public static bool StoreSponsorData(SponsorModel sponsor, ref bool edit)
         {
@@ -231,9 +259,16 @@ namespace ITinTheDWebSite.Helpers
 
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
                 {
+                    // Put everything we find in the database in the var variable. All the
+                    // information will be gotten using the User ID.
+
                     var SponsorData = from r in context.ProspectiveCorporateSponsor
                                       where r.SponsorId == UserId
                                       select r;
+
+                    // If the user has some information then edit it.
+                    // Otherwise register the account.
+
                     if (SponsorData.Count() > 0 && UserId > 0)
                     {
                         CurrentSponsor = SponsorData.FirstOrDefault();
@@ -266,9 +301,14 @@ namespace ITinTheDWebSite.Helpers
 
                     try
                     {
+                        // If the account is edited then save changes. Otherwise register the account.
+
                         if (edit == false)
                         {
                             WebSecurity.CreateUserAndAccount(sponsor.EmailAddress, sponsor.Password);
+
+                            // User is automatically logged in here.
+
                             WebSecurity.Login(sponsor.EmailAddress, sponsor.Password);
 
                             DatabaseHelper.AddUserToRole(sponsor.EmailAddress, "Sponsor");
@@ -280,13 +320,13 @@ namespace ITinTheDWebSite.Helpers
 
                         return true;
                     }
+
                     catch (Exception e)
                     {
                         string errorMessage = e.Message;
 
                         return false;
                     }
-
                 }
             }
 
@@ -298,15 +338,89 @@ namespace ITinTheDWebSite.Helpers
             }
         }
 
+        //==================================================================================//
+        //      Get Sponsor information                                                     //
+        //                                                                                  //
+        //      Gets the sponsor information if it is not empty.                            //
+        //                                                                                  //
+        //      Note: If the User ID is -1 then it is being checked out by the user.        //
+        //      If not then it is being checked by the admin.                               //
+        //==================================================================================//
+
+        public static SponsorModel GetSponsorData(SponsorModel spons, int UserId)
+        {
+            // If the User ID is -1 then it is being checked out by the user. We will then
+            // get the current user ID.
+
+            if (UserId == -1)
+            {
+                UserId = WebSecurity.CurrentUserId;
+            }
+
+            try
+            {
+                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
+                {
+                    // Put everything we find in the database in the var variable. All the
+                    // information will be gotten using the User ID.
+
+                    var corporatesponsor = from r in context.ProspectiveCorporateSponsor
+                                           where r.SponsorId == UserId
+                                           select r;
+
+                    // If the user has some information then edit it.
+                    // Otherwise return nothing.
+
+                    if (corporatesponsor.Count() > 0)
+                    {
+                        spons.CompanyName = corporatesponsor.FirstOrDefault().CompanyName;
+                        spons.CompanyAddress = corporatesponsor.FirstOrDefault().CompanyAddress;
+                        spons.ContactName = corporatesponsor.FirstOrDefault().ContactName;
+                        spons.Title = corporatesponsor.FirstOrDefault().Title;
+                        spons.Telephone = corporatesponsor.FirstOrDefault().Telephone;
+                        spons.EmailAddress = corporatesponsor.FirstOrDefault().EmailAddress;
+                        spons.Reason = corporatesponsor.FirstOrDefault().Reason;
+
+                        // Return the modal that is filled with information from the database.
+
+                        return (spons);
+                    }
+                    else
+                    {
+                        return (null);
+                    }
+                }
+            }
+            catch
+            {
+                return (null);
+            }
+        }
+
+        //==================================================================================//
+        //      Remove Sponsor information                                                  //
+        //                                                                                  //
+        //      Removes the sponsor information if it is not empty.                         //
+        //                                                                                  //
+        //      Note: If the User ID is -1 then it is being checked out by the user.        //
+        //      If not then it is being checked by the admin.                               //
+        //==================================================================================//
+
         public static bool RemoveSponsorData(int UserId)
         {
             try
             {
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
                 {
+                    // Put everything we find in the database in the var variable. All the
+                    // information will be gotten using the User ID.
+
                     var SponsorData = from r in context.ProspectiveCorporateSponsor
                                       where r.SponsorId == UserId
                                       select r;
+
+                    // If the user has some information then remove it.
+                    // Otherwise return false.
 
                     if (SponsorData.Count() > 0 && UserId > 0)
                     {
@@ -329,7 +443,6 @@ namespace ITinTheDWebSite.Helpers
                     {
                         return false;
                     }
-
                 }
             }
 
@@ -341,50 +454,14 @@ namespace ITinTheDWebSite.Helpers
             }
         }
 
-        //===========================================================================
-        //     Get / Store Academic information
-        //===========================================================================
-        public static AcademicModel GetAcademicdData(AcademicModel academic, int UserId)
-        {
-            if (UserId == -1)
-            {
-                UserId = WebSecurity.CurrentUserId;
-            }
-
-            try
-            {
-                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
-                {
-                    var ExistingAcademic = from r in context.ProspectiveAcademic
-                                           where r.AcademicId == UserId
-                                           select r;
-
-                    if (ExistingAcademic.Count() > 0)
-                    {
-                        academic.AcademyName = ExistingAcademic.FirstOrDefault().AcademyName;
-                        academic.AcademyAddress = ExistingAcademic.FirstOrDefault().AcademyAddress;
-                        academic.PrimaryContactName = ExistingAcademic.FirstOrDefault().PrimaryContactName;
-                        academic.PrimaryTitle = ExistingAcademic.FirstOrDefault().PrimaryTitle;
-                        academic.PrimaryTelephone = ExistingAcademic.FirstOrDefault().PrimaryTelephone;
-                        academic.PrimaryEmailAddress = ExistingAcademic.FirstOrDefault().PrimaryEmailAddress;
-
-                        academic.SecondaryContactName = ExistingAcademic.FirstOrDefault().SecondaryContactName;
-                        academic.SecondaryTitle = ExistingAcademic.FirstOrDefault().SecondaryTitle;
-                        academic.SecondaryTelephone = ExistingAcademic.FirstOrDefault().SecondaryTelephone;
-                        academic.SecondaryEmailAddress = ExistingAcademic.FirstOrDefault().SecondaryEmailAddress;
-                        return (academic);
-                    }
-                    else
-                    {
-                        return (null);
-                    }
-                }
-            }
-            catch
-            {
-                return (null);
-            }
-        }
+        //==================================================================================//
+        //      Store Academic information                                                  //
+        //                                                                                  //
+        //      Register the academic information if it is empty. Otherwise edit it.        //
+        //                                                                                  //
+        //      Note: If the edit is true then the account is being edited.                 //
+        //      Otherwise it is being registered.                                           //
+        //==================================================================================//
 
         public static bool StoreAcademicData(AcademicModel academic, ref bool edit)
         {
@@ -398,12 +475,18 @@ namespace ITinTheDWebSite.Helpers
 
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
                 {
+                    // Put everything we find in the database in the var variable. All the
+                    // information will be gotten using the User ID.
+
                     var AcademicData = from r in context.ProspectiveAcademic
                                        where r.AcademicId == UserId
                                        select r;
+
+                    // If the user has some information then edit it.
+                    // Otherwise register the account.
+
                     if (AcademicData.Count() > 0 && UserId > 0)
                     {
-                        //add = false;
                         CurrentAcademic = AcademicData.FirstOrDefault();
                         CurrentAcademic.AcademyAddress = academic.AcademyAddress;
                         CurrentAcademic.AcademyName = academic.AcademyName;
@@ -421,6 +504,7 @@ namespace ITinTheDWebSite.Helpers
 
                         edit = true;
                     }
+
                     else
                     {
                         CurrentAcademic = new ProspectiveAcademic();
@@ -443,6 +527,8 @@ namespace ITinTheDWebSite.Helpers
 
                     try
                     {
+                        // If the account is edited then save changes. Otherwise register the account.
+
                         if (edit == false)
                         {
                             WebSecurity.CreateUserAndAccount(academic.PrimaryEmailAddress, academic.Password);
@@ -456,19 +542,11 @@ namespace ITinTheDWebSite.Helpers
                         context.SaveChanges();
                         return true;
                     }
+
                     catch (Exception ex)
                     {
-                        if (ex is SqlException)
-                        {
-                            // Handle more specific SqlException exception here.
-                            string mess = ex.Message;
-                        }
-
                         return false;
-                        // Handle generic ones here.
-
                     }
-
                 }
             }
 
@@ -478,15 +556,95 @@ namespace ITinTheDWebSite.Helpers
             }
         }
 
+        //==================================================================================//
+        //      Get Academic information                                                    //
+        //                                                                                  //
+        //      Gets the academic information if it is not empty.                           //
+        //                                                                                  //
+        //      Note: If the User ID is -1 then it is being checked out by the user.        //
+        //      If not then it is being checked by the admin.                               //
+        //==================================================================================//
+
+        public static AcademicModel GetAcademicdData(AcademicModel academic, int UserId)
+        {
+            // If the User ID is -1 then it is being checked out by the user. We will then
+            // get the current user ID.
+
+            if (UserId == -1)
+            {
+                UserId = WebSecurity.CurrentUserId;
+            }
+
+            try
+            {
+                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
+                {
+                    // Put everything we find in the database in the var variable. All the
+                    // information will be gotten using the User ID.
+
+                    var ExistingAcademic = from r in context.ProspectiveAcademic
+                                           where r.AcademicId == UserId
+                                           select r;
+
+                    // If the user has some information then edit it.
+                    // Otherwise return nothing.
+
+                    if (ExistingAcademic.Count() > 0)
+                    {
+                        academic.AcademyName = ExistingAcademic.FirstOrDefault().AcademyName;
+                        academic.AcademyAddress = ExistingAcademic.FirstOrDefault().AcademyAddress;
+                        academic.PrimaryContactName = ExistingAcademic.FirstOrDefault().PrimaryContactName;
+                        academic.PrimaryTitle = ExistingAcademic.FirstOrDefault().PrimaryTitle;
+                        academic.PrimaryTelephone = ExistingAcademic.FirstOrDefault().PrimaryTelephone;
+                        academic.PrimaryEmailAddress = ExistingAcademic.FirstOrDefault().PrimaryEmailAddress;
+
+                        academic.SecondaryContactName = ExistingAcademic.FirstOrDefault().SecondaryContactName;
+                        academic.SecondaryTitle = ExistingAcademic.FirstOrDefault().SecondaryTitle;
+                        academic.SecondaryTelephone = ExistingAcademic.FirstOrDefault().SecondaryTelephone;
+                        academic.SecondaryEmailAddress = ExistingAcademic.FirstOrDefault().SecondaryEmailAddress;
+
+                        // Return the modal that is filled with information from the database.
+
+                        return (academic);
+                    }
+
+                    else
+                    {
+                        return (null);
+                    }
+                }
+            }
+
+            catch
+            {
+                return (null);
+            }
+        }
+
+        //==================================================================================//
+        //      Remove Academic information                                                 //
+        //                                                                                  //
+        //      Removes the academic information if it is not empty.                        //
+        //                                                                                  //
+        //      Note: If the User ID is -1 then it is being checked out by the user.        //
+        //      If not then it is being checked by the admin.                               //
+        //==================================================================================//
+
         public static bool RemoveAcademicData(int UserId)
         {
             try
             {
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
                 {
+                    // Put everything we find in the database in the var variable. All the
+                    // information will be gotten using the User ID.
+
                     var SponsorData = from r in context.ProspectiveAcademic
                                       where r.AcademicId == UserId
                                       select r;
+
+                    // If the user has some information then remove it.
+                    // Otherwise return false.
 
                     if (SponsorData.Count() > 0 && UserId > 0)
                     {
@@ -520,47 +678,15 @@ namespace ITinTheDWebSite.Helpers
             }
         }
 
-        //===========================================================================
-        //     Get / Store Student information
-        //===========================================================================
-        public static ProspectModel GetProspectData(ProspectModel prospect, int UserId)
-        {
-            if (UserId == -1)
-            {
-                UserId = WebSecurity.CurrentUserId;
-            }
-            try
-            {
-                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
-                {
-                    var ExistingProspect = from r in context.ProspectiveStudent
-                                           where r.UserId == UserId
-                                           select r;
-
-                    if (ExistingProspect.Count() > 0)
-                    {
-                        prospect.Name = ExistingProspect.FirstOrDefault().Name;
-                        prospect.Telephone = ExistingProspect.FirstOrDefault().Telephone;
-                        prospect.EmailAddress = ExistingProspect.FirstOrDefault().EmailAddress;
-                        prospect.DesiredCareerPath = ExistingProspect.FirstOrDefault().DesiredCareerPath;
-                        prospect.Gender = ExistingProspect.FirstOrDefault().Gender;
-                        prospect.ResumeUploaded = ExistingProspect.FirstOrDefault().ResumeUploaded;
-                        prospect.TranscriptUploaded = ExistingProspect.FirstOrDefault().TranscriptUploaded;
-
-                        return (prospect);
-                    }
-                    else
-                    {
-                        return (null);
-                    }
-                }
-            }
-            catch
-            {
-                return (null);
-            }
-
-        }
+        //==================================================================================//
+        //      Store Prospect Student information                                          //
+        //                                                                                  //
+        //      Register the prospective student information if it is                       //
+        //      empty. Otherwise edit it.                                                   //
+        //                                                                                  //
+        //      Note: If the edit is true then the account is being edited.                 //
+        //      Otherwise it is being registered.                                           //
+        //==================================================================================//
 
         public static bool StoreProspectData(ProspectModel prospect, ref bool edit)
         {
@@ -574,9 +700,16 @@ namespace ITinTheDWebSite.Helpers
             {
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
                 {
+                    // Put everything we find in the database in the var variable. All the
+                    // information will be gotten using the User ID.
+
                     var ProspectData = from r in context.ProspectiveStudent
                                        where r.UserId == UserId
                                        select r;
+
+                    // If the user has some information then edit it.
+                    // Otherwise register the account.
+
                     if (ProspectData.Count() > 0 && UserId > 0)
                     {
                         edit = true;
@@ -589,7 +722,8 @@ namespace ITinTheDWebSite.Helpers
                         CurrentStudent.DesiredCareerPath = prospect.DesiredCareerPath;
                         CurrentStudent.Gender = prospect.Gender;
 
-                        // Store a new resume file if user supplied one
+                        // Store the new resume if it is supplied and not empty.
+
                         if (prospect.ResumeFile != null && prospect.ResumeFile.ContentLength > 0)
                         {
                             ProspectiveStudentResume Resume = new ProspectiveStudentResume();
@@ -603,18 +737,19 @@ namespace ITinTheDWebSite.Helpers
                                 Resume.ContentType = prospect.ResumeFile.ContentType;
                                 Resume.ContentLength = prospect.ResumeFile.ContentLength;
 
-                                DatabaseHelper.UploadFile(Resume, prospect);
+                                DatabaseHelper.UploadResume(Resume, prospect);
 
                                 CurrentStudent.ResumeUploaded = "Yes";
                                 prospect.ResumeUploaded = "Yes";
                             }
                         }
 
-                        // store transcripts if supplied
+                        // Store the new transcript if it is supplied and not empty.
+
                         if (prospect.TranscriptFile != null && prospect.TranscriptFile.ContentLength > 0)
                         {
-
                             ProspectiveStudentTranscript Transcript = new ProspectiveStudentTranscript();
+
                             using (MemoryStream ts = new MemoryStream())
                             {
                                 prospect.TranscriptFile.InputStream.CopyTo(ts);
@@ -631,6 +766,7 @@ namespace ITinTheDWebSite.Helpers
                             }
                         }
                     }
+
                     else
                     {
                         CurrentStudent = new ProspectiveStudent();
@@ -647,14 +783,21 @@ namespace ITinTheDWebSite.Helpers
 
                     try
                     {
+                        // If the account is edited then save changes. Otherwise register the account.
+
                         if (edit == false)
                         {
                             WebSecurity.CreateUserAndAccount(prospect.EmailAddress, prospect.Password);
+
+                            // User is automatically logged in here.
+
                             WebSecurity.Login(prospect.EmailAddress, prospect.Password);
 
                             DatabaseHelper.AddUserToRole(prospect.EmailAddress, "Student");
 
                             CurrentStudent.UserId = WebSecurity.GetUserId(prospect.EmailAddress);
+
+                            // Store the resume if it is supplied and not empty.
 
                             if (prospect.ResumeFile != null && prospect.ResumeFile.ContentLength > 0)
                             {
@@ -669,7 +812,7 @@ namespace ITinTheDWebSite.Helpers
                                     Resume.ContentType = prospect.ResumeFile.ContentType;
                                     Resume.ContentLength = prospect.ResumeFile.ContentLength;
 
-                                    DatabaseHelper.UploadFile(Resume, prospect);
+                                    DatabaseHelper.UploadResume(Resume, prospect);
 
                                     CurrentStudent.ResumeUploaded = "Yes";
                                     prospect.ResumeUploaded = "Yes";
@@ -682,11 +825,12 @@ namespace ITinTheDWebSite.Helpers
                                 prospect.ResumeUploaded = "No";
                             }
 
-                            // store transcripts if supplied
+                            // Store the resume if it is supplied and not empty.
+
                             if (prospect.TranscriptFile != null && prospect.TranscriptFile.ContentLength > 0)
                             {
-
                                 ProspectiveStudentTranscript Transcript = new ProspectiveStudentTranscript();
+
                                 using (MemoryStream ts = new MemoryStream())
                                 {
                                     prospect.TranscriptFile.InputStream.CopyTo(ts);
@@ -702,6 +846,7 @@ namespace ITinTheDWebSite.Helpers
                                     prospect.TranscriptUploaded = "Yes";
                                 }
                             }
+
                             else
                             {
                                 CurrentStudent.TranscriptUploaded = "No";
@@ -712,18 +857,89 @@ namespace ITinTheDWebSite.Helpers
                         context.SaveChanges();
                         return true;
                     }
+
                     catch
                     {
                         return false;
                     }
-
                 }
             }
+
             catch
             {
                 return false;
             }
         }
+
+        //==================================================================================//
+        //      Get Prospect Student information                                            //
+        //                                                                                  //
+        //      Gets the prospect student information if it is not empty.                   //
+        //                                                                                  //
+        //      Note: If the User ID is -1 then it is being checked out by the user.        //
+        //      If not then it is being checked by the admin.                               //
+        //==================================================================================//
+
+        public static ProspectModel GetProspectData(ProspectModel prospect, int UserId)
+        {
+            // If the User ID is -1 then it is being checked out by the user. We will then
+            // get the current user ID.
+
+            if (UserId == -1)
+            {
+                UserId = WebSecurity.CurrentUserId;
+            }
+            try
+            {
+                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
+                {
+                    // Put everything we find in the database in the var variable. All the
+                    // information will be gotten using the User ID.
+
+                    var ExistingProspect = from r in context.ProspectiveStudent
+                                           where r.UserId == UserId
+                                           select r;
+
+                    // If the user has some information then edit it.
+                    // Otherwise return nothing.
+
+                    if (ExistingProspect.Count() > 0)
+                    {
+                        prospect.Name = ExistingProspect.FirstOrDefault().Name;
+                        prospect.Telephone = ExistingProspect.FirstOrDefault().Telephone;
+                        prospect.EmailAddress = ExistingProspect.FirstOrDefault().EmailAddress;
+                        prospect.DesiredCareerPath = ExistingProspect.FirstOrDefault().DesiredCareerPath;
+                        prospect.Gender = ExistingProspect.FirstOrDefault().Gender;
+                        prospect.ResumeUploaded = ExistingProspect.FirstOrDefault().ResumeUploaded;
+                        prospect.TranscriptUploaded = ExistingProspect.FirstOrDefault().TranscriptUploaded;
+
+                        // Return the modal that is filled with information from the database.
+
+                        return (prospect);
+                    }
+
+                    else
+                    {
+                        return (null);
+                    }
+                }
+            }
+
+            catch
+            {
+                return (null);
+            }
+
+        }
+
+        //==================================================================================//
+        //      Remove Prospect Student information                                         //
+        //                                                                                  //
+        //      Removes the prospective student information if it is not empty.             //
+        //                                                                                  //
+        //      Note: If the User ID is -1 then it is being checked out by the user.        //
+        //      If not then it is being checked by the admin.                               //
+        //==================================================================================//
 
         public static bool RemoveProspectiveData(int UserId)
         {
@@ -731,9 +947,15 @@ namespace ITinTheDWebSite.Helpers
             {
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
                 {
+                    // Put everything we find in the database in the var variable. All the
+                    // information will be gotten using the User ID.
+
                     var SponsorData = from r in context.ProspectiveStudent
                                       where r.UserId == UserId
                                       select r;
+
+                    // If the user has some information then remove it.
+                    // Otherwise return false.
 
                     if (SponsorData.Count() > 0 && UserId > 0)
                     {
@@ -767,19 +989,30 @@ namespace ITinTheDWebSite.Helpers
             }
         }
 
+        //==================================================================================//
+        //      Upload Prospect Student Transcript.                                         //
+        //                                                                                  //
+        //      Uploads the prospective student transcript if it is not empty.              //
+        //==================================================================================//
+
         public static bool UploadTranscript(ProspectiveStudentTranscript f, ProspectModel prospect)
         {
-
             int UserId = WebSecurity.GetUserId(prospect.EmailAddress);
 
             try
             {
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
                 {
+                    // Put everything we find in the database in the var variable. All the
+                    // information will be gotten using the User ID.
 
                     var UserTranscript = from r in context.ProspectiveStudentTranscripts
                                          where r.UserId == UserId
                                          select r;
+
+                    // If the user has a transcript then update it.
+                    // Otherwise make a new row in the database.
+
                     if (UserTranscript.Count() > 0)
                     {
                         ProspectiveStudentTranscript currentTranscript = UserTranscript.FirstOrDefault();
@@ -788,9 +1021,12 @@ namespace ITinTheDWebSite.Helpers
                         currentTranscript.FileContent = f.FileContent;
                         currentTranscript.FileName = f.FileName;
                         currentTranscript.ContentLength = f.ContentLength;
+
                         context.SaveChanges();
+
                         return true;
                     }
+
                     else
                     {
                         f.UserId = UserId;
@@ -800,12 +1036,58 @@ namespace ITinTheDWebSite.Helpers
                     }
                 }
             }
+
             catch (Exception)
             {
                 return false;
             }
-
         }
+
+        //==================================================================================//
+        //      Get Prospect Student Transcript.                                            //
+        //                                                                                  //
+        //      Gets the prospective student transcript if it is not empty.                 //
+        //==================================================================================//
+
+        public static ProspectiveStudentTranscript GetTranscript(int UserId)
+        {
+            try
+            {
+                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
+                {
+                    // Put everything we find in the database in the var variable. All the
+                    // information will be gotten using the User ID.
+
+                    var transcript = from r in context.ProspectiveStudentTranscripts
+                                     where r.UserId == UserId
+                                     select r;
+
+                    // If the user has a transcript then return it.
+                    // Otherwise return nothing.
+
+                    if (transcript.Count() > 0)
+                    {
+                        return (transcript.FirstOrDefault());
+                    }
+
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+
+            catch
+            {
+                return (null);
+            }
+        }
+
+        //==================================================================================//
+        //      Remove Prospect Student Transcript.                                         //
+        //                                                                                  //
+        //      Removes the prospective student transcript if it is not empty.              //
+        //==================================================================================//
 
         public static bool RemoveTranscript(int UserId)
         {
@@ -813,9 +1095,15 @@ namespace ITinTheDWebSite.Helpers
             {
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
                 {
+                    // Put everything we find in the database in the var variable. All the
+                    // information will be gotten using the User ID.
+
                     var UserTranscript = from r in context.ProspectiveStudentTranscripts
                                          where r.UserId == UserId
                                          select r;
+
+                    // If the user has a transcript then update it.
+                    // Otherwise make a new row in the database.
 
                     if (UserTranscript.Count() > 0 && UserId > 0)
                     {
@@ -849,39 +1137,13 @@ namespace ITinTheDWebSite.Helpers
             }
         }
 
-        public static ProspectiveStudentTranscript GetTranscript(int UserId)
-        {
-            ProspectiveStudentTranscript f = new ProspectiveStudentTranscript();
+        //==================================================================================//
+        //      Upload Prospect Student Resume.                                             //
+        //                                                                                  //
+        //      Uploads the prospective student transcript if it is not empty.              //
+        //==================================================================================//
 
-            try
-            {
-                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
-                {
-
-                    var transcript = from r in context.ProspectiveStudentTranscripts
-                                     where r.UserId == UserId
-                                     select r;
-
-                    if (transcript.Count() > 0)
-                    {
-                        return (transcript.FirstOrDefault());
-                    }
-                    else
-                    {
-                        return null;
-                    }
-
-                }
-            }
-
-            catch
-            {
-                return (null);
-            }
-
-        }
-
-        public static bool UploadFile(ProspectiveStudentResume f, ProspectModel prospect)
+        public static bool UploadResume(ProspectiveStudentResume resume, ProspectModel prospect)
         {
             int UserId = WebSecurity.GetUserId(prospect.EmailAddress);
 
@@ -889,45 +1151,106 @@ namespace ITinTheDWebSite.Helpers
             {
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
                 {
+                    // Put everything we find in the database in the var variable. All the
+                    // information will be gotten using the User ID.
+
                     var UserResume = from r in context.ProspectiveStudentResumes
                                      where r.UserId == UserId
                                      select r;
+
+                    // If the user has a resume then update it.
+                    // Otherwise make a new row in the database.
+
                     if (UserResume.Count() > 0)
                     {
                         ProspectiveStudentResume currentResume = UserResume.FirstOrDefault();
 
                         currentResume.UserId = UserId;
-                        currentResume.FileContent = f.FileContent;
-                        currentResume.FileName = f.FileName;
-                        currentResume.ContentLength = f.ContentLength;
+                        currentResume.FileContent = resume.FileContent;
+                        currentResume.FileName = resume.FileName;
+                        currentResume.ContentLength = resume.ContentLength;
                         context.SaveChanges();
                         return true;
                     }
+
                     else
                     {
-                        f.UserId = UserId;
-                        context.AddToProspectiveStudentResumes(f);
+                        resume.UserId = UserId;
+                        context.AddToProspectiveStudentResumes(resume);
                         context.SaveChanges();
                         return true;
                     }
                 }
             }
+
             catch (Exception)
             {
                 return false;
             }
-
         }
 
-        public static bool RemoveFile(int UserId)
+        //==================================================================================//
+        //      Get Prospect Student Resume.                                                //
+        //                                                                                  //
+        //      Gets the prospective student resume if it is not empty.                     //
+        //==================================================================================//
+
+        public static ProspectiveStudentResume GetResume(int UserId)
         {
             try
             {
                 using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
                 {
+                    // Put everything we find in the database in the var variable. All the
+                    // information will be gotten using the User ID.
+
+                    var resume = from r in context.ProspectiveStudentResumes
+                                 where r.UserId == UserId
+                                 select r;
+
+                    // If the user has a resume then return it.
+                    // Otherwise return nothing.
+
+                    if (resume.Count() > 0)
+                    {
+                        //return File(resume.FirstOrDefault().FileContent, resume.FirstOrDefault().ContentType);
+                        return (resume.FirstOrDefault());
+                    }
+
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+
+            catch
+            {
+                return (null);
+            }
+        }
+
+        //==================================================================================//
+        //      Remove Prospect Student Resume.                                             //
+        //                                                                                  //
+        //      Removes the prospective student resume if it is not empty.                  //
+        //==================================================================================//
+
+        public static bool RemoveResume(int UserId)
+        {
+            try
+            {
+                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
+                {
+                    // Put everything we find in the database in the var variable. All the
+                    // information will be gotten using the User ID.
+
                     var UserResume = from r in context.ProspectiveStudentResumes
                                      where r.UserId == UserId
                                      select r;
+
+                    // If the user has a resume then update it.
+                    // Otherwise make a new row in the database.
 
                     if (UserResume.Count() > 0 && UserId > 0)
                     {
@@ -960,37 +1283,5 @@ namespace ITinTheDWebSite.Helpers
                 return false;
             }
         }
-
-        public static ProspectiveStudentResume GetResume(int UserId)
-        {
-            ProspectiveStudentResume f = new ProspectiveStudentResume();
-
-            try
-            {
-                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
-                {
-                    var resume = from r in context.ProspectiveStudentResumes
-                                 where r.UserId == UserId
-                                 select r;
-
-                    if (resume.Count() > 0)
-                    {
-                        //return File(resume.FirstOrDefault().FileContent, resume.FirstOrDefault().ContentType);
-                        return (resume.FirstOrDefault());
-                    }
-                    else
-                    {
-                        return null;
-                    }
-
-                }
-            }
-
-            catch
-            {
-                return (null);
-            }
-        }
     }
-
 }

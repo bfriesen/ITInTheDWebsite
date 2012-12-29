@@ -90,7 +90,7 @@ namespace ITinTheDWebSite.Controllers
                         TempData["Message"] += x++ + ". Transcript successfully deleted. ";
                     }
 
-                    if (DatabaseHelper.RemoveFile(id))
+                    if (DatabaseHelper.RemoveResume(id))
                     {
                         TempData["Message"] += x++ + ". File successfully deleted.";
                     }
