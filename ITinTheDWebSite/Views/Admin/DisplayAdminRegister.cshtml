@@ -7,15 +7,16 @@
 @{
     ITinTheDWebSite.Models.RegisterModel regAdmin = new ITinTheDWebSite.Models.RegisterModel();
 }
-
-@if ((User.IsInRole("Admin") && ITinTheDWebSite.Helpers.DatabaseHelper.GetAdminData(regAdmin, WebSecurity.GetUserId(User.Identity.Name)).AccountStatus < 3) || !User.IsInRole("Admin") && (Model.AccountStatus == 1))
+@if (Model.AccountStatus == 1)
 {
-    <h4>You are not verified by the admin yet, your account status is 1.</h4>
+    <h4>
+        You are not verified by the admin yet, your account status is 1.</h4>
 }
 
 else
 {
-    <h6>* Denotes required fields.</h6>
+    <h6>
+        * Denotes required fields.</h6>
     using (Html.BeginForm("StoreAdmin", "Admin"))
     {
     @Html.AntiForgeryToken()
@@ -34,12 +35,26 @@ else
         {
             if (ITinTheDWebSite.Helpers.DatabaseHelper.GetAdminData(regAdmin, WebSecurity.GetUserId(User.Identity.Name)).AccountStatus == 3)
             {
+                if (Model.EmailAddress == ITinTheDWebSite.Helpers.DatabaseHelper.GetAdminData(regAdmin, WebSecurity.GetUserId(User.Identity.Name)).EmailAddress)
+                {
+            <div class="editor-label">
+                @Html.LabelFor(model => model.AccountStatus)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.AccountStatus, new { @readonly = true })
+            </div>
+                }
+
+                else
+                {
+                
             <div class="editor-label">
                 @Html.LabelFor(model => model.AccountStatus)
             </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.AccountStatus)
             </div>
+                }
             }
 
             else
