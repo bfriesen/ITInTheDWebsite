@@ -18,15 +18,15 @@ namespace ITinTheDWebSite
              //   clientId: "",
                // clientSecret: "");
 
-            OAuthWebSecurity.RegisterTwitterClient(
-             consumerKey: "axQTsvuVpt0Ohg4DjIlw",
-               consumerSecret: "Lmet9tOamYYd0VRoLScxHKGza5CK7Rwcn0KwTrMYBgg");
+            //OAuthWebSecurity.RegisterTwitterClient(
+            // consumerKey: "axQTsvuVpt0Ohg4DjIlw",
+            //   consumerSecret: "Lmet9tOamYYd0VRoLScxHKGza5CK7Rwcn0KwTrMYBgg");
 
-            OAuthWebSecurity.RegisterFacebookClient(
-                appId: "496184330412486",
-                appSecret: "cd7b3eb20af8bd204d469a76388e7599");
+            //OAuthWebSecurity.RegisterFacebookClient(
+            //    appId: "496184330412486",
+            //    appSecret: "cd7b3eb20af8bd204d469a76388e7599");
 
-            OAuthWebSecurity.RegisterGoogleClient();
+            //OAuthWebSecurity.RegisterGoogleClient();
         }
     }
 }

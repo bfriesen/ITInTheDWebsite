@@ -27,9 +27,11 @@ ViewBag.Title = "Events";
 <tr>
 <td>
    <a href="@item.Link" target="_blank">@Html.Encode(item.Title)</a>
+   
 </td>
 <td>
   @System.Web.HttpUtility.HtmlDecode(item.Description)
+  <a href="@item.Link" target="_blank"> Read More</a>
 </td>
 </tr>   
     
