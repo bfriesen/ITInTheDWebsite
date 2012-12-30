@@ -78,9 +78,6 @@ namespace ITinTheDWebSite.Models
 
     public class AcademicModel
     {
-        //[Key]
-        //public int AcademicId { get; set; }
-
         // Required fields.
         
         [Required]
@@ -133,6 +130,9 @@ namespace ITinTheDWebSite.Models
         [DisplayName("Secondary Email Address")]
         [RegularExpression(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", ErrorMessage = "Please enter a valid email address")]
         public string SecondaryEmailAddress { get; set; }
+
+        [DisplayName("Account Status")]
+        public int AccountStatus { get; set; }
     }
 
     public class ProspectModel
@@ -171,6 +171,9 @@ namespace ITinTheDWebSite.Models
 
         [DisplayName("Gender")]
         public string Gender { get; set; }
+
+        [DisplayName("Account Status (1 - 4)")]
+        public int AccountStatus { get; set; }
 
         public string TranscriptUploaded { get; set; }
 
@@ -229,6 +232,9 @@ namespace ITinTheDWebSite.Models
         [DisplayName("Briefly explain why you want to participate in IT in the D")]
         [DataType(DataType.MultilineText)]
         public string Reason { get; set; }
+
+        [DisplayName("Account Status")]
+        public int AccountStatus { get; set; }
     }
 
     public class ExternalLogin

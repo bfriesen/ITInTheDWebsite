@@ -65,5 +65,8 @@ namespace ITinTheDWebSite.Models
 
         [Display(Name = "Company")]
         public string CompanyName { get; set; }
+
+        [DisplayName("Account Status")]
+        public int AccountStatus { get; set; }
     }
 }

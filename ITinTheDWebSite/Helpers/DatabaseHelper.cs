@@ -66,6 +66,7 @@ namespace ITinTheDWebSite.Helpers
                     if (AdminData.Count() > 0 && UserId > 0)
                     {
                         CurrentAdmin = AdminData.FirstOrDefault();
+                        CurrentAdmin.Status = regAdmin.AccountStatus;
                         CurrentAdmin.Company = regAdmin.CompanyName;
                         CurrentAdmin.EmailAddress = regAdmin.EmailAddress;
                         CurrentAdmin.Name = regAdmin.Name;
@@ -79,6 +80,7 @@ namespace ITinTheDWebSite.Helpers
                     {
                         CurrentAdmin = new SiteAdmin();
 
+                        CurrentAdmin.Status = regAdmin.AccountStatus;
                         CurrentAdmin.Company = regAdmin.CompanyName;
                         CurrentAdmin.Name = regAdmin.Name;
                         CurrentAdmin.EmailAddress = regAdmin.EmailAddress;
@@ -158,6 +160,7 @@ namespace ITinTheDWebSite.Helpers
                     if (currentAdmin.Count() > 0)
                     {
                         regAdmin.Name = currentAdmin.FirstOrDefault().Name;
+                        regAdmin.AccountStatus = currentAdmin.FirstOrDefault().Status;
                         regAdmin.EmailAddress = currentAdmin.FirstOrDefault().EmailAddress;
                         regAdmin.CompanyName = currentAdmin.FirstOrDefault().Company;
                         regAdmin.Telephone = currentAdmin.FirstOrDefault().Telephone;
@@ -272,6 +275,7 @@ namespace ITinTheDWebSite.Helpers
                     if (SponsorData.Count() > 0 && UserId > 0)
                     {
                         CurrentSponsor = SponsorData.FirstOrDefault();
+                        CurrentSponsor.Status = sponsor.AccountStatus;
                         CurrentSponsor.CompanyAddress = sponsor.CompanyAddress;
                         CurrentSponsor.CompanyName = sponsor.CompanyName;
                         CurrentSponsor.ContactName = sponsor.ContactName;
@@ -287,7 +291,7 @@ namespace ITinTheDWebSite.Helpers
                     {
                         CurrentSponsor = new ProspectiveCorporateSponsor();
 
-                        CurrentSponsor.Status = (int)SponsorStatus.Initial;
+                        CurrentSponsor.Status = sponsor.AccountStatus;
                         CurrentSponsor.CompanyAddress = sponsor.CompanyAddress;
                         CurrentSponsor.CompanyName = sponsor.CompanyName;
                         CurrentSponsor.ContactName = sponsor.ContactName;
@@ -373,6 +377,7 @@ namespace ITinTheDWebSite.Helpers
 
                     if (corporatesponsor.Count() > 0)
                     {
+                        spons.AccountStatus = corporatesponsor.FirstOrDefault().Status;
                         spons.CompanyName = corporatesponsor.FirstOrDefault().CompanyName;
                         spons.CompanyAddress = corporatesponsor.FirstOrDefault().CompanyAddress;
                         spons.ContactName = corporatesponsor.FirstOrDefault().ContactName;
@@ -488,6 +493,7 @@ namespace ITinTheDWebSite.Helpers
                     if (AcademicData.Count() > 0 && UserId > 0)
                     {
                         CurrentAcademic = AcademicData.FirstOrDefault();
+                        CurrentAcademic.Status = academic.AccountStatus;
                         CurrentAcademic.AcademyAddress = academic.AcademyAddress;
                         CurrentAcademic.AcademyName = academic.AcademyName;
                         CurrentAcademic.PrimaryContactName = academic.PrimaryContactName;
@@ -509,7 +515,7 @@ namespace ITinTheDWebSite.Helpers
                     {
                         CurrentAcademic = new ProspectiveAcademic();
 
-                        CurrentAcademic.Status = (int)AcademicStatus.Initial;
+                        CurrentAcademic.Status = academic.AccountStatus;
                         CurrentAcademic.AcademyAddress = academic.AcademyAddress;
                         CurrentAcademic.AcademyName = academic.AcademyName;
                         CurrentAcademic.PrimaryContactName = academic.PrimaryContactName;
@@ -591,6 +597,7 @@ namespace ITinTheDWebSite.Helpers
 
                     if (ExistingAcademic.Count() > 0)
                     {
+                        academic.AccountStatus = ExistingAcademic.FirstOrDefault().Status;
                         academic.AcademyName = ExistingAcademic.FirstOrDefault().AcademyName;
                         academic.AcademyAddress = ExistingAcademic.FirstOrDefault().AcademyAddress;
                         academic.PrimaryContactName = ExistingAcademic.FirstOrDefault().PrimaryContactName;
@@ -715,6 +722,7 @@ namespace ITinTheDWebSite.Helpers
                         edit = true;
 
                         CurrentStudent = ProspectData.FirstOrDefault();
+                        CurrentStudent.Status = prospect.AccountStatus;
                         CurrentStudent.UserId = UserId;
                         CurrentStudent.Name = prospect.Name;
                         CurrentStudent.Telephone = prospect.Telephone;
@@ -771,7 +779,7 @@ namespace ITinTheDWebSite.Helpers
                     {
                         CurrentStudent = new ProspectiveStudent();
 
-                        CurrentStudent.Status = (int)StudentStatus.Initial;
+                        CurrentStudent.Status = prospect.AccountStatus;
                         CurrentStudent.Name = prospect.Name;
                         CurrentStudent.Telephone = prospect.Telephone;
                         CurrentStudent.EmailAddress = prospect.EmailAddress;
@@ -905,6 +913,7 @@ namespace ITinTheDWebSite.Helpers
 
                     if (ExistingProspect.Count() > 0)
                     {
+                        prospect.AccountStatus = ExistingProspect.FirstOrDefault().Status;
                         prospect.Name = ExistingProspect.FirstOrDefault().Name;
                         prospect.Telephone = ExistingProspect.FirstOrDefault().Telephone;
                         prospect.EmailAddress = ExistingProspect.FirstOrDefault().EmailAddress;

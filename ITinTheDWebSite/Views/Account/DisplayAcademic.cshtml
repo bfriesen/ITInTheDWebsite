@@ -1,28 +1,37 @@
 ﻿@model ITinTheDWebSite.Models.AcademicModel
-
 @{
     ViewBag.Title = "Display";
 }
-
 <h3>@TempData["RegistrationMessage"]</h3>
 <h4>@TempData["Message"]</h4>
-<h6>* Denotes required fields.</h6>
-@using (Html.BeginForm("StoreAcademic","Account")) {
+@{
+    ITinTheDWebSite.Models.RegisterModel regAdmin = new ITinTheDWebSite.Models.RegisterModel();
+}
+
+@if ((User.IsInRole("Admin") && ITinTheDWebSite.Helpers.DatabaseHelper.GetAdminData(regAdmin, WebSecurity.GetUserId(User.Identity.Name)).AccountStatus < 3) || !User.IsInRole("Admin") && (Model.AccountStatus == 1))
+{
+    <h4>You are not verified by the admin yet, your account status is 1.</h4>
+}
+
+else
+{
+    <h6>
+        * Denotes required fields.</h6>
+    using (Html.BeginForm("StoreAcademic", "Account"))
+    {
     
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>AcademicModel</legend>
-
         <div class="editor-label">
-            @Html.LabelFor(model => model.AcademyName)    
+            @Html.LabelFor(model => model.AcademyName)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.AcademyName)
             @Html.ValidationMessageFor(model => model.AcademyName)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.AcademyAddress)
         </div>
@@ -30,7 +39,6 @@
             @Html.EditorFor(model => model.AcademyAddress)
             @Html.ValidationMessageFor(model => model.AcademyAddress)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.PrimaryContactName)
         </div>
@@ -38,15 +46,54 @@
             @Html.EditorFor(model => model.PrimaryContactName)
             @Html.ValidationMessageFor(model => model.PrimaryContactName)
         </div>
-
         <div class="editor-label">
-        <b>   @Html.LabelFor(model => model.PrimaryTitle) </b>
+            <b>@Html.LabelFor(model => model.PrimaryTitle) </b>
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.PrimaryTitle)
             @Html.ValidationMessageFor(model => model.PrimaryTitle)
         </div>
+        @{
+        if (User.IsInRole("Admin"))
+        {
+            if (ITinTheDWebSite.Helpers.DatabaseHelper.GetAdminData(regAdmin, WebSecurity.GetUserId(User.Identity.Name)).AccountStatus == 3)
+            {
+            <div class="editor-label">
+                @Html.LabelFor(model => model.AccountStatus)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.AccountStatus)
+            </div>
+            }
 
+            else
+            {
+            <div class="editor-label">
+                @Html.LabelFor(model => model.AccountStatus)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.AccountStatus, new { @readonly = true })
+            </div>
+            }
+
+        }
+
+        else if (Model.PrimaryEmailAddress == null)
+        {
+
+        }
+
+        else
+        {
+            <div class="editor-label">
+                @Html.LabelFor(model => model.AccountStatus)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.AccountStatus, new { @readonly = true })
+            </div>
+        }
+        }
+        @Html.ValidationMessageFor(model => model.AccountStatus)
         <div class="editor-label">
             @Html.LabelFor(model => model.PrimaryTelephone)
         </div>
@@ -54,12 +101,11 @@
             @Html.EditorFor(model => model.PrimaryTelephone)
             @Html.ValidationMessageFor(model => model.PrimaryTelephone)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.PrimaryEmailAddress)
         </div>
         <div class="editor-field">
-            @if (Model.EmailAddress == null)
+            @if (Model.PrimaryEmailAddress == null)
             {
                 @Html.EditorFor(model => model.PrimaryEmailAddress)
             }
@@ -69,7 +115,6 @@
             }
             @Html.ValidationMessageFor(model => model.PrimaryEmailAddress)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.Password)
         </div>
@@ -77,7 +122,6 @@
             @Html.EditorFor(model => model.Password)
             @Html.ValidationMessageFor(model => model.Password)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.ConfirmPassword)
         </div>
@@ -85,15 +129,13 @@
             @Html.EditorFor(model => model.ConfirmPassword)
             @Html.ValidationMessageFor(model => model.ConfirmPassword)
         </div>
-
         <div class="editor-label">
-         <b>   @Html.LabelFor(model => model.SecondaryContactName) </b>
+            <b>@Html.LabelFor(model => model.SecondaryContactName) </b>
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.SecondaryContactName)
             @Html.ValidationMessageFor(model => model.SecondaryContactName)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.SecondaryTitle)
         </div>
@@ -101,7 +143,6 @@
             @Html.EditorFor(model => model.SecondaryTitle)
             @Html.ValidationMessageFor(model => model.SecondaryTitle)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.SecondaryTelephone)
         </div>
@@ -109,7 +150,6 @@
             @Html.EditorFor(model => model.SecondaryTelephone)
             @Html.ValidationMessageFor(model => model.SecondaryTelephone)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.SecondaryEmailAddress)
         </div>
@@ -117,17 +157,16 @@
             @Html.EditorFor(model => model.SecondaryEmailAddress)
             @Html.ValidationMessageFor(model => model.SecondaryEmailAddress)
         </div>
-
         <p>
             <input type="submit" value="Submit" />
         </p>
     </fieldset>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

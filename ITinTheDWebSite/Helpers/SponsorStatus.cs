@@ -5,7 +5,6 @@ using System.Web;
 
 namespace ITinTheDWebSite.Helpers
 {
-
     public enum SponsorStatus
     {
         Initial = 1,
@@ -26,5 +25,4 @@ namespace ITinTheDWebSite.Helpers
         InProgress = 2,
         Completed = 3
     }
-
 }

@@ -80,7 +80,17 @@ namespace ITinTheDWebSite.Controllers
             {
                 bool edit = false;
 
-                if (DatabaseHelper.StoreProspectData(prospect, ref edit))
+                if (prospect.AccountStatus < 1)
+                {
+                    prospect.AccountStatus = 1;
+                }
+
+                else if (prospect.AccountStatus > 4)
+                {
+                    prospect.AccountStatus = 4;
+                }
+
+                if  (DatabaseHelper.StoreProspectData(prospect, ref edit))
                 {
                     if (edit == true)
                     {
@@ -181,6 +191,16 @@ namespace ITinTheDWebSite.Controllers
             {
                 bool edit = false;
 
+                if (academic.AccountStatus < 1)
+                {
+                    academic.AccountStatus = 1;
+                }
+
+                else if (academic.AccountStatus > 4)
+                {
+                    academic.AccountStatus = 4;
+                }
+
                 if (DatabaseHelper.StoreAcademicData(academic, ref edit))
                 {
                     if (edit == true)
@@ -231,6 +251,16 @@ namespace ITinTheDWebSite.Controllers
             if (ModelState.IsValid)
             {
                 bool edit = false;
+
+                if (sponsor.AccountStatus < 1)
+                {
+                    sponsor.AccountStatus = 1;
+                }
+
+                else if (sponsor.AccountStatus > 3)
+                {
+                    sponsor.AccountStatus = 3;
+                }
 
                 if (DatabaseHelper.StoreSponsorData(sponsor, ref edit))
                 {

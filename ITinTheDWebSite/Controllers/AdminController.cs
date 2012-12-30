@@ -85,7 +85,7 @@ namespace ITinTheDWebSite.Controllers
 
                     int x = 1;
 
-                    if(DatabaseHelper.RemoveTranscript(id))
+                    if (DatabaseHelper.RemoveTranscript(id))
                     {
                         TempData["Message"] += x++ + ". Transcript successfully deleted. ";
                     }
@@ -146,14 +146,12 @@ namespace ITinTheDWebSite.Controllers
                 TempData["RegistrationMessage"] = "Academic institution registration form.";
             }
 
-            return RedirectToAction("User", "Admin", new { id  });
+            return RedirectToAction("User", "Admin", new { id });
         }
 
         //
         // GET: /Account/Register
 
-       // [Authorize(Roles = "Admin")]
-       // [AllowAnonymous]
         public ActionResult DisplayAdminRegister()
         {
             RegisterModel adminReg = new RegisterModel();
@@ -169,8 +167,8 @@ namespace ITinTheDWebSite.Controllers
         // POST: /Account/Register
 
         //[Authorize(Roles = "Admin")]
+
         [HttpPost]
-        //[AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult StoreAdmin(RegisterModel adminReg)
         {

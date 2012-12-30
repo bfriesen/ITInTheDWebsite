@@ -929,6 +929,30 @@ namespace ITinTheDWebSite
         private global::System.String _SecondaryEmailAddress;
         partial void OnSecondaryEmailAddressChanging(global::System.String value);
         partial void OnSecondaryEmailAddressChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String AcademicInstitutionTextField
+        {
+            get
+            {
+                return _AcademicInstitutionTextField;
+            }
+            set
+            {
+                OnAcademicInstitutionTextFieldChanging(value);
+                ReportPropertyChanging("AcademicInstitutionTextField");
+                _AcademicInstitutionTextField = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("AcademicInstitutionTextField");
+                OnAcademicInstitutionTextFieldChanged();
+            }
+        }
+        private global::System.String _AcademicInstitutionTextField;
+        partial void OnAcademicInstitutionTextFieldChanging(global::System.String value);
+        partial void OnAcademicInstitutionTextFieldChanged();
 
         #endregion
     
@@ -1251,6 +1275,30 @@ namespace ITinTheDWebSite
         private global::System.String _Reason;
         partial void OnReasonChanging(global::System.String value);
         partial void OnReasonChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String SponsorPageTextField
+        {
+            get
+            {
+                return _SponsorPageTextField;
+            }
+            set
+            {
+                OnSponsorPageTextFieldChanging(value);
+                ReportPropertyChanging("SponsorPageTextField");
+                _SponsorPageTextField = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("SponsorPageTextField");
+                OnSponsorPageTextFieldChanged();
+            }
+        }
+        private global::System.String _SponsorPageTextField;
+        partial void OnSponsorPageTextFieldChanging(global::System.String value);
+        partial void OnSponsorPageTextFieldChanged();
 
         #endregion
     
@@ -1571,6 +1619,30 @@ namespace ITinTheDWebSite
         private global::System.String _TranscriptUploaded;
         partial void OnTranscriptUploadedChanging(global::System.String value);
         partial void OnTranscriptUploadedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ProspectiveStudentTextField
+        {
+            get
+            {
+                return _ProspectiveStudentTextField;
+            }
+            set
+            {
+                OnProspectiveStudentTextFieldChanging(value);
+                ReportPropertyChanging("ProspectiveStudentTextField");
+                _ProspectiveStudentTextField = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ProspectiveStudentTextField");
+                OnProspectiveStudentTextFieldChanged();
+            }
+        }
+        private global::System.String _ProspectiveStudentTextField;
+        partial void OnProspectiveStudentTextFieldChanging(global::System.String value);
+        partial void OnProspectiveStudentTextFieldChanged();
 
         #endregion
     
@@ -2001,13 +2073,15 @@ namespace ITinTheDWebSite
         /// Create a new SiteAdmin object.
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="status">Initial value of the Status property.</param>
         /// <param name="userId">Initial value of the UserId property.</param>
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="emailAddress">Initial value of the EmailAddress property.</param>
-        public static SiteAdmin CreateSiteAdmin(global::System.Int32 id, global::System.Int32 userId, global::System.String name, global::System.String emailAddress)
+        public static SiteAdmin CreateSiteAdmin(global::System.Int32 id, global::System.Int32 status, global::System.Int32 userId, global::System.String name, global::System.String emailAddress)
         {
             SiteAdmin siteAdmin = new SiteAdmin();
             siteAdmin.ID = id;
+            siteAdmin.Status = status;
             siteAdmin.UserId = userId;
             siteAdmin.Name = name;
             siteAdmin.EmailAddress = emailAddress;
@@ -2043,6 +2117,30 @@ namespace ITinTheDWebSite
         private global::System.Int32 _ID;
         partial void OnIDChanging(global::System.Int32 value);
         partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Status
+        {
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                OnStatusChanging(value);
+                ReportPropertyChanging("Status");
+                _Status = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Status");
+                OnStatusChanged();
+            }
+        }
+        private global::System.Int32 _Status;
+        partial void OnStatusChanging(global::System.Int32 value);
+        partial void OnStatusChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
