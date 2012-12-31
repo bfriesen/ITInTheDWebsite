@@ -37,6 +37,7 @@
                                         <li>@Html.ActionLink("Trainers", "Index", "Trainers")</li>
                                         <li>@Html.ActionLink("Curriculum", "Index","Curriculum")</li>
                                         <li>@Html.ActionLink("Events", "Index","Events")</li>
+                                        <li>@Html.ActionLink("Contact Us", "Index", "Contact")</li>
                                     </ul>
                                 </li>
                             </ul>
@@ -53,47 +54,45 @@
             </div>
         </header>
         @RenderBody()
-        <!-- Footer
-      ================================================== -->
+        <!-- Footer ================================================== -->
          
  <footer class="footer row">
-	
-<hr>
-<h3>Our Sponsors:</h2>
 
-<!--home page "sponsor" images/links-->
-<a href="http://www.quickenloans.com/" target="_blank"><img style="padding: 25px" src="../../Images/Carousel/quicken_logo.png" alt="rss feed"></a>
-	<a href="http://www.compuware.com/" target="_blank"><img style="padding: 25px" src="../../Images/Carousel/compuwarelogosmall.png" alt="rss feed"></a>
-	<a href="http://www.fathead.com/" target="_blank"><img style="padding: 25px" src="../../Images/Carousel/fathead.png" alt="rss feed"></a>
-	<a href="http://www.galaxesolutions.com/" target="_blank"><img style="padding: 25px" src="../../Images/Carousel/galaxe solutions.png" alt="rss feed"></a>
-    <a href="http://marketingassociates.com/" target="_blank"><img style="padding: 25px" src="../../Images/Carousel/mrktg_assoc_logo.png" alt="rss feed"></a>
-<!--end home page "sponsor" images/links-->
-	© 2013 ITInTheD, Inc. · <a href="../Home/DisplayPrivacy">Privacy</a> · <a href="../Home/DisplayTerms">Terms</a>
-    <p class="pull-right" style="margin-top: 70px;">
-        <a href="#">Back to top</a></p>
+<h3>Our Sponsors:</h3>
+
+<!--"sponsor" images/links-->
+    <center>
+    <a href="http://www.quickenloans.com/" target="_blank"><img style="padding: 25px" src="../../Images/Carousel/quicken_logo.png" alt="quicken loans" /></a>
+	<a href="http://www.compuware.com/" target="_blank"><img style="padding: 25px" src="../../Images/Carousel/compuwarelogosmall.png" alt="compuware" /></a>
+	<a href="http://www.fathead.com/" target="_blank"><img style="padding: 25px" src="../../Images/Carousel/fathead.png" alt="fathead" /></a>
+	<a href="http://www.galaxesolutions.com/" target="_blank"><img style="padding: 25px" src="../../Images/Carousel/galaxe solutions.png" alt="galaxe solutions" /></a>
+    <a href="http://marketingassociates.com/" target="_blank"><img style="padding: 25px" src="../../Images/Carousel/mrktg_assoc_logo.png" alt="marketing associates" /></a>
+    </center>
+<!--end "sponsor" images/links-->
+        
                 <div class="navbar">
                 <div class="navbar-inner">
                     <div class=pull-left>
-                        <h6>Follow us on:<h6> <p/>
-                        <a href="http://www.facebook.com/ITinDetroit" target="_blank"><img src="../../images/facebook_icon.png" height="45" width="45" /></a>
-                        <a href="http://www.twitter.com/ITinDetroit" target="_blank"><img src="../../Images/twitter_icon.png" height="45" width="45" /></a>
+                    <!--social media links-->
+                        <h6>Follow us on:</h6>
+                        <a href="http://www.facebook.com/ITinDetroit" target="_blank"><img src="../../images/facebook_icon.png" height="40" width="40" alt="facebook" /></a>
+                        <a href="http://www.twitter.com/ITinDetroit" target="_blank"><img src="../../Images/twitter_icon.png" height="40" width="40" alt="twitter" /></a>
+                        <a href=" http://www.linkedin.com/groups/IT-in-D-Your-Detroit-4471137?itemaction=mclk&anetid=4471137&impid=4471137-4685117&pgkey=anet_about_guest&actpref=anet_about-gbm&trk=anet_about-gbm-group&goback=%2Eanb_4685117_*2_*1_*1_*1_*1_*1" target="_blank"><img src="../../Images/linkedin_icon.png" height="40" width="40" alt="linked in" /></a>
+                        <p /><a href="#">Back to top</a>
                     </div>
-                    <div class="pull-middle">
-                                    @Html.ActionLink("Contact Us", "Index", "Contact")
-                       </div>
-
                     <div class="container">
                         <div class="content-wrapper">
-                                    
                                  <div class="pull-right">
-                                  
-                                     @Html.Partial("_ErrorReport", new sbContact.Models.EmailFields())
+                                    @Html.Partial("_ErrorReport", new sbContact.Models.EmailFields())
+                                    <br />© 2013 ITInTheD, Inc.
+                                    <br />· <a href="../Home/DisplayPrivacy">Privacy</a> · <a href="../Home/DisplayTerms">Terms</a>
                                 </div>
                         </div>
                     </div>
                     <!--container -->
                 </div>
                 <!-- nav-bar-inner -->
+                </div>
 </footer>
 
     </div>

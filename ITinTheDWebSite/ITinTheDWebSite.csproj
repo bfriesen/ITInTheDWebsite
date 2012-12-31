@@ -316,6 +316,7 @@
     <Content Include="Images\facebook_icon.png" />
     <Content Include="Images\Files Upload Check\SQLDatabase_CheckMark.PNG" />
     <Content Include="Images\Files Upload Check\SQLDatabse_CheckX.PNG" />
+    <Content Include="Images\linkedin_icon.png" />
     <Content Include="Images\SponsorsAccordion\220px-CompuwareLogo.png" />
     <Content Include="Images\SponsorsAccordion\GalaxESolutions.JPG" />
     <Content Include="Images\SponsorsAccordion\MarketingAssociates.JPG" />
