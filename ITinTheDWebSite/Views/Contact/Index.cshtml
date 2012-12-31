@@ -1,10 +1,10 @@
 ﻿@model sbContact.Models.EmailFields
 
 <h2 align="center">Contact Us</h2>
-
+ <div class="pull-left">
 @using (Html.BeginForm("Sendit","Email")) {
         @Html.ValidationSummary(true)
-    <div class="well">
+   
         <fieldset>
         <legend>Please provide the following information</legend>
         <div class="editor-label">
@@ -44,18 +44,23 @@
 </p>
  
 </fieldset>
-    </div>
+   
     }
-<div>
+  </div>
+@*<div class = center>
 Compuware World Headquarters<br />
 1 Campus Martius <br />
 Detroit, MI 48226<br />
+</div>*@
 
-<center>
+<div class= "pull-right"> 
     <a href="https://maps.google.com/maps?q=1050+Woodward+Avenue,+Detroit,+MI+48226+&hl=en&sll=37.0625,-95.677068&sspn=41.224889,79.013672&hnear=1050+Woodward+Ave,+Detroit,+Wayne,+Michigan+48226&t=m&z=16" target=_blank>Get directions to IT in The D</a>
     <br />
-    <iframe width="350" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=1050+Woodward+Avenue,+Detroit,+MI+48226+&amp;aq=&amp;sll=37.0625,-95.677068&amp;sspn=41.224889,79.013672&amp;ie=UTF8&amp;hq=&amp;hnear=1050+Woodward+Ave,+Detroit,+Wayne,+Michigan+48226&amp;t=m&amp;z=14&amp;ll=42.332308,-83.046976&amp;output=embed"></iframe>
-</center>
+    <iframe width="550" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=1050+Woodward+Avenue,+Detroit,+MI+48226+&amp;aq=&amp;sll=37.0625,-95.677068&amp;sspn=41.224889,79.013672&amp;ie=UTF8&amp;hq=&amp;hnear=1050+Woodward+Ave,+Detroit,+Wayne,+Michigan+48226&amp;t=m&amp;z=14&amp;ll=42.332308,-83.046976&amp;output=embed"></iframe>
+<br />
+Compuware World Headquarters<br />
+1 Campus Martius <br />
+Detroit, MI 48226<br />
 </div>
 
 @section Scripts {
