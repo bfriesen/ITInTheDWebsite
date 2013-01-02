@@ -16,7 +16,6 @@ namespace ITinTheDWebSite.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        //
         // GET: /Account/Login
 
         [AllowAnonymous]
@@ -26,7 +25,6 @@ namespace ITinTheDWebSite.Controllers
             return View();
         }
 
-        //
         // POST: /Account/Login
 
         [HttpPost]
@@ -44,7 +42,6 @@ namespace ITinTheDWebSite.Controllers
             return View(model);
         }
 
-        //
         // POST: /Account/LogOff
 
         [HttpPost]
@@ -56,20 +53,7 @@ namespace ITinTheDWebSite.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //
-        // GET: /RegisterProspect/
-
-        [AllowAnonymous]
-        public ActionResult DisplayProspect()
-        {
-            ProspectModel prospect = new ProspectModel();
-            if (DatabaseHelper.GetProspectData(prospect, -1) == null)
-            {
-                TempData["RegistrationMessage"] = "Prospective student registration form.";
-            }
-
-            return View(prospect);
-        }
+        //  POST: Student Information.
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -90,9 +74,27 @@ namespace ITinTheDWebSite.Controllers
                     prospect.AccountStatus = 4;
                 }
 
-                if  (DatabaseHelper.StoreProspectData(prospect, ref edit))
+                if (prospect.ProspectiveStudentTextField == null)
                 {
-                    if (edit == true)
+                    ProspectModel oldProspect = new ProspectModel();
+
+                    string field = DatabaseHelper.GetProspectData(oldProspect, WebSecurity.GetUserId(prospect.EmailAddress)).ProspectiveStudentTextField;
+
+                    prospect.ProspectiveStudentTextField = field;
+                }
+
+                if (DatabaseHelper.StoreProspectData(prospect, ref edit))
+                {
+                    int ID = WebSecurity.GetUserId(prospect.EmailAddress);
+
+                    if (edit == true && ID != WebSecurity.CurrentUserId)
+                    {
+                        TempData["Message"] = "Successfully edited the user's information.";
+
+                        return RedirectToAction("User", "Admin", new { ID });
+                    }
+
+                    else if (edit == true)
                     {
                         TempData["Message"] = "Successfully edited your information.";
                         return RedirectToAction("Manage", "Account");
@@ -116,18 +118,21 @@ namespace ITinTheDWebSite.Controllers
             return RedirectToAction("DisplayProspect", "Account");
         }
 
-        // Get Resume and/or Transcript.
+        // GET: Student Information.
 
-        [Authorize(Roles = "Student")]
-        public ActionResult DisplayProspectFiles()
+        [AllowAnonymous]
+        public ActionResult DisplayProspect()
         {
             ProspectModel prospect = new ProspectModel();
-            prospect = DatabaseHelper.GetProspectData(prospect, -1);
+            if (DatabaseHelper.GetProspectData(prospect, -1) == null)
+            {
+                TempData["RegistrationMessage"] = "Prospective student registration form.";
+            }
 
             return View(prospect);
         }
 
-        //HttpPostedFileBase resume, HttpPostedFileBase Transcript
+        // POST: Resume and/or Transcript.
 
         public ActionResult StoreProspectFiles(ProspectModel prospect)
         {
@@ -164,22 +169,79 @@ namespace ITinTheDWebSite.Controllers
             }
         }
 
-        //
-        // GET: /RegisterAcademic/Displayc
+        // GET: Resume and/or Transcript.
 
-        [AllowAnonymous]
-        public ActionResult DisplayAcademic()
+        [Authorize(Roles = "Student")]
+        public ActionResult DisplayProspectFiles()
         {
-            AcademicModel academic = new AcademicModel();
-            if (DatabaseHelper.GetAcademicdData(academic, -1) == null)
-            {
-                TempData["RegistrationMessage"] = "Academic institution registration form.";
-            }
+            ProspectModel prospect = new ProspectModel();
+            prospect = DatabaseHelper.GetProspectData(prospect, -1);
 
-            return View(academic);
+            return View(prospect);
         }
 
-        //
+        // POST: Dynamic Prospect page.
+
+        public ActionResult StoreProspectPage(ProspectModel prospect)
+        {
+            bool edit = false;
+
+            if (prospect.ProspectiveStudentTextField == null)
+            {
+                prospect = DatabaseHelper.GetProspectData(prospect, WebSecurity.GetUserId(User.Identity.Name));
+
+                prospect.ProspectiveStudentTextField = "";
+
+                if (DatabaseHelper.StoreProspectData(prospect, ref edit))
+                {
+                    TempData["Message"] = "Successfully deleted your story as a graduate student.";
+                    return RedirectToAction("Index", "AcademicInstitution");
+                }
+
+                else
+                {
+                    TempData["Message"] = "Failed to delete your story as a graduate student.";
+                    return RedirectToAction("Index", "AcademicInstitution");
+                }
+            }
+
+            else
+            {
+                ProspectModel currentProspect = new ProspectModel();
+
+                currentProspect = DatabaseHelper.GetProspectData(currentProspect, WebSecurity.GetUserId(User.Identity.Name));
+
+                string newTextField = prospect.ProspectiveStudentTextField;
+
+                prospect = currentProspect;
+
+                prospect.ProspectiveStudentTextField = newTextField;
+
+                if (DatabaseHelper.StoreProspectData(prospect, ref edit))
+                {
+                    TempData["Message"] = "Successfully entered your story as a graduate student.";
+                    return RedirectToAction("Index", "GraduateStudents");
+                }
+
+                else
+                {
+                    TempData["Message"] = "Failed to enter your story as a graduate student.";
+                    return RedirectToAction("Index", "GraduateStudents");
+                }
+            }            
+        }
+
+        // GET: Dynamic Prospect page.
+
+        public ActionResult DisplayProspectPage()
+        {
+            ProspectModel currentProspect = new ProspectModel();
+
+            currentProspect = DatabaseHelper.GetProspectData(currentProspect, WebSecurity.GetUserId(User.Identity.Name));
+
+            return View(currentProspect);
+        }
+
         // POST: /RegisterAcademic/Store
 
         [HttpPost]
@@ -196,13 +258,31 @@ namespace ITinTheDWebSite.Controllers
                     academic.AccountStatus = 1;
                 }
 
-                else if (academic.AccountStatus > 4)
+                else if (academic.AccountStatus > 3)
                 {
-                    academic.AccountStatus = 4;
+                    academic.AccountStatus = 3;
+                }
+
+                if (academic.AcademicInstitutionTextField == null)
+                {
+                    AcademicModel oldAcademic = new AcademicModel();
+
+                    string field = DatabaseHelper.GetAcademicdData(oldAcademic, WebSecurity.GetUserId(academic.PrimaryEmailAddress)).AcademicInstitutionTextField;
+
+                    academic.AcademicInstitutionTextField = field;
                 }
 
                 if (DatabaseHelper.StoreAcademicData(academic, ref edit))
                 {
+                    int ID = WebSecurity.GetUserId(academic.PrimaryEmailAddress);
+
+                    if (edit == true && ID != WebSecurity.CurrentUserId)
+                    {
+                        TempData["Message"] = "Successfully edited the user's information.";
+
+                        return RedirectToAction("User", "Admin", new { ID });
+                    }
+
                     if (edit == true)
                     {
                         TempData["Message"] = "Successfully edited your information.";
@@ -226,21 +306,83 @@ namespace ITinTheDWebSite.Controllers
             TempData["Message"] = "Registeration failed.";
             return RedirectToAction("DisplayAcademic", "Home");
         }
+        
+        // GET: /RegisterAcademic/Display
 
         [AllowAnonymous]
-        public ActionResult DisplaySponsor()
+        public ActionResult DisplayAcademic()
         {
-            SponsorModel spons = new SponsorModel();
-            if (DatabaseHelper.GetSponsorData(spons, -1) == null)
+            AcademicModel academic = new AcademicModel();
+            if (DatabaseHelper.GetAcademicdData(academic, -1) == null)
             {
-                TempData["RegistrationMessage"] = "Sponsor registration form.";
+                TempData["RegistrationMessage"] = "Academic institution registration form.";
             }
 
-            return View(spons);
-
+            return View(academic);
         }
 
-        //
+        // POST: Dynamic Academic page.
+
+        public ActionResult StoreAcademicPage(AcademicModel academic)
+        {
+            bool edit = false;
+
+            if (academic.AcademicInstitutionTextField == null)
+            {
+                academic = DatabaseHelper.GetAcademicdData(academic, WebSecurity.GetUserId(User.Identity.Name));
+
+                academic.AcademicInstitutionTextField = "";
+
+                if (DatabaseHelper.StoreAcademicData(academic, ref edit))
+                {
+                    TempData["Message"] = "Successfully deleted your information as an academic institution.";
+                    return RedirectToAction("Index", "AcademicInstitution");
+                }
+
+                else
+                {
+                    TempData["Message"] = "Failed to delete your information as an academic institution.";
+                    return RedirectToAction("Index", "AcademicInstitution");
+                }
+            }
+
+            else
+            {
+                AcademicModel currentAcademic = new AcademicModel();
+
+                currentAcademic = DatabaseHelper.GetAcademicdData(currentAcademic, WebSecurity.GetUserId(User.Identity.Name));
+
+                string newTextField = academic.AcademicInstitutionTextField;
+
+                academic = currentAcademic;
+
+                academic.AcademicInstitutionTextField = newTextField;
+
+                if (DatabaseHelper.StoreAcademicData(academic, ref edit))
+                {
+                    TempData["Message"] = "Successfully entered your information as an academic institution.";
+                    return RedirectToAction("Index", "AcademicInstitution");
+                }
+
+                else
+                {
+                    TempData["Message"] = "Failed to enter your information as an academic institution.";
+                    return RedirectToAction("Index", "AcademicInstitution");
+                }
+            }
+        }
+
+        // GET: Dynamic Academic page.
+
+        public ActionResult DisplayAcademicPage()
+        {
+            AcademicModel currentAcademic = new AcademicModel();
+
+            currentAcademic = DatabaseHelper.GetAcademicdData(currentAcademic, WebSecurity.GetUserId(User.Identity.Name));
+
+            return View(currentAcademic);
+        }
+
         // POST: /RegisterSponsor/Store
 
         [HttpPost]
@@ -262,8 +404,26 @@ namespace ITinTheDWebSite.Controllers
                     sponsor.AccountStatus = 3;
                 }
 
+                if (sponsor.SponsorTextField == null)
+                {
+                    SponsorModel oldSponsor = new SponsorModel();
+
+                    string field = DatabaseHelper.GetSponsorData(oldSponsor, WebSecurity.GetUserId(sponsor.EmailAddress)).SponsorTextField;
+
+                    sponsor.SponsorTextField = field;
+                }
+
                 if (DatabaseHelper.StoreSponsorData(sponsor, ref edit))
                 {
+                    int ID = WebSecurity.GetUserId(sponsor.EmailAddress);
+
+                    if (edit == true && ID != WebSecurity.CurrentUserId)
+                    {
+                        TempData["Message"] = "Successfully edited the user's information.";
+
+                        return RedirectToAction("User", "Admin", new { ID });
+                    }
+
                     if (edit == true)
                     {
                         TempData["Message"] = "Successfully edited your information.";
@@ -288,7 +448,83 @@ namespace ITinTheDWebSite.Controllers
             return RedirectToAction("DisplaySponsor", "Account");
         }
 
-        //
+        // GET: /RegisterSponsor/Display
+
+        [AllowAnonymous]
+        public ActionResult DisplaySponsor()
+        {
+            SponsorModel spons = new SponsorModel();
+            if (DatabaseHelper.GetSponsorData(spons, -1) == null)
+            {
+                TempData["RegistrationMessage"] = "Sponsor registration form.";
+            }
+
+            return View(spons);
+
+        }
+
+        // POST: Dynamic Academic page.
+
+        public ActionResult StoreSponsorPage(SponsorModel sponsor)
+        {
+            bool edit = false;
+
+            if (sponsor.SponsorTextField == null)
+            {
+                sponsor = DatabaseHelper.GetSponsorData(sponsor, WebSecurity.GetUserId(User.Identity.Name));
+
+                sponsor.SponsorTextField = "";
+
+                if (DatabaseHelper.StoreSponsorData(sponsor, ref edit))
+                {
+                    TempData["Message"] = "Successfully deleted your information as a sponsor.";
+                    return RedirectToAction("Index", "Sponsors");
+                }
+
+                else
+                {
+                    TempData["Message"] = "Failed to delete your information as a sponsor.";
+                    return RedirectToAction("Index", "Sponsors");
+                }
+            }
+
+            else
+            {
+                SponsorModel currentSponsor = new SponsorModel();
+
+                currentSponsor = DatabaseHelper.GetSponsorData(currentSponsor, WebSecurity.GetUserId(User.Identity.Name));
+
+                string newTextField = sponsor.SponsorTextField;
+
+                sponsor = currentSponsor;
+
+                sponsor.SponsorTextField = newTextField;
+
+                if (DatabaseHelper.StoreSponsorData(sponsor, ref edit))
+                {
+                    TempData["Message"] = "Successfully entered your information as a sponsor.";
+                    return RedirectToAction("Index", "Sponsors");
+                }
+
+                else
+                {
+                    TempData["Message"] = "Failed to enter your information as a sponsor.";
+                    return RedirectToAction("Index", "Sponsors");
+                }
+            }
+        }
+
+        // GET: Dynamic Academic page.
+
+        public ActionResult DisplaySponsorPage()
+        {
+            SponsorModel currentSponsor = new SponsorModel();
+
+            currentSponsor = DatabaseHelper.GetSponsorData(currentSponsor, WebSecurity.GetUserId(User.Identity.Name));
+
+            return View(currentSponsor);
+        }
+
         // POST: /Account/Disassociate
 
         [HttpPost]
@@ -317,7 +553,6 @@ namespace ITinTheDWebSite.Controllers
             return RedirectToAction("Manage", new { Message = message });
         }
 
-        //
         // GET: /Account/Manage
 
         public ActionResult Manage(ManageMessageId? message)
@@ -332,7 +567,6 @@ namespace ITinTheDWebSite.Controllers
             return View();
         }
 
-        //
         // POST: /Account/Manage
 
         [HttpPost]
@@ -395,7 +629,6 @@ namespace ITinTheDWebSite.Controllers
             return View(model);
         }
 
-        //
         // POST: /Account/ExternalLogin
 
         [HttpPost]
@@ -406,7 +639,6 @@ namespace ITinTheDWebSite.Controllers
             return new ExternalLoginResult(provider, Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
         }
 
-        //
         // GET: /Account/ExternalLoginCallback
 
         [AllowAnonymous]
@@ -439,7 +671,6 @@ namespace ITinTheDWebSite.Controllers
             }
         }
 
-        //
         // POST: /Account/ExternalLoginConfirmation
 
         [HttpPost]
@@ -485,7 +716,6 @@ namespace ITinTheDWebSite.Controllers
             return View(model);
         }
 
-        //
         // GET: /Account/ExternalLoginFailure
 
         [AllowAnonymous]

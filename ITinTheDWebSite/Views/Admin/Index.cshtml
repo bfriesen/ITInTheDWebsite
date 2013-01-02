@@ -70,27 +70,115 @@
                     <td>
                         Roles
                     </td>
+                    <td>
+                        Verification Status
+                    </td>
                 </tr>
             </thead>
-        
-        <h2>
-            Users</h2>
-        @foreach (ITinTheDWebSite.Models.UserInfo u in Model.allUsers)
-        {
-            <tr>
-                <td>@u.user.UserId
-                </td>
-                <td>
-                    <a href="/admin/user?id=@u.user.UserId" >@u.user.UserName</a>
-                </td>
-                <td>
+            <h2>
+                Users</h2>
+            @foreach (ITinTheDWebSite.Models.UserInfo u in Model.allUsers)
+            {
+                int status = 0;
+                string message = "";
+                
+                <tr>
+                    <td>@u.user.UserId
+                    </td>
+                    <td>
+                        <a href="/admin/user?id=@u.user.UserId" >@u.user.UserName</a>
+                    </td>
+                    <td>
+                        @foreach (string r in @u.roles)
+                        {                            
+                            @r<span> </span>
+                        }
+                        
+                    </td>
+                    <td>
                     @foreach (string r in @u.roles)
                     {
-                        @r<span> </span> 
+                        if (r == "Student")
+                        {
+                            ITinTheDWebSite.Models.ProspectModel prospect = new ITinTheDWebSite.Models.ProspectModel();
+
+                            status = ITinTheDWebSite.Helpers.DatabaseHelper.GetProspectData(prospect, u.user.UserId).AccountStatus;
+
+                            switch(status)
+                            {
+                                case 1:
+                                    message = " - Unverified.";
+                                    break;
+                                case 2:
+                                    message = " - Able to edit profile.";
+                                    break;
+                                case 3:
+                                    message = " - Current student.";
+                                    break;
+                                case 4:
+                                    message = " - Graduate student.";
+                                    break;
+                                default:
+                                    message = " - No status.";
+                                    break;
+                            }
+                        }
+
+                        else if (r == "Educator")
+                        {
+                            ITinTheDWebSite.Models.AcademicModel academic = new ITinTheDWebSite.Models.AcademicModel();
+
+                            status = ITinTheDWebSite.Helpers.DatabaseHelper.GetAcademicdData(academic, u.user.UserId).AccountStatus;
+
+                            message = "Account can edit their own profile.";
+                        }
+
+                        else if (r == "Sponsor")
+                        {
+                            ITinTheDWebSite.Models.SponsorModel sponsor = new ITinTheDWebSite.Models.SponsorModel();
+
+                            status = ITinTheDWebSite.Helpers.DatabaseHelper.GetSponsorData(sponsor, u.user.UserId).AccountStatus;
+                        }
+
+                        else if (r == "Admin")
+                        {
+                            ITinTheDWebSite.Models.RegisterModel regAdmin = new ITinTheDWebSite.Models.RegisterModel();
+
+                            status = ITinTheDWebSite.Helpers.DatabaseHelper.GetAdminData(regAdmin, u.user.UserId).AccountStatus;
+                        }
+
+                        switch (status)
+                        {
+                            case 1:
+                                message = " - Unverified.";
+                                break;
+                            case 2:
+                                message = " - Able to edit profile.";
+                                break;
+                            case 3:
+                                message = " - Current " + r + '.';
+                                break;
+                            case 4:
+                                if (r == "Student")
+                                {
+                                    message = " - Graduate student.";
+                                }
+
+                                else
+                                {
+                                    message = " - No status.";
+                                }
+                                break;
+                            default:
+                                message = " - No status.";
+                                break;
+                        }
+                        
+                        @status @message
                     }
-                </td>
-            </tr>
-        }
+                    </td>
+                </tr>
+            }
         </table>
     </div>
     <div id="tabs-2">

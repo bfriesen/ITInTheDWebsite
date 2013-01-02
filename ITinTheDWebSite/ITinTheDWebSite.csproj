@@ -171,6 +171,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\AcademicInstitutionController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
@@ -178,10 +179,14 @@
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\FAQController.cs" />
+    <Compile Include="Controllers\GraduateStudentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ResumeController.cs" />
     <Compile Include="Controllers\SponsorsController.cs" />
     <Compile Include="Controllers\TrainersController.cs" />
+    <Compile Include="GetFileImage.ashx.cs">
+      <DependentUpon>GetFileImage.ashx</DependentUpon>
+    </Compile>
     <Compile Include="GetFileTranscript.ashx.cs">
       <DependentUpon>GetFileTranscript.ashx</DependentUpon>
     </Compile>
@@ -455,6 +460,15 @@
     <Content Include="Views\Account\DisplayProspectFiles.cshtml" />
     <Content Include="Views\Account\StoreProspectFiles.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="GetFileImage.ashx" />
+    <Content Include="Views\GraduateStudents\Index.cshtml" />
+    <Content Include="Views\AcademicInstitution\Index.cshtml" />
+    <Content Include="Views\Account\DisplayProspectPage.cshtml" />
+    <Content Include="Views\Account\StoreProspectPage.cshtml" />
+    <Content Include="Views\Account\DisplayAcademicPage.cshtml" />
+    <Content Include="Views\Account\StoreAcademicPage.cshtml" />
+    <Content Include="Views\Account\StoreSponsorPage.cshtml" />
+    <Content Include="Views\Account\DisplaySponsorPage.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

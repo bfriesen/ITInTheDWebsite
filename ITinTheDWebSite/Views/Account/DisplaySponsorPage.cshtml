@@ -1,0 +1,40 @@
+﻿@model ITinTheDWebSite.Models.SponsorModel
+@{
+    ViewBag.Title = "DisplaySponsorPage";
+}
+<!-- Modal -->
+<!-- Button to trigger modal -->
+<a href="#SponsorModel" style="color: Black" role="button" class="btn" data-toggle="modal">
+    Share your information</a>
+<div id="SponsorModel" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="sponsorExp"
+    aria-hidden="true" style="width: 400px; height: 450px;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×</button>
+        <h3 id="mySponsorLabel">
+            Sponsor Information</h3>
+    </div>
+    @using (Html.BeginForm("StoreSponsorPage", "Account"))
+    {
+        @Html.ValidationSummary(true)
+        <div class="well">
+            <fieldset>
+                <h6>
+                    * Empty the text area to delete your information.</h6>
+                <div class="editor-label">
+                    Share your information:
+                </div>
+                <div class="editor-field">
+                    @Html.TextAreaFor(model => model.SponsorTextField)
+                    @Html.ValidationMessageFor(model => model.SponsorTextField)
+                </div>
+                <p>
+                    <input type="submit" value="Submit" />
+                </p>
+            </fieldset>
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

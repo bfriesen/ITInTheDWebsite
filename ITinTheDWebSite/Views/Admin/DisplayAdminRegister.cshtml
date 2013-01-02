@@ -23,6 +23,20 @@ else
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>Registration Form</legend>
+        <div>
+            @if (Model.ImageUploaded == "Yes")
+            {
+                <p>
+                    Avatar</p>
+                <img src="/GetFileImage.ashx?id=@WebSecurity.GetUserId(Model.EmailAddress)" / style="width: 128px; height: 128px;">
+
+            }
+            <div class="editor-label">
+                <br />
+                @Html.Label("Upload Avatar")
+            </div>
+            <input type="file" name="ImageFile" />
+        </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.Name)
         </div>
@@ -31,11 +45,33 @@ else
             @Html.ValidationMessageFor(model => model.Name)
         </div>
         @{
-        if (User.IsInRole("Admin"))
-        {
-            if (ITinTheDWebSite.Helpers.DatabaseHelper.GetAdminData(regAdmin, WebSecurity.GetUserId(User.Identity.Name)).AccountStatus == 3)
+            if (User.IsInRole("Admin"))
             {
-                if (Model.EmailAddress == ITinTheDWebSite.Helpers.DatabaseHelper.GetAdminData(regAdmin, WebSecurity.GetUserId(User.Identity.Name)).EmailAddress)
+                if (ITinTheDWebSite.Helpers.DatabaseHelper.GetAdminData(regAdmin, WebSecurity.GetUserId(User.Identity.Name)).AccountStatus == 3)
+                {
+                    if (Model.EmailAddress == ITinTheDWebSite.Helpers.DatabaseHelper.GetAdminData(regAdmin, WebSecurity.GetUserId(User.Identity.Name)).EmailAddress)
+                    {
+            <div class="editor-label">
+                @Html.LabelFor(model => model.AccountStatus)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.AccountStatus, new { @readonly = true })
+            </div>
+                    }
+
+                    else
+                    {
+                
+            <div class="editor-label">
+                @Html.LabelFor(model => model.AccountStatus)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.AccountStatus)
+            </div>
+                    }
+                }
+
+                else
                 {
             <div class="editor-label">
                 @Html.LabelFor(model => model.AccountStatus)
@@ -45,16 +81,11 @@ else
             </div>
                 }
 
-                else
-                {
-                
-            <div class="editor-label">
-                @Html.LabelFor(model => model.AccountStatus)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.AccountStatus)
-            </div>
-                }
+            }
+
+            else if (Model.EmailAddress == null)
+            {
+
             }
 
             else
@@ -66,23 +97,6 @@ else
                 @Html.TextBoxFor(model => model.AccountStatus, new { @readonly = true })
             </div>
             }
-
-        }
-
-        else if (Model.EmailAddress == null)
-        {
-
-        }
-
-        else
-        {
-            <div class="editor-label">
-                @Html.LabelFor(model => model.AccountStatus)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(model => model.AccountStatus, new { @readonly = true })
-            </div>
-        }
         }
         @Html.ValidationMessageFor(model => model.AccountStatus)
         <div class="editor-label">

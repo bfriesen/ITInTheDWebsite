@@ -7,7 +7,6 @@
 @{
     ITinTheDWebSite.Models.RegisterModel regAdmin = new ITinTheDWebSite.Models.RegisterModel();
 }
-
 @if ((User.IsInRole("Admin") && ITinTheDWebSite.Helpers.DatabaseHelper.GetAdminData(regAdmin, WebSecurity.GetUserId(User.Identity.Name)).AccountStatus < 3) || !User.IsInRole("Admin") && (Model.AccountStatus == 1))
 {
     <h4>You are not verified by the admin yet, your account status is 1.</h4>
@@ -15,14 +14,27 @@
 
 else
 {
-<h6>* Denotes required fields.</h6>
-using (Html.BeginForm("StoreProspect", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{  
+    <h6>* Denotes required fields.</h6>
+    using (Html.BeginForm("StoreProspect", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {  
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>StudentProspect</legend>
+        <div>
+            @if (Model.ImageUploaded == "Yes")
+            {
+                <p>
+                    Avatar</p>
+                <img src="/GetFileImage.ashx?id=@WebSecurity.GetUserId(Model.EmailAddress)" / style="width: 128px; height: 128px;">
+            }
+            <div class="editor-label">
+                <br />
+                @Html.Label("Upload Avatar")
+            </div>
+            <input type="file" name="ImageFile" />
+        </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.Name)
         </div>
@@ -31,44 +43,44 @@ using (Html.BeginForm("StoreProspect", "Account", FormMethod.Post, new { enctype
             @Html.ValidationMessageFor(model => model.Name)
         </div>
         @{
-    if (User.IsInRole("Admin"))
-    {
-        if (ITinTheDWebSite.Helpers.DatabaseHelper.GetAdminData(regAdmin, WebSecurity.GetUserId(User.Identity.Name)).AccountStatus == 3)
-        {
+            if (User.IsInRole("Admin"))
+            {
+                if (ITinTheDWebSite.Helpers.DatabaseHelper.GetAdminData(regAdmin, WebSecurity.GetUserId(User.Identity.Name)).AccountStatus == 3)
+                {
                     <div class="editor-label">
                         @Html.LabelFor(model => model.AccountStatus)
                     </div>
                     <div class="editor-field">
                         @Html.EditorFor(model => model.AccountStatus)
                     </div>
-        }
+                }
 
-        else
-        {
+                else
+                {
                     <div class="editor-label">
                         @Html.LabelFor(model => model.AccountStatus)
                     </div>
                     <div class="editor-field">
                         @Html.TextBoxFor(model => model.AccountStatus, new { @readonly = true })
                     </div>
-        }
+                }
 
-    }
+            }
 
-    else if (Model.EmailAddress == null)
-    {
+            else if (Model.EmailAddress == null)
+            {
 
-    }
+            }
 
-    else
-    {
+            else
+            {
                 <div class="editor-label">
                     @Html.LabelFor(model => model.AccountStatus)
                 </div>
                 <div class="editor-field">
                     @Html.TextBoxFor(model => model.AccountStatus, new { @readonly = true })
                 </div>
-    }
+            }
         }
         @Html.ValidationMessageFor(model => model.AccountStatus)
         <div class="editor-label">
@@ -164,5 +176,5 @@ using (Html.BeginForm("StoreProspect", "Account", FormMethod.Post, new { enctype
             <input type="submit" value="Submit" />
         </p>
     </fieldset>
-}
+    }
 }

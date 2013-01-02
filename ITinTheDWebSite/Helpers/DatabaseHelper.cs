@@ -73,6 +73,28 @@ namespace ITinTheDWebSite.Helpers
                         CurrentAdmin.Telephone = regAdmin.Telephone;
                         CurrentAdmin.UserId = UserId;
 
+                        // Store the avatar if it is supplied.
+
+                        if (regAdmin.ImageFile != null)
+                        {
+                            UserImage image = new UserImage();
+
+                            using (MemoryStream ms = new MemoryStream())
+                            {
+                                regAdmin.ImageFile.InputStream.CopyTo(ms);
+
+                                image.FileContent = ms.ToArray();
+                                image.FileName = Path.GetFileName(regAdmin.ImageFile.FileName);
+                                image.ContentType = regAdmin.ImageFile.ContentType;
+                                image.ContentLength = regAdmin.ImageFile.ContentLength;
+
+                                DatabaseHelper.UploadImage(image, CurrentAdmin.UserId);
+
+                                CurrentAdmin.ImageUploaded = "Yes";
+                                regAdmin.ImageUploaded = "Yes";
+                            }
+                        }
+
                         edit = true;
                     }
 
@@ -100,6 +122,34 @@ namespace ITinTheDWebSite.Helpers
                             DatabaseHelper.AddUserToRole(regAdmin.EmailAddress, "Admin");
 
                             CurrentAdmin.UserId = WebSecurity.GetUserId(regAdmin.EmailAddress);
+
+                            // Store the avatar if it is supplied.
+
+                            if (regAdmin.ImageFile != null)
+                            {
+                                UserImage image = new UserImage();
+
+                                using (MemoryStream ms = new MemoryStream())
+                                {
+                                    regAdmin.ImageFile.InputStream.CopyTo(ms);
+
+                                    image.FileContent = ms.ToArray();
+                                    image.FileName = Path.GetFileName(regAdmin.ImageFile.FileName);
+                                    image.ContentType = regAdmin.ImageFile.ContentType;
+                                    image.ContentLength = regAdmin.ImageFile.ContentLength;
+
+                                    DatabaseHelper.UploadImage(image, CurrentAdmin.UserId);
+
+                                    CurrentAdmin.ImageUploaded = "Yes";
+                                    regAdmin.ImageUploaded = "Yes";
+                                }
+                            }
+
+                            else
+                            {
+                                CurrentAdmin.ImageUploaded = "No";
+                                regAdmin.ImageUploaded = "No";
+                            }
                         }
 
                         context.SaveChanges();
@@ -165,6 +215,7 @@ namespace ITinTheDWebSite.Helpers
                         regAdmin.CompanyName = currentAdmin.FirstOrDefault().Company;
                         regAdmin.Telephone = currentAdmin.FirstOrDefault().Telephone;
                         regAdmin.EmailAddress = currentAdmin.FirstOrDefault().EmailAddress;
+                        regAdmin.ImageUploaded = currentAdmin.FirstOrDefault().ImageUploaded;
 
                         // Return the modal that is filled with information from the database.
 
@@ -283,7 +334,30 @@ namespace ITinTheDWebSite.Helpers
                         CurrentSponsor.Title = sponsor.Title;
                         CurrentSponsor.Telephone = sponsor.Telephone;
                         CurrentSponsor.Reason = sponsor.Reason;
+                        CurrentSponsor.SponsorPageTextField = sponsor.SponsorTextField;
                         CurrentSponsor.SponsorId = UserId;
+
+                        // Store the avatar if it is supplied.
+
+                        if (sponsor.ImageFile != null)
+                        {
+                            UserImage image = new UserImage();
+
+                            using (MemoryStream ms = new MemoryStream())
+                            {
+                                sponsor.ImageFile.InputStream.CopyTo(ms);
+
+                                image.FileContent = ms.ToArray();
+                                image.FileName = Path.GetFileName(sponsor.ImageFile.FileName);
+                                image.ContentType = sponsor.ImageFile.ContentType;
+                                image.ContentLength = sponsor.ImageFile.ContentLength;
+
+                                DatabaseHelper.UploadImage(image, CurrentSponsor.SponsorId);
+
+                                CurrentSponsor.ImageUploaded = "Yes";
+                                sponsor.ImageUploaded = "Yes";
+                            }
+                        }
 
                         edit = true;
                     }
@@ -299,6 +373,7 @@ namespace ITinTheDWebSite.Helpers
                         CurrentSponsor.Title = sponsor.Title;
                         CurrentSponsor.Telephone = sponsor.Telephone;
                         CurrentSponsor.Reason = sponsor.Reason;
+                        CurrentSponsor.SponsorPageTextField = sponsor.SponsorTextField;
 
                         context.AddToProspectiveCorporateSponsor(CurrentSponsor);
                     }
@@ -318,6 +393,34 @@ namespace ITinTheDWebSite.Helpers
                             DatabaseHelper.AddUserToRole(sponsor.EmailAddress, "Sponsor");
 
                             CurrentSponsor.SponsorId = WebSecurity.GetUserId(sponsor.EmailAddress);
+
+                            // Store the avatar if it is supplied.
+
+                            if (sponsor.ImageFile != null)
+                            {
+                                UserImage image = new UserImage();
+
+                                using (MemoryStream ms = new MemoryStream())
+                                {
+                                    sponsor.ImageFile.InputStream.CopyTo(ms);
+
+                                    image.FileContent = ms.ToArray();
+                                    image.FileName = Path.GetFileName(sponsor.ImageFile.FileName);
+                                    image.ContentType = sponsor.ImageFile.ContentType;
+                                    image.ContentLength = sponsor.ImageFile.ContentLength;
+
+                                    DatabaseHelper.UploadImage(image, CurrentSponsor.SponsorId);
+
+                                    CurrentSponsor.ImageUploaded = "Yes";
+                                    sponsor.ImageUploaded = "Yes";
+                                }
+                            }
+
+                            else
+                            {
+                                CurrentSponsor.ImageUploaded = "No";
+                                sponsor.ImageUploaded = "No";
+                            }
                         }
 
                         context.SaveChanges();
@@ -385,6 +488,8 @@ namespace ITinTheDWebSite.Helpers
                         spons.Telephone = corporatesponsor.FirstOrDefault().Telephone;
                         spons.EmailAddress = corporatesponsor.FirstOrDefault().EmailAddress;
                         spons.Reason = corporatesponsor.FirstOrDefault().Reason;
+                        spons.ImageUploaded = corporatesponsor.FirstOrDefault().ImageUploaded;
+                        spons.SponsorTextField = corporatesponsor.FirstOrDefault().SponsorPageTextField;
 
                         // Return the modal that is filled with information from the database.
 
@@ -470,7 +575,7 @@ namespace ITinTheDWebSite.Helpers
 
         public static bool StoreAcademicData(AcademicModel academic, ref bool edit)
         {
-            int UserId = WebSecurity.CurrentUserId;
+            int UserId = WebSecurity.GetUserId(academic.PrimaryEmailAddress);
 
             edit = false;
 
@@ -506,7 +611,30 @@ namespace ITinTheDWebSite.Helpers
                         CurrentAcademic.SecondaryTitle = academic.SecondaryTitle;
                         CurrentAcademic.SecondaryTelephone = academic.SecondaryTelephone;
 
+                        CurrentAcademic.AcademicInstitutionTextField = academic.AcademicInstitutionTextField;
                         CurrentAcademic.AcademicId = UserId;
+
+                        // Store the avatar if it is supplied.
+
+                        if (academic.ImageFile != null)
+                        {
+                            UserImage image = new UserImage();
+
+                            using (MemoryStream ms = new MemoryStream())
+                            {
+                                academic.ImageFile.InputStream.CopyTo(ms);
+
+                                image.FileContent = ms.ToArray();
+                                image.FileName = Path.GetFileName(academic.ImageFile.FileName);
+                                image.ContentType = academic.ImageFile.ContentType;
+                                image.ContentLength = academic.ImageFile.ContentLength;
+
+                                DatabaseHelper.UploadImage(image, CurrentAcademic.AcademicId);
+
+                                CurrentAcademic.ImageUploaded = "Yes";
+                                academic.ImageUploaded = "Yes";
+                            }
+                        }
 
                         edit = true;
                     }
@@ -527,6 +655,7 @@ namespace ITinTheDWebSite.Helpers
                         CurrentAcademic.SecondaryEmailAddress = academic.SecondaryEmailAddress;
                         CurrentAcademic.SecondaryTitle = academic.SecondaryTitle;
                         CurrentAcademic.SecondaryTelephone = academic.SecondaryTelephone;
+                        CurrentAcademic.AcademicInstitutionTextField = academic.AcademicInstitutionTextField;
 
                         context.AddToProspectiveAcademic(CurrentAcademic);
                     }
@@ -543,6 +672,34 @@ namespace ITinTheDWebSite.Helpers
                             DatabaseHelper.AddUserToRole(academic.PrimaryEmailAddress, "Educator");
 
                             CurrentAcademic.AcademicId = WebSecurity.GetUserId(academic.PrimaryEmailAddress);
+
+                            // Store the avatar if it is supplied.
+
+                            if (academic.ImageFile != null)
+                            {
+                                UserImage image = new UserImage();
+
+                                using (MemoryStream ms = new MemoryStream())
+                                {
+                                    academic.ImageFile.InputStream.CopyTo(ms);
+
+                                    image.FileContent = ms.ToArray();
+                                    image.FileName = Path.GetFileName(academic.ImageFile.FileName);
+                                    image.ContentType = academic.ImageFile.ContentType;
+                                    image.ContentLength = academic.ImageFile.ContentLength;
+
+                                    DatabaseHelper.UploadImage(image, CurrentAcademic.AcademicId);
+
+                                    CurrentAcademic.ImageUploaded = "Yes";
+                                    academic.ImageUploaded = "Yes";
+                                }
+                            }
+
+                            else
+                            {
+                                CurrentAcademic.ImageUploaded = "No";
+                                academic.ImageUploaded = "No";
+                            }
                         }
 
                         context.SaveChanges();
@@ -609,6 +766,9 @@ namespace ITinTheDWebSite.Helpers
                         academic.SecondaryTitle = ExistingAcademic.FirstOrDefault().SecondaryTitle;
                         academic.SecondaryTelephone = ExistingAcademic.FirstOrDefault().SecondaryTelephone;
                         academic.SecondaryEmailAddress = ExistingAcademic.FirstOrDefault().SecondaryEmailAddress;
+
+                        academic.ImageUploaded = ExistingAcademic.FirstOrDefault().ImageUploaded;
+                        academic.AcademicInstitutionTextField = ExistingAcademic.FirstOrDefault().AcademicInstitutionTextField;
 
                         // Return the modal that is filled with information from the database.
 
@@ -697,7 +857,7 @@ namespace ITinTheDWebSite.Helpers
 
         public static bool StoreProspectData(ProspectModel prospect, ref bool edit)
         {
-            int UserId = WebSecurity.CurrentUserId;
+            int UserId = WebSecurity.GetUserId(prospect.EmailAddress);
 
             ProspectiveStudent CurrentStudent;
 
@@ -729,6 +889,29 @@ namespace ITinTheDWebSite.Helpers
                         CurrentStudent.EmailAddress = prospect.EmailAddress;
                         CurrentStudent.DesiredCareerPath = prospect.DesiredCareerPath;
                         CurrentStudent.Gender = prospect.Gender;
+                        CurrentStudent.ProspectiveStudentTextField = prospect.ProspectiveStudentTextField;
+
+                        // Store the avatar if it is supplied.
+
+                        if (prospect.ImageFile != null)
+                        {
+                            UserImage image = new UserImage();
+
+                            using (MemoryStream ms = new MemoryStream())
+                            {
+                                prospect.ImageFile.InputStream.CopyTo(ms);
+
+                                image.FileContent = ms.ToArray();
+                                image.FileName = Path.GetFileName(prospect.ImageFile.FileName);
+                                image.ContentType = prospect.ImageFile.ContentType;
+                                image.ContentLength = prospect.ImageFile.ContentLength;
+
+                                DatabaseHelper.UploadImage(image, CurrentStudent.UserId);
+
+                                CurrentStudent.ImageUploaded = "Yes";
+                                prospect.ImageUploaded = "Yes";
+                            }
+                        }
 
                         // Store the new resume if it is supplied and not empty.
 
@@ -785,6 +968,7 @@ namespace ITinTheDWebSite.Helpers
                         CurrentStudent.EmailAddress = prospect.EmailAddress;
                         CurrentStudent.DesiredCareerPath = prospect.DesiredCareerPath;
                         CurrentStudent.Gender = prospect.Gender;
+                        CurrentStudent.ProspectiveStudentTextField = prospect.ProspectiveStudentTextField;
 
                         context.AddToProspectiveStudent(CurrentStudent);
                     }
@@ -804,6 +988,34 @@ namespace ITinTheDWebSite.Helpers
                             DatabaseHelper.AddUserToRole(prospect.EmailAddress, "Student");
 
                             CurrentStudent.UserId = WebSecurity.GetUserId(prospect.EmailAddress);
+
+                            // Store the avatar if it is supplied.
+
+                            if (prospect.ImageFile != null)
+                            {
+                                UserImage image = new UserImage();
+
+                                using (MemoryStream ms = new MemoryStream())
+                                {
+                                    prospect.ImageFile.InputStream.CopyTo(ms);
+
+                                    image.FileContent = ms.ToArray();
+                                    image.FileName = Path.GetFileName(prospect.ImageFile.FileName);
+                                    image.ContentType = prospect.ImageFile.ContentType;
+                                    image.ContentLength = prospect.ImageFile.ContentLength;
+
+                                    DatabaseHelper.UploadImage(image, CurrentStudent.UserId);
+
+                                    CurrentStudent.ImageUploaded = "Yes";
+                                    prospect.ImageUploaded = "Yes";
+                                }
+                            }
+
+                            else
+                            {
+                                CurrentStudent.ImageUploaded = "No";
+                                prospect.ImageUploaded = "No";
+                            }
 
                             // Store the resume if it is supplied and not empty.
 
@@ -921,6 +1133,8 @@ namespace ITinTheDWebSite.Helpers
                         prospect.Gender = ExistingProspect.FirstOrDefault().Gender;
                         prospect.ResumeUploaded = ExistingProspect.FirstOrDefault().ResumeUploaded;
                         prospect.TranscriptUploaded = ExistingProspect.FirstOrDefault().TranscriptUploaded;
+                        prospect.ImageUploaded = ExistingProspect.FirstOrDefault().ImageUploaded;
+                        prospect.ProspectiveStudentTextField = ExistingProspect.FirstOrDefault().ProspectiveStudentTextField;
 
                         // Return the modal that is filled with information from the database.
 
@@ -1264,6 +1478,150 @@ namespace ITinTheDWebSite.Helpers
                     if (UserResume.Count() > 0 && UserId > 0)
                     {
                         context.DeleteObject(UserResume.FirstOrDefault());
+                    }
+
+                    else
+                    {
+                        return false;
+                    }
+
+                    try
+                    {
+                        context.SaveChanges();
+
+                        return true;
+                    }
+
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                string exMessage = ex.Message;
+
+                return false;
+            }
+        }
+
+        //==================================================================================//
+        //      Upload Prospect Student Image.                                              //
+        //                                                                                  //
+        //      Uploads the prospective student image if it is not empty.                   //
+        //==================================================================================//
+
+        public static bool UploadImage(UserImage image, int UserId)
+        {
+            try
+            {
+                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
+                {
+                    // Put everything we find in the database in the var variable. All the
+                    // information will be gotten using the User ID.
+
+                    var UserImage = from r in context.UserImage
+                                     where r.UserID == UserId
+                                     select r;
+
+                    // If the user has an image then update it.
+                    // Otherwise make a new row in the database.
+
+                    if (UserImage.Count() > 0)
+                    {
+                        UserImage currentImage = UserImage.FirstOrDefault();
+
+                        currentImage.UserID = UserId;
+                        currentImage.FileContent = image.FileContent;
+                        currentImage.FileName = image.FileName;
+                        currentImage.ContentLength = image.ContentLength;
+                        context.SaveChanges();
+                        return true;
+                    }
+
+                    else
+                    {
+                        image.UserID = UserId;
+                        context.AddToUserImage(image);
+                        context.SaveChanges();
+                        return true;
+                    }
+                }
+            }
+
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        //==================================================================================//
+        //      Get Prospect Student Image.                                                 //
+        //                                                                                  //
+        //      Gets the prospective student image if it is not empty.                      //
+        //==================================================================================//
+
+        public static UserImage GetImage(int UserId)
+        {
+            try
+            {
+                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
+                {
+                    // Put everything we find in the database in the var variable. All the
+                    // information will be gotten using the User ID.
+
+                    var image = from r in context.UserImage
+                                 where r.UserID == UserId
+                                 select r;
+
+                    // If the user has an image then return it.
+                    // Otherwise return nothing.
+
+                    if (image.Count() > 0)
+                    {
+                        return (image.FirstOrDefault());
+                    }
+
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+
+            catch
+            {
+                return (null);
+            }
+        }
+
+        //==================================================================================//
+        //      Remove Prospect Student Image.                                              //
+        //                                                                                  //
+        //      Removes the prospective student image if it is not empty.                   //
+        //==================================================================================//
+
+        public static bool RemoveImage(int UserId)
+        {
+            try
+            {
+                using (ITintheDTestTableEntities context = new ITintheDTestTableEntities())
+                {
+                    // Put everything we find in the database in the var variable. All the
+                    // information will be gotten using the User ID.
+
+                    var UserImage = from r in context.UserImage
+                                     where r.UserID == UserId
+                                     select r;
+
+                    // If the user has an image then update it.
+                    // Otherwise make a new row in the database.
+
+                    if (UserImage.Count() > 0 && UserId > 0)
+                    {
+                        context.DeleteObject(UserImage.FirstOrDefault());
                     }
 
                     else

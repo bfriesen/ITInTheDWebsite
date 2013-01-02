@@ -68,5 +68,11 @@ namespace ITinTheDWebSite.Models
 
         [DisplayName("Account Status")]
         public int AccountStatus { get; set; }
+
+        public string ImageUploaded { get; set; }
+
+        // Files
+
+        public HttpPostedFileBase ImageFile { get; set; }
     }
 }

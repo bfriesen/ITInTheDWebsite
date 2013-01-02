@@ -133,6 +133,14 @@ namespace ITinTheDWebSite.Models
 
         [DisplayName("Account Status")]
         public int AccountStatus { get; set; }
+
+        public string AcademicInstitutionTextField { get; set; }
+
+        public string ImageUploaded { get; set; }
+
+        // Files
+
+        public HttpPostedFileBase ImageFile { get; set; }
     }
 
     public class ProspectModel
@@ -175,14 +183,19 @@ namespace ITinTheDWebSite.Models
         [DisplayName("Account Status (1 - 4)")]
         public int AccountStatus { get; set; }
 
+        public string ProspectiveStudentTextField { get; set; }
+
         public string TranscriptUploaded { get; set; }
 
         public string ResumeUploaded { get; set; }
+
+        public string ImageUploaded { get; set; }
 
         // Files.
 
         public HttpPostedFileBase ResumeFile { get; set; }
         public HttpPostedFileBase TranscriptFile { get; set; }
+        public HttpPostedFileBase ImageFile { get; set; }
     }
 
     public class SponsorModel
@@ -235,6 +248,14 @@ namespace ITinTheDWebSite.Models
 
         [DisplayName("Account Status")]
         public int AccountStatus { get; set; }
+
+        public string ImageUploaded { get; set; }
+
+        public string SponsorTextField { get; set; }
+
+        // Files
+
+        public HttpPostedFileBase ImageFile { get; set; }
     }
 
     public class ExternalLogin

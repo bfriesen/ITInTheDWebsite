@@ -7,16 +7,17 @@ using ITinTheDWebSite.Helpers;
 namespace ITinTheDWebSite
 {
     /// <summary>
-    /// Summary description for GetFile
+    /// Summary description for GetFileImage
     /// </summary>
-    public class GetFileTranscript : IHttpHandler
+    public class GetFileImage : IHttpHandler
     {
+
         public void ProcessRequest(HttpContext context)
         {
             if (context.Request.QueryString["id"] != null)
             {
                 int id = int.Parse(context.Request.QueryString["id"]);
-                ProspectiveStudentTranscript f = DatabaseHelper.GetTranscript(id);       // Retrieve File with this ID from the database
+                UserImage f = DatabaseHelper.GetImage(id);       // Retrieve File with this ID from the database
                 context.Response.Clear();
                 context.Response.AddHeader("Content-Length", f.ContentLength.ToString());
                 context.Response.ContentType = f.ContentType;

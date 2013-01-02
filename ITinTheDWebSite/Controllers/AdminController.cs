@@ -176,8 +176,27 @@ namespace ITinTheDWebSite.Controllers
             {
                 bool edit = false;
 
+                if (adminReg.AccountStatus < 1)
+                {
+                    adminReg.AccountStatus = 1;
+                }
+
+                else if (adminReg.AccountStatus > 3)
+                {
+                    adminReg.AccountStatus = 3;
+                }
+
                 if (DatabaseHelper.StoreAdminData(adminReg, ref edit))
                 {
+                    int ID = WebSecurity.GetUserId(adminReg.EmailAddress);
+
+                    if (edit == true && ID != WebSecurity.CurrentUserId)
+                    {
+                        TempData["Message"] = "Successfully edited the user's information.";
+
+                        return RedirectToAction("User", "Admin", new { ID });
+                    }
+
                     if (edit == true)
                     {
                         TempData["Message"] = "Successfully edited your information.";

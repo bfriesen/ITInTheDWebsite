@@ -54,15 +54,13 @@
     <h1>@ViewBag.Title.</h1>
 </hgroup>
 @{
-    string name = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(User.Identity.Name.Split('@')[0]);
+    string name = User.Identity.Name;
 
     if (User.IsInRole("Student"))
     {
         ITinTheDWebSite.Models.ProspectModel prospect = new ITinTheDWebSite.Models.ProspectModel();
 
         name = ITinTheDWebSite.Helpers.DatabaseHelper.GetProspectData(prospect, WebSecurity.GetUserId(User.Identity.Name)).Name;
-
-        name = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name.Split('@')[0]);
     }
 
     else if (User.IsInRole("Sponsor"))
@@ -70,8 +68,6 @@
         ITinTheDWebSite.Models.SponsorModel sponsor = new ITinTheDWebSite.Models.SponsorModel();
 
         name = ITinTheDWebSite.Helpers.DatabaseHelper.GetSponsorData(sponsor, WebSecurity.GetUserId(User.Identity.Name)).CompanyName;
-
-        name = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name.Split('@')[0]);
     }
 
     else if (User.IsInRole("Educator"))
@@ -79,8 +75,6 @@
         ITinTheDWebSite.Models.AcademicModel educator = new ITinTheDWebSite.Models.AcademicModel();
 
         name = ITinTheDWebSite.Helpers.DatabaseHelper.GetAcademicdData(educator, WebSecurity.GetUserId(User.Identity.Name)).AcademyName;
-
-        name = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name.Split('@')[0]);
     }
 
     else if (User.IsInRole("Admin"))
@@ -88,8 +82,6 @@
         ITinTheDWebSite.Models.RegisterModel admin = new ITinTheDWebSite.Models.RegisterModel();
 
         name = ITinTheDWebSite.Helpers.DatabaseHelper.GetAdminData(admin, WebSecurity.GetUserId(User.Identity.Name)).Name;
-
-        name = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name.Split('@')[0]);
     }
 
     else

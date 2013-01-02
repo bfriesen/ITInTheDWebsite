@@ -17,7 +17,7 @@ else
 {
     <h6>
         * Denotes required fields.</h6>
-    using (Html.BeginForm("StoreAcademic", "Account"))
+    using (Html.BeginForm("StoreAcademic", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
     
     @Html.AntiForgeryToken()
@@ -25,6 +25,19 @@ else
 
     <fieldset>
         <legend>AcademicModel</legend>
+        <div>
+            @if (Model.ImageUploaded == "Yes")
+            {
+                <p>
+                    Avatar</p>
+                <img src="/GetFileImage.ashx?id=@WebSecurity.GetUserId(Model.PrimaryEmailAddress)" / style="width: 128px; height: 128px;">
+            }
+            <div class="editor-label">
+                <br />
+                @Html.Label("Upload Avatar")
+            </div>
+            <input type="file" name="ImageFile" />
+        </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.AcademyName)
         </div>
@@ -162,11 +175,4 @@ else
         </p>
     </fieldset>
     }
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
-}
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }

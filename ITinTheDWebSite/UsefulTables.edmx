@@ -6,7 +6,6 @@
     <edmx:StorageModels>
     <Schema Namespace="ITintheDTestModel1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="ITintheDTestModel1StoreContainer">
-          <EntitySet Name="AcademicStatus" EntityType="ITintheDTestModel1.Store.AcademicStatus" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Faq" EntityType="ITintheDTestModel1.Store.Faq" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ProspectiveAcademic" EntityType="ITintheDTestModel1.Store.ProspectiveAcademic" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ProspectiveCorporateSponsor" EntityType="ITintheDTestModel1.Store.ProspectiveCorporateSponsor" store:Type="Tables" Schema="dbo" />
@@ -14,34 +13,14 @@
           <EntitySet Name="ProspectiveStudentResume" EntityType="ITintheDTestModel1.Store.ProspectiveStudentResume" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ProspectiveStudentTranscript" EntityType="ITintheDTestModel1.Store.ProspectiveStudentTranscript" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SiteAdmin" EntityType="ITintheDTestModel1.Store.SiteAdmin" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="SponsorStatus" EntityType="ITintheDTestModel1.Store.SponsorStatus" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="StudentStatus" EntityType="ITintheDTestModel1.Store.StudentStatus" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserImage" EntityType="ITintheDTestModel1.Store.UserImage" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="webpages_Roles" EntityType="ITintheDTestModel1.Store.webpages_Roles" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="webpages_UsersInRoles" EntityType="ITintheDTestModel1.Store.webpages_UsersInRoles" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK_ProspectiveAcademic_AcademicStatus1" Association="ITintheDTestModel1.Store.FK_ProspectiveAcademic_AcademicStatus1">
-            <End Role="AcademicStatus" EntitySet="AcademicStatus" />
-            <End Role="ProspectiveAcademic" EntitySet="ProspectiveAcademic" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProspectiveCorporateSponsor_SponsorStatus" Association="ITintheDTestModel1.Store.FK_ProspectiveCorporateSponsor_SponsorStatus">
-            <End Role="SponsorStatus" EntitySet="SponsorStatus" />
-            <End Role="ProspectiveCorporateSponsor" EntitySet="ProspectiveCorporateSponsor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProspectiveStudent_StudentStatus1" Association="ITintheDTestModel1.Store.FK_ProspectiveStudent_StudentStatus1">
-            <End Role="StudentStatus" EntitySet="StudentStatus" />
-            <End Role="ProspectiveStudent" EntitySet="ProspectiveStudent" />
-          </AssociationSet>
           <AssociationSet Name="fk_RoleId" Association="ITintheDTestModel1.Store.fk_RoleId">
             <End Role="webpages_Roles" EntitySet="webpages_Roles" />
             <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="AcademicStatus">
-          <Key>
-            <PropertyRef Name="AcademicStatusId" />
-          </Key>
-          <Property Name="AcademicStatusId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="50" />
-        </EntityType>
         <EntityType Name="Faq">
           <Key>
             <PropertyRef Name="FaqID" />
@@ -68,6 +47,7 @@
           <Property Name="SecondaryTelephone" Type="varchar" MaxLength="14" />
           <Property Name="SecondaryEmailAddress" Type="nvarchar" MaxLength="255" />
           <Property Name="AcademicInstitutionTextField" Type="nvarchar(max)" />
+          <Property Name="ImageUploaded" Type="varchar" MaxLength="3" />
         </EntityType>
         <EntityType Name="ProspectiveCorporateSponsor">
           <Key>
@@ -84,6 +64,7 @@
           <Property Name="EmailAddress" Type="nvarchar" Nullable="false" MaxLength="255" />
           <Property Name="Reason" Type="nvarchar(max)" />
           <Property Name="SponsorPageTextField" Type="nvarchar(max)" />
+          <Property Name="ImageUploaded" Type="varchar" MaxLength="3" />
         </EntityType>
         <EntityType Name="ProspectiveStudent">
           <Key>
@@ -100,6 +81,7 @@
           <Property Name="ResumeUploaded" Type="varchar" MaxLength="3" />
           <Property Name="TranscriptUploaded" Type="varchar" MaxLength="3" />
           <Property Name="ProspectiveStudentTextField" Type="nvarchar(max)" />
+          <Property Name="ImageUploaded" Type="varchar" MaxLength="3" />
         </EntityType>
         <EntityType Name="ProspectiveStudentResume">
           <Key>
@@ -134,20 +116,18 @@
           <Property Name="Telephone" Type="varchar" MaxLength="14" />
           <Property Name="EmailAddress" Type="nvarchar" Nullable="false" MaxLength="255" />
           <Property Name="Company" Type="nvarchar" MaxLength="255" />
+          <Property Name="ImageUploaded" Type="varchar" MaxLength="3" />
         </EntityType>
-        <EntityType Name="SponsorStatus">
+        <EntityType Name="UserImage">
           <Key>
-            <PropertyRef Name="SponsorStatusId" />
+            <PropertyRef Name="FileId" />
           </Key>
-          <Property Name="SponsorStatusId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="StudentStatus">
-          <Key>
-            <PropertyRef Name="StudentStatusId" />
-          </Key>
-          <Property Name="StudentStatusId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="FileId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FileContent" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ContentType" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ContentLength" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="webpages_Roles">
           <Key>
@@ -164,42 +144,6 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_ProspectiveAcademic_AcademicStatus1">
-          <End Role="AcademicStatus" Type="ITintheDTestModel1.Store.AcademicStatus" Multiplicity="1" />
-          <End Role="ProspectiveAcademic" Type="ITintheDTestModel1.Store.ProspectiveAcademic" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AcademicStatus">
-              <PropertyRef Name="AcademicStatusId" />
-            </Principal>
-            <Dependent Role="ProspectiveAcademic">
-              <PropertyRef Name="Status" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProspectiveCorporateSponsor_SponsorStatus">
-          <End Role="SponsorStatus" Type="ITintheDTestModel1.Store.SponsorStatus" Multiplicity="1" />
-          <End Role="ProspectiveCorporateSponsor" Type="ITintheDTestModel1.Store.ProspectiveCorporateSponsor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SponsorStatus">
-              <PropertyRef Name="SponsorStatusId" />
-            </Principal>
-            <Dependent Role="ProspectiveCorporateSponsor">
-              <PropertyRef Name="Status" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProspectiveStudent_StudentStatus1">
-          <End Role="StudentStatus" Type="ITintheDTestModel1.Store.StudentStatus" Multiplicity="1" />
-          <End Role="ProspectiveStudent" Type="ITintheDTestModel1.Store.ProspectiveStudent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StudentStatus">
-              <PropertyRef Name="StudentStatusId" />
-            </Principal>
-            <Dependent Role="ProspectiveStudent">
-              <PropertyRef Name="Status" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_RoleId">
           <End Role="webpages_Roles" Type="ITintheDTestModel1.Store.webpages_Roles" Multiplicity="1" />
           <End Role="webpages_UsersInRoles" Type="ITintheDTestModel1.Store.webpages_UsersInRoles" Multiplicity="*" />
@@ -226,25 +170,11 @@
             <End Role="webpages_Roles" EntitySet="webpages_Roles" />
             <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
           </AssociationSet>
-          <EntitySet Name="AcademicStatus" EntityType="ITintheDTestModel1.AcademicStatus" />
-          <EntitySet Name="StudentStatus" EntityType="ITintheDTestModel1.StudentStatu" />
-          <EntitySet Name="SponsorStatus" EntityType="ITintheDTestModel1.SponsorStatu" />
-          <EntitySet Name="ProspectiveAcademic" EntityType="ITintheDTestModel1.ProspectiveAcademic" />
           <EntitySet Name="ProspectiveCorporateSponsor" EntityType="ITintheDTestModel1.ProspectiveCorporateSponsor" />
           <EntitySet Name="ProspectiveStudent" EntityType="ITintheDTestModel1.ProspectiveStudent" />
-          <AssociationSet Name="FK_ProspectiveAcademic_AcademicStatus1" Association="ITintheDTestModel1.FK_ProspectiveAcademic_AcademicStatus1">
-            <End Role="AcademicStatus" EntitySet="AcademicStatus" />
-            <End Role="ProspectiveAcademic" EntitySet="ProspectiveAcademic" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProspectiveCorporateSponsor_SponsorStatus" Association="ITintheDTestModel1.FK_ProspectiveCorporateSponsor_SponsorStatus">
-            <End Role="SponsorStatu" EntitySet="SponsorStatus" />
-            <End Role="ProspectiveCorporateSponsor" EntitySet="ProspectiveCorporateSponsor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProspectiveStudent_StudentStatus1" Association="ITintheDTestModel1.FK_ProspectiveStudent_StudentStatus1">
-            <End Role="StudentStatu" EntitySet="StudentStatus" />
-            <End Role="ProspectiveStudent" EntitySet="ProspectiveStudent" />
-          </AssociationSet>
           <EntitySet Name="SiteAdmin" EntityType="ITintheDTestModel1.SiteAdmin" />
+          <EntitySet Name="ProspectiveAcademic" EntityType="ITintheDTestModel1.ProspectiveAcademic" />
+          <EntitySet Name="UserImage" EntityType="ITintheDTestModel1.UserImage" />
         </EntityContainer>
         <EntityType Name="Faq">
           <Key>
@@ -305,29 +235,52 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="AcademicStatus">
+        <EntityType Name="ProspectiveCorporateSponsor">
           <Key>
-            <PropertyRef Name="AcademicStatusId" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Type="Int32" Name="AcademicStatusId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Description" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ProspectiveAcademic" Relationship="ITintheDTestModel1.FK_ProspectiveAcademic_AcademicStatus1" FromRole="AcademicStatus" ToRole="ProspectiveAcademic" />
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="SponsorId" Nullable="false" />
+          <Property Type="Int32" Name="Status" Nullable="false" />
+          <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CompanyAddress" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ContactName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Title" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Telephone" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Reason" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SponsorPageTextField" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ImageUploaded" MaxLength="3" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="StudentStatu">
+        <EntityType Name="ProspectiveStudent">
           <Key>
-            <PropertyRef Name="StudentStatusId" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Type="Int32" Name="StudentStatusId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Description" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ProspectiveStudent" Relationship="ITintheDTestModel1.FK_ProspectiveStudent_StudentStatus1" FromRole="StudentStatu" ToRole="ProspectiveStudent" />
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="Status" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Telephone" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DesiredCareerPath" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Gender" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ResumeUploaded" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TranscriptUploaded" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ProspectiveStudentTextField" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ImageUploaded" MaxLength="3" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="SponsorStatu">
+        <EntityType Name="SiteAdmin">
           <Key>
-            <PropertyRef Name="SponsorStatusId" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Type="Int32" Name="SponsorStatusId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Description" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ProspectiveCorporateSponsor" Relationship="ITintheDTestModel1.FK_ProspectiveCorporateSponsor_SponsorStatus" FromRole="SponsorStatu" ToRole="ProspectiveCorporateSponsor" />
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Status" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Telephone" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Company" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ImageUploaded" MaxLength="3" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ProspectiveAcademic">
           <Key>
@@ -347,89 +300,18 @@
           <Property Type="String" Name="SecondaryTelephone" MaxLength="14" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="SecondaryEmailAddress" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="AcademicInstitutionTextField" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AcademicStatus" Relationship="ITintheDTestModel1.FK_ProspectiveAcademic_AcademicStatus1" FromRole="ProspectiveAcademic" ToRole="AcademicStatus" />
+          <Property Type="String" Name="ImageUploaded" MaxLength="3" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="ProspectiveCorporateSponsor">
+        <EntityType Name="UserImage">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="FileId" />
           </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="SponsorId" Nullable="false" />
-          <Property Type="Int32" Name="Status" Nullable="false" />
-          <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="CompanyAddress" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="ContactName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Title" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Telephone" MaxLength="14" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Reason" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="SponsorPageTextField" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SponsorStatus" Relationship="ITintheDTestModel1.FK_ProspectiveCorporateSponsor_SponsorStatus" FromRole="ProspectiveCorporateSponsor" ToRole="SponsorStatu" />
-        </EntityType>
-        <EntityType Name="ProspectiveStudent">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="UserId" Nullable="false" />
-          <Property Type="Int32" Name="Status" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Telephone" MaxLength="14" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="DesiredCareerPath" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Gender" MaxLength="6" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ResumeUploaded" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="TranscriptUploaded" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ProspectiveStudentTextField" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="StudentStatus" Relationship="ITintheDTestModel1.FK_ProspectiveStudent_StudentStatus1" FromRole="ProspectiveStudent" ToRole="StudentStatu" />
-        </EntityType>
-        <Association Name="FK_ProspectiveAcademic_AcademicStatus1">
-          <End Type="ITintheDTestModel1.AcademicStatus" Role="AcademicStatus" Multiplicity="1" />
-          <End Type="ITintheDTestModel1.ProspectiveAcademic" Role="ProspectiveAcademic" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AcademicStatus">
-              <PropertyRef Name="AcademicStatusId" />
-            </Principal>
-            <Dependent Role="ProspectiveAcademic">
-              <PropertyRef Name="Status" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProspectiveCorporateSponsor_SponsorStatus">
-          <End Type="ITintheDTestModel1.SponsorStatu" Role="SponsorStatu" Multiplicity="1" />
-          <End Type="ITintheDTestModel1.ProspectiveCorporateSponsor" Role="ProspectiveCorporateSponsor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SponsorStatu">
-              <PropertyRef Name="SponsorStatusId" />
-            </Principal>
-            <Dependent Role="ProspectiveCorporateSponsor">
-              <PropertyRef Name="Status" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProspectiveStudent_StudentStatus1">
-          <End Type="ITintheDTestModel1.StudentStatu" Role="StudentStatu" Multiplicity="1" />
-          <End Type="ITintheDTestModel1.ProspectiveStudent" Role="ProspectiveStudent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StudentStatu">
-              <PropertyRef Name="StudentStatusId" />
-            </Principal>
-            <Dependent Role="ProspectiveStudent">
-              <PropertyRef Name="Status" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="SiteAdmin">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="Status" Nullable="false" />
-          <Property Type="Int32" Name="UserId" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="255" FixedLength="true" Unicode="true" />
-          <Property Type="String" Name="Telephone" MaxLength="14" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Company" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="FileId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="FileName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Binary" Name="FileContent" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Type="String" Name="ContentType" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ContentLength" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -466,53 +348,10 @@
             <ScalarProperty Name="UserId" ColumnName="UserId" />
             <ScalarProperty Name="RoleId" ColumnName="RoleId" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="AcademicStatus">
-            <EntityTypeMapping TypeName="ITintheDTestModel1.AcademicStatus">
-              <MappingFragment StoreEntitySet="AcademicStatus">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="AcademicStatusId" ColumnName="AcademicStatusId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="StudentStatus">
-            <EntityTypeMapping TypeName="ITintheDTestModel1.StudentStatu">
-              <MappingFragment StoreEntitySet="StudentStatus">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="StudentStatusId" ColumnName="StudentStatusId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SponsorStatus">
-            <EntityTypeMapping TypeName="ITintheDTestModel1.SponsorStatu">
-              <MappingFragment StoreEntitySet="SponsorStatus">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="SponsorStatusId" ColumnName="SponsorStatusId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProspectiveAcademic">
-            <EntityTypeMapping TypeName="ITintheDTestModel1.ProspectiveAcademic">
-              <MappingFragment StoreEntitySet="ProspectiveAcademic">
-                <ScalarProperty Name="AcademicInstitutionTextField" ColumnName="AcademicInstitutionTextField" />
-                <ScalarProperty Name="SecondaryEmailAddress" ColumnName="SecondaryEmailAddress" />
-                <ScalarProperty Name="SecondaryTelephone" ColumnName="SecondaryTelephone" />
-                <ScalarProperty Name="SecondaryTitle" ColumnName="SecondaryTitle" />
-                <ScalarProperty Name="SecondaryContactName" ColumnName="SecondaryContactName" />
-                <ScalarProperty Name="PrimaryEmailAddress" ColumnName="PrimaryEmailAddress" />
-                <ScalarProperty Name="PrimaryTelephone" ColumnName="PrimaryTelephone" />
-                <ScalarProperty Name="PrimaryTitle" ColumnName="PrimaryTitle" />
-                <ScalarProperty Name="PrimaryContactName" ColumnName="PrimaryContactName" />
-                <ScalarProperty Name="AcademyAddress" ColumnName="AcademyAddress" />
-                <ScalarProperty Name="AcademyName" ColumnName="AcademyName" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="AcademicId" ColumnName="AcademicId" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ProspectiveCorporateSponsor">
             <EntityTypeMapping TypeName="ITintheDTestModel1.ProspectiveCorporateSponsor">
               <MappingFragment StoreEntitySet="ProspectiveCorporateSponsor">
+                <ScalarProperty Name="ImageUploaded" ColumnName="ImageUploaded" />
                 <ScalarProperty Name="SponsorPageTextField" ColumnName="SponsorPageTextField" />
                 <ScalarProperty Name="Reason" ColumnName="Reason" />
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
@@ -530,6 +369,7 @@
           <EntitySetMapping Name="ProspectiveStudent">
             <EntityTypeMapping TypeName="ITintheDTestModel1.ProspectiveStudent">
               <MappingFragment StoreEntitySet="ProspectiveStudent">
+                <ScalarProperty Name="ImageUploaded" ColumnName="ImageUploaded" />
                 <ScalarProperty Name="ProspectiveStudentTextField" ColumnName="ProspectiveStudentTextField" />
                 <ScalarProperty Name="TranscriptUploaded" ColumnName="TranscriptUploaded" />
                 <ScalarProperty Name="ResumeUploaded" ColumnName="ResumeUploaded" />
@@ -547,6 +387,7 @@
           <EntitySetMapping Name="SiteAdmin">
             <EntityTypeMapping TypeName="ITintheDTestModel1.SiteAdmin">
               <MappingFragment StoreEntitySet="SiteAdmin">
+                <ScalarProperty Name="ImageUploaded" ColumnName="ImageUploaded" />
                 <ScalarProperty Name="Company" ColumnName="Company" />
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="Telephone" ColumnName="Telephone" />
@@ -554,6 +395,39 @@
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProspectiveAcademic">
+            <EntityTypeMapping TypeName="ITintheDTestModel1.ProspectiveAcademic">
+              <MappingFragment StoreEntitySet="ProspectiveAcademic">
+                <ScalarProperty Name="ImageUploaded" ColumnName="ImageUploaded" />
+                <ScalarProperty Name="AcademicInstitutionTextField" ColumnName="AcademicInstitutionTextField" />
+                <ScalarProperty Name="SecondaryEmailAddress" ColumnName="SecondaryEmailAddress" />
+                <ScalarProperty Name="SecondaryTelephone" ColumnName="SecondaryTelephone" />
+                <ScalarProperty Name="SecondaryTitle" ColumnName="SecondaryTitle" />
+                <ScalarProperty Name="SecondaryContactName" ColumnName="SecondaryContactName" />
+                <ScalarProperty Name="PrimaryEmailAddress" ColumnName="PrimaryEmailAddress" />
+                <ScalarProperty Name="PrimaryTelephone" ColumnName="PrimaryTelephone" />
+                <ScalarProperty Name="PrimaryTitle" ColumnName="PrimaryTitle" />
+                <ScalarProperty Name="PrimaryContactName" ColumnName="PrimaryContactName" />
+                <ScalarProperty Name="AcademyAddress" ColumnName="AcademyAddress" />
+                <ScalarProperty Name="AcademyName" ColumnName="AcademyName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="AcademicId" ColumnName="AcademicId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserImage">
+            <EntityTypeMapping TypeName="ITintheDTestModel1.UserImage">
+              <MappingFragment StoreEntitySet="UserImage">
+                <ScalarProperty Name="ContentLength" ColumnName="ContentLength" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="FileContent" ColumnName="FileContent" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -580,32 +454,18 @@
       <Diagram Name="UsefulTables">
         <EntityTypeShape EntityType="ITintheDTestModel1.Faq" Width="1.5" PointX="6.25" PointY="1" Height="1.5956835937499996" IsExpanded="true" />
         <EntityTypeShape EntityType="ITintheDTestModel1.ProspectiveStudentResume" Width="1.5" PointX="7.875" PointY="4" Height="2.1725878906249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="ITintheDTestModel1.ProspectiveStudentTranscript" Width="1.5" PointX="4.75" PointY="7.75" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="ITintheDTestModel1.ProspectiveStudentTranscript" Width="1.5" PointX="5.375" PointY="3.75" Height="2.1725878906249996" IsExpanded="true" />
         <EntityTypeShape EntityType="ITintheDTestModel1.webpages_Roles" Width="1.5" PointX="0.75" PointY="0.875" Height="1.5956835937499994" IsExpanded="true" />
         <EntityTypeShape EntityType="ITintheDTestModel1.webpages_UsersInRoles" Width="1.5" PointX="3" PointY="0.875" Height="1.5956835937499996" IsExpanded="true" />
         <AssociationConnector Association="ITintheDTestModel1.fk_RoleId" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="1.6728417968749998" />
           <ConnectorPoint PointX="3" PointY="1.6728417968749998" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="ITintheDTestModel1.AcademicStatus" Width="1.5" PointX="9.375" PointY="2.125" Height="1.5956835937500031" />
-        <EntityTypeShape EntityType="ITintheDTestModel1.StudentStatu" Width="1.5" PointX="9.375" PointY="6.75" Height="1.5956835937500022" />
-        <EntityTypeShape EntityType="ITintheDTestModel1.SponsorStatu" Width="1.5" PointX="0.75" PointY="11.75" Height="1.5956835937500031" />
-        <EntityTypeShape EntityType="ITintheDTestModel1.ProspectiveAcademic" Width="1.5" PointX="11.625" PointY="1" Height="3.9033007812500031" />
-        <EntityTypeShape EntityType="ITintheDTestModel1.ProspectiveCorporateSponsor" Width="1.5" PointX="3" PointY="10.875" Height="3.3263964843750031" />
-        <EntityTypeShape EntityType="ITintheDTestModel1.ProspectiveStudent" Width="1.5" PointX="11.625" PointY="5.875" Height="3.3263964843750031" />
-        <AssociationConnector Association="ITintheDTestModel1.FK_ProspectiveAcademic_AcademicStatus1" >
-          <ConnectorPoint PointX="10.875" PointY="2.922841796875" />
-          <ConnectorPoint PointX="11.625" PointY="2.922841796875" />
-        </AssociationConnector>
-        <AssociationConnector Association="ITintheDTestModel1.FK_ProspectiveCorporateSponsor_SponsorStatus" >
-          <ConnectorPoint PointX="2.25" PointY="12.547841796875" />
-          <ConnectorPoint PointX="3" PointY="12.547841796875" />
-        </AssociationConnector>
-        <AssociationConnector Association="ITintheDTestModel1.FK_ProspectiveStudent_StudentStatus1" >
-          <ConnectorPoint PointX="10.875" PointY="7.547841796875" />
-          <ConnectorPoint PointX="11.625" PointY="7.547841796875" />
-        </AssociationConnector>
-        <EntityTypeShape EntityType="ITintheDTestModel1.SiteAdmin" Width="1.5" PointX="0.75" PointY="3.75" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="ITintheDTestModel1.ProspectiveCorporateSponsor" Width="1.5" PointX="5.75" PointY="7.75" Height="3.3263964843750031" />
+        <EntityTypeShape EntityType="ITintheDTestModel1.ProspectiveStudent" Width="1.5" PointX="7.75" PointY="7.75" Height="3.3263964843750031" />
+        <EntityTypeShape EntityType="ITintheDTestModel1.SiteAdmin" Width="1.5" PointX="0.75" PointY="8.75" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="ITintheDTestModel1.ProspectiveAcademic" Width="1.5" PointX="0.75" PointY="3.75" Height="3.9033007812500031" />
+        <EntityTypeShape EntityType="ITintheDTestModel1.UserImage" Width="1.5" PointX="2.75" PointY="3.75" Height="2.1725878906250031" />
         </Diagram>
     </Diagrams>
   </Designer>

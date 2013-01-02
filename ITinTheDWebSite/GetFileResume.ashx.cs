@@ -11,7 +11,6 @@ namespace ITinTheDWebSite
     /// </summary>
     public class GetFileResume : IHttpHandler
     {
-
         public void ProcessRequest(HttpContext context)
         {
             if (context.Request.QueryString["id"] != null)
@@ -27,7 +26,6 @@ namespace ITinTheDWebSite
 
                 return;
             }
-
         }
 
         public bool IsReusable

@@ -19,9 +19,6 @@ using System.Runtime.Serialization;
 #region EDM Relationship Metadata
 
 [assembly: EdmRelationshipAttribute("ITintheDTestModel1", "fk_RoleId", "webpages_Roles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ITinTheDWebSite.webpages_Roles), "webpages_UsersInRoles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ITinTheDWebSite.webpages_UsersInRoles), true)]
-[assembly: EdmRelationshipAttribute("ITintheDTestModel1", "FK_ProspectiveAcademic_AcademicStatus1", "AcademicStatus", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ITinTheDWebSite.AcademicStatus), "ProspectiveAcademic", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ITinTheDWebSite.ProspectiveAcademic), true)]
-[assembly: EdmRelationshipAttribute("ITintheDTestModel1", "FK_ProspectiveCorporateSponsor_SponsorStatus", "SponsorStatu", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ITinTheDWebSite.SponsorStatu), "ProspectiveCorporateSponsor", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ITinTheDWebSite.ProspectiveCorporateSponsor), true)]
-[assembly: EdmRelationshipAttribute("ITintheDTestModel1", "FK_ProspectiveStudent_StudentStatus1", "StudentStatu", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ITinTheDWebSite.StudentStatu), "ProspectiveStudent", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ITinTheDWebSite.ProspectiveStudent), true)]
 
 #endregion
 
@@ -156,70 +153,6 @@ namespace ITinTheDWebSite
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<AcademicStatus> AcademicStatus
-        {
-            get
-            {
-                if ((_AcademicStatus == null))
-                {
-                    _AcademicStatus = base.CreateObjectSet<AcademicStatus>("AcademicStatus");
-                }
-                return _AcademicStatus;
-            }
-        }
-        private ObjectSet<AcademicStatus> _AcademicStatus;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<StudentStatu> StudentStatus
-        {
-            get
-            {
-                if ((_StudentStatus == null))
-                {
-                    _StudentStatus = base.CreateObjectSet<StudentStatu>("StudentStatus");
-                }
-                return _StudentStatus;
-            }
-        }
-        private ObjectSet<StudentStatu> _StudentStatus;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<SponsorStatu> SponsorStatus
-        {
-            get
-            {
-                if ((_SponsorStatus == null))
-                {
-                    _SponsorStatus = base.CreateObjectSet<SponsorStatu>("SponsorStatus");
-                }
-                return _SponsorStatus;
-            }
-        }
-        private ObjectSet<SponsorStatu> _SponsorStatus;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<ProspectiveAcademic> ProspectiveAcademic
-        {
-            get
-            {
-                if ((_ProspectiveAcademic == null))
-                {
-                    _ProspectiveAcademic = base.CreateObjectSet<ProspectiveAcademic>("ProspectiveAcademic");
-                }
-                return _ProspectiveAcademic;
-            }
-        }
-        private ObjectSet<ProspectiveAcademic> _ProspectiveAcademic;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<ProspectiveCorporateSponsor> ProspectiveCorporateSponsor
         {
             get
@@ -264,6 +197,38 @@ namespace ITinTheDWebSite
             }
         }
         private ObjectSet<SiteAdmin> _SiteAdmin;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ProspectiveAcademic> ProspectiveAcademic
+        {
+            get
+            {
+                if ((_ProspectiveAcademic == null))
+                {
+                    _ProspectiveAcademic = base.CreateObjectSet<ProspectiveAcademic>("ProspectiveAcademic");
+                }
+                return _ProspectiveAcademic;
+            }
+        }
+        private ObjectSet<ProspectiveAcademic> _ProspectiveAcademic;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<UserImage> UserImage
+        {
+            get
+            {
+                if ((_UserImage == null))
+                {
+                    _UserImage = base.CreateObjectSet<UserImage>("UserImage");
+                }
+                return _UserImage;
+            }
+        }
+        private ObjectSet<UserImage> _UserImage;
 
         #endregion
         #region AddTo Methods
@@ -309,38 +274,6 @@ namespace ITinTheDWebSite
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the AcademicStatus EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToAcademicStatus(AcademicStatus academicStatus)
-        {
-            base.AddObject("AcademicStatus", academicStatus);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the StudentStatus EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToStudentStatus(StudentStatu studentStatu)
-        {
-            base.AddObject("StudentStatus", studentStatu);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the SponsorStatus EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToSponsorStatus(SponsorStatu sponsorStatu)
-        {
-            base.AddObject("SponsorStatus", sponsorStatu);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the ProspectiveAcademic EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToProspectiveAcademic(ProspectiveAcademic prospectiveAcademic)
-        {
-            base.AddObject("ProspectiveAcademic", prospectiveAcademic);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the ProspectiveCorporateSponsor EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToProspectiveCorporateSponsor(ProspectiveCorporateSponsor prospectiveCorporateSponsor)
@@ -363,6 +296,22 @@ namespace ITinTheDWebSite
         {
             base.AddObject("SiteAdmin", siteAdmin);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ProspectiveAcademic EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToProspectiveAcademic(ProspectiveAcademic prospectiveAcademic)
+        {
+            base.AddObject("ProspectiveAcademic", prospectiveAcademic);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the UserImage EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToUserImage(UserImage userImage)
+        {
+            base.AddObject("UserImage", userImage);
+        }
 
         #endregion
     }
@@ -371,112 +320,6 @@ namespace ITinTheDWebSite
     #endregion
     
     #region Entities
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="ITintheDTestModel1", Name="AcademicStatus")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class AcademicStatus : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new AcademicStatus object.
-        /// </summary>
-        /// <param name="academicStatusId">Initial value of the AcademicStatusId property.</param>
-        /// <param name="description">Initial value of the Description property.</param>
-        public static AcademicStatus CreateAcademicStatus(global::System.Int32 academicStatusId, global::System.String description)
-        {
-            AcademicStatus academicStatus = new AcademicStatus();
-            academicStatus.AcademicStatusId = academicStatusId;
-            academicStatus.Description = description;
-            return academicStatus;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 AcademicStatusId
-        {
-            get
-            {
-                return _AcademicStatusId;
-            }
-            set
-            {
-                if (_AcademicStatusId != value)
-                {
-                    OnAcademicStatusIdChanging(value);
-                    ReportPropertyChanging("AcademicStatusId");
-                    _AcademicStatusId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("AcademicStatusId");
-                    OnAcademicStatusIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _AcademicStatusId;
-        partial void OnAcademicStatusIdChanging(global::System.Int32 value);
-        partial void OnAcademicStatusIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                OnDescriptionChanging(value);
-                ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Description");
-                OnDescriptionChanged();
-            }
-        }
-        private global::System.String _Description;
-        partial void OnDescriptionChanging(global::System.String value);
-        partial void OnDescriptionChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ITintheDTestModel1", "FK_ProspectiveAcademic_AcademicStatus1", "ProspectiveAcademic")]
-        public EntityCollection<ProspectiveAcademic> ProspectiveAcademic
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProspectiveAcademic>("ITintheDTestModel1.FK_ProspectiveAcademic_AcademicStatus1", "ProspectiveAcademic");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProspectiveAcademic>("ITintheDTestModel1.FK_ProspectiveAcademic_AcademicStatus1", "ProspectiveAcademic", value);
-                }
-            }
-        }
-
-        #endregion
-    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -953,50 +796,33 @@ namespace ITinTheDWebSite
         private global::System.String _AcademicInstitutionTextField;
         partial void OnAcademicInstitutionTextFieldChanging(global::System.String value);
         partial void OnAcademicInstitutionTextFieldChanged();
-
-        #endregion
-    
-        #region Navigation Properties
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ITintheDTestModel1", "FK_ProspectiveAcademic_AcademicStatus1", "AcademicStatus")]
-        public AcademicStatus AcademicStatus
+        public global::System.String ImageUploaded
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AcademicStatus>("ITintheDTestModel1.FK_ProspectiveAcademic_AcademicStatus1", "AcademicStatus").Value;
+                return _ImageUploaded;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AcademicStatus>("ITintheDTestModel1.FK_ProspectiveAcademic_AcademicStatus1", "AcademicStatus").Value = value;
+                OnImageUploadedChanging(value);
+                ReportPropertyChanging("ImageUploaded");
+                _ImageUploaded = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ImageUploaded");
+                OnImageUploadedChanged();
             }
         }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<AcademicStatus> AcademicStatusReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AcademicStatus>("ITintheDTestModel1.FK_ProspectiveAcademic_AcademicStatus1", "AcademicStatus");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<AcademicStatus>("ITintheDTestModel1.FK_ProspectiveAcademic_AcademicStatus1", "AcademicStatus", value);
-                }
-            }
-        }
+        private global::System.String _ImageUploaded;
+        partial void OnImageUploadedChanging(global::System.String value);
+        partial void OnImageUploadedChanged();
 
         #endregion
+    
     }
     
     /// <summary>
@@ -1299,50 +1125,33 @@ namespace ITinTheDWebSite
         private global::System.String _SponsorPageTextField;
         partial void OnSponsorPageTextFieldChanging(global::System.String value);
         partial void OnSponsorPageTextFieldChanged();
-
-        #endregion
-    
-        #region Navigation Properties
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ITintheDTestModel1", "FK_ProspectiveCorporateSponsor_SponsorStatus", "SponsorStatu")]
-        public SponsorStatu SponsorStatus
+        public global::System.String ImageUploaded
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SponsorStatu>("ITintheDTestModel1.FK_ProspectiveCorporateSponsor_SponsorStatus", "SponsorStatu").Value;
+                return _ImageUploaded;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SponsorStatu>("ITintheDTestModel1.FK_ProspectiveCorporateSponsor_SponsorStatus", "SponsorStatu").Value = value;
+                OnImageUploadedChanging(value);
+                ReportPropertyChanging("ImageUploaded");
+                _ImageUploaded = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ImageUploaded");
+                OnImageUploadedChanged();
             }
         }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<SponsorStatu> SponsorStatusReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SponsorStatu>("ITintheDTestModel1.FK_ProspectiveCorporateSponsor_SponsorStatus", "SponsorStatu");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SponsorStatu>("ITintheDTestModel1.FK_ProspectiveCorporateSponsor_SponsorStatus", "SponsorStatu", value);
-                }
-            }
-        }
+        private global::System.String _ImageUploaded;
+        partial void OnImageUploadedChanging(global::System.String value);
+        partial void OnImageUploadedChanged();
 
         #endregion
+    
     }
     
     /// <summary>
@@ -1643,50 +1452,33 @@ namespace ITinTheDWebSite
         private global::System.String _ProspectiveStudentTextField;
         partial void OnProspectiveStudentTextFieldChanging(global::System.String value);
         partial void OnProspectiveStudentTextFieldChanged();
-
-        #endregion
-    
-        #region Navigation Properties
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ITintheDTestModel1", "FK_ProspectiveStudent_StudentStatus1", "StudentStatu")]
-        public StudentStatu StudentStatus
+        public global::System.String ImageUploaded
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<StudentStatu>("ITintheDTestModel1.FK_ProspectiveStudent_StudentStatus1", "StudentStatu").Value;
+                return _ImageUploaded;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<StudentStatu>("ITintheDTestModel1.FK_ProspectiveStudent_StudentStatus1", "StudentStatu").Value = value;
+                OnImageUploadedChanging(value);
+                ReportPropertyChanging("ImageUploaded");
+                _ImageUploaded = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ImageUploaded");
+                OnImageUploadedChanged();
             }
         }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<StudentStatu> StudentStatusReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<StudentStatu>("ITintheDTestModel1.FK_ProspectiveStudent_StudentStatus1", "StudentStatu");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<StudentStatu>("ITintheDTestModel1.FK_ProspectiveStudent_StudentStatus1", "StudentStatu", value);
-                }
-            }
-        }
+        private global::System.String _ImageUploaded;
+        partial void OnImageUploadedChanging(global::System.String value);
+        partial void OnImageUploadedChanged();
 
         #endregion
+    
     }
     
     /// <summary>
@@ -2261,6 +2053,30 @@ namespace ITinTheDWebSite
         private global::System.String _Company;
         partial void OnCompanyChanging(global::System.String value);
         partial void OnCompanyChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ImageUploaded
+        {
+            get
+            {
+                return _ImageUploaded;
+            }
+            set
+            {
+                OnImageUploadedChanging(value);
+                ReportPropertyChanging("ImageUploaded");
+                _ImageUploaded = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ImageUploaded");
+                OnImageUploadedChanged();
+            }
+        }
+        private global::System.String _ImageUploaded;
+        partial void OnImageUploadedChanging(global::System.String value);
+        partial void OnImageUploadedChanged();
 
         #endregion
     
@@ -2269,24 +2085,32 @@ namespace ITinTheDWebSite
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="ITintheDTestModel1", Name="SponsorStatu")]
+    [EdmEntityTypeAttribute(NamespaceName="ITintheDTestModel1", Name="UserImage")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class SponsorStatu : EntityObject
+    public partial class UserImage : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new SponsorStatu object.
+        /// Create a new UserImage object.
         /// </summary>
-        /// <param name="sponsorStatusId">Initial value of the SponsorStatusId property.</param>
-        /// <param name="description">Initial value of the Description property.</param>
-        public static SponsorStatu CreateSponsorStatu(global::System.Int32 sponsorStatusId, global::System.String description)
+        /// <param name="fileId">Initial value of the FileId property.</param>
+        /// <param name="userID">Initial value of the UserID property.</param>
+        /// <param name="fileName">Initial value of the FileName property.</param>
+        /// <param name="fileContent">Initial value of the FileContent property.</param>
+        /// <param name="contentType">Initial value of the ContentType property.</param>
+        /// <param name="contentLength">Initial value of the ContentLength property.</param>
+        public static UserImage CreateUserImage(global::System.Int32 fileId, global::System.Int32 userID, global::System.String fileName, global::System.Byte[] fileContent, global::System.String contentType, global::System.Int32 contentLength)
         {
-            SponsorStatu sponsorStatu = new SponsorStatu();
-            sponsorStatu.SponsorStatusId = sponsorStatusId;
-            sponsorStatu.Description = description;
-            return sponsorStatu;
+            UserImage userImage = new UserImage();
+            userImage.FileId = fileId;
+            userImage.UserID = userID;
+            userImage.FileName = fileName;
+            userImage.FileContent = fileContent;
+            userImage.ContentType = contentType;
+            userImage.ContentLength = contentLength;
+            return userImage;
         }
 
         #endregion
@@ -2297,185 +2121,150 @@ namespace ITinTheDWebSite
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 SponsorStatusId
+        public global::System.Int32 FileId
         {
             get
             {
-                return _SponsorStatusId;
+                return _FileId;
             }
             set
             {
-                if (_SponsorStatusId != value)
+                if (_FileId != value)
                 {
-                    OnSponsorStatusIdChanging(value);
-                    ReportPropertyChanging("SponsorStatusId");
-                    _SponsorStatusId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("SponsorStatusId");
-                    OnSponsorStatusIdChanged();
+                    OnFileIdChanging(value);
+                    ReportPropertyChanging("FileId");
+                    _FileId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("FileId");
+                    OnFileIdChanged();
                 }
             }
         }
-        private global::System.Int32 _SponsorStatusId;
-        partial void OnSponsorStatusIdChanging(global::System.Int32 value);
-        partial void OnSponsorStatusIdChanged();
+        private global::System.Int32 _FileId;
+        partial void OnFileIdChanging(global::System.Int32 value);
+        partial void OnFileIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Description
+        public global::System.Int32 UserID
         {
             get
             {
-                return _Description;
+                return _UserID;
             }
             set
             {
-                OnDescriptionChanging(value);
-                ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Description");
-                OnDescriptionChanged();
+                OnUserIDChanging(value);
+                ReportPropertyChanging("UserID");
+                _UserID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserID");
+                OnUserIDChanged();
             }
         }
-        private global::System.String _Description;
-        partial void OnDescriptionChanging(global::System.String value);
-        partial void OnDescriptionChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ITintheDTestModel1", "FK_ProspectiveCorporateSponsor_SponsorStatus", "ProspectiveCorporateSponsor")]
-        public EntityCollection<ProspectiveCorporateSponsor> ProspectiveCorporateSponsor
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProspectiveCorporateSponsor>("ITintheDTestModel1.FK_ProspectiveCorporateSponsor_SponsorStatus", "ProspectiveCorporateSponsor");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProspectiveCorporateSponsor>("ITintheDTestModel1.FK_ProspectiveCorporateSponsor_SponsorStatus", "ProspectiveCorporateSponsor", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="ITintheDTestModel1", Name="StudentStatu")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class StudentStatu : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new StudentStatu object.
-        /// </summary>
-        /// <param name="studentStatusId">Initial value of the StudentStatusId property.</param>
-        /// <param name="description">Initial value of the Description property.</param>
-        public static StudentStatu CreateStudentStatu(global::System.Int32 studentStatusId, global::System.String description)
-        {
-            StudentStatu studentStatu = new StudentStatu();
-            studentStatu.StudentStatusId = studentStatusId;
-            studentStatu.Description = description;
-            return studentStatu;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 StudentStatusId
-        {
-            get
-            {
-                return _StudentStatusId;
-            }
-            set
-            {
-                if (_StudentStatusId != value)
-                {
-                    OnStudentStatusIdChanging(value);
-                    ReportPropertyChanging("StudentStatusId");
-                    _StudentStatusId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("StudentStatusId");
-                    OnStudentStatusIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _StudentStatusId;
-        partial void OnStudentStatusIdChanging(global::System.Int32 value);
-        partial void OnStudentStatusIdChanged();
+        private global::System.Int32 _UserID;
+        partial void OnUserIDChanging(global::System.Int32 value);
+        partial void OnUserIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Description
+        public global::System.String FileName
         {
             get
             {
-                return _Description;
+                return _FileName;
             }
             set
             {
-                OnDescriptionChanging(value);
-                ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Description");
-                OnDescriptionChanged();
+                OnFileNameChanging(value);
+                ReportPropertyChanging("FileName");
+                _FileName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("FileName");
+                OnFileNameChanged();
             }
         }
-        private global::System.String _Description;
-        partial void OnDescriptionChanging(global::System.String value);
-        partial void OnDescriptionChanged();
-
-        #endregion
-    
-        #region Navigation Properties
+        private global::System.String _FileName;
+        partial void OnFileNameChanging(global::System.String value);
+        partial void OnFileNameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ITintheDTestModel1", "FK_ProspectiveStudent_StudentStatus1", "ProspectiveStudent")]
-        public EntityCollection<ProspectiveStudent> ProspectiveStudent
+        public global::System.Byte[] FileContent
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProspectiveStudent>("ITintheDTestModel1.FK_ProspectiveStudent_StudentStatus1", "ProspectiveStudent");
+                return StructuralObject.GetValidValue(_FileContent);
             }
             set
             {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProspectiveStudent>("ITintheDTestModel1.FK_ProspectiveStudent_StudentStatus1", "ProspectiveStudent", value);
-                }
+                OnFileContentChanging(value);
+                ReportPropertyChanging("FileContent");
+                _FileContent = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("FileContent");
+                OnFileContentChanged();
             }
         }
+        private global::System.Byte[] _FileContent;
+        partial void OnFileContentChanging(global::System.Byte[] value);
+        partial void OnFileContentChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ContentType
+        {
+            get
+            {
+                return _ContentType;
+            }
+            set
+            {
+                OnContentTypeChanging(value);
+                ReportPropertyChanging("ContentType");
+                _ContentType = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ContentType");
+                OnContentTypeChanged();
+            }
+        }
+        private global::System.String _ContentType;
+        partial void OnContentTypeChanging(global::System.String value);
+        partial void OnContentTypeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ContentLength
+        {
+            get
+            {
+                return _ContentLength;
+            }
+            set
+            {
+                OnContentLengthChanging(value);
+                ReportPropertyChanging("ContentLength");
+                _ContentLength = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ContentLength");
+                OnContentLengthChanged();
+            }
+        }
+        private global::System.Int32 _ContentLength;
+        partial void OnContentLengthChanging(global::System.Int32 value);
+        partial void OnContentLengthChanged();
 
         #endregion
+    
     }
     
     /// <summary>
