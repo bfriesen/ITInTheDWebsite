@@ -6,14 +6,18 @@
 }
 
 body {
-    background-color: #fff;
     border-top: solid 10px #000;
-    color: #333;
-    font-size: .85em;
+    /*color: #333;*/
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     margin: 0;
-    padding: 0;
     background-repeat:repeat-x;
+    font-size: 14px;
+    line-height: 20px;
+    color: #777777;
+    background-image:url('../../Images/Carousel/');
+    background-color: #efeeef;
+    clear: both;
+    padding-top: 70px;
 }
 
 a {
@@ -113,12 +117,6 @@ h5, h6 {
     max-width: 960px;
 }
 
-#body {
-    background-color: #efeeef;
-    clear: both;
-    padding-bottom: 35px;
-}
-
     .main-content {
         background: url("../Images/accent.png") no-repeat;
         padding-left: 10px;
@@ -137,6 +135,7 @@ footer {
     clear: both;
     font-size: .8em;
     height: 10px;
+    padding: 40px 0px;
 }
 
 
@@ -814,20 +813,36 @@ background-image: -webkit-gradient(linear, 0% 100%, 100% 0%, color-stop(.33, #ff
     height: 94px;
 }
 
-body {
-  margin: 0;
-  font-family:  "Segoe UI", Verdana, Helvetica, Sans-Serif;
-  font-size: 14px;
-  line-height: 20px;
-  color: #777777;
-  background-color: Gray;
-  background-image:url('../../Images/Carousel/');
- 
-  
-}
 .navbar-inverse .nav .active > a,
 .navbar-inverse .nav .active > a:hover,
 .navbar-inverse .nav .active > a:focus {
   color: black;
   background-color: #111111;
+}
+
+div.sponsors {
+    height: 70px;
+}
+
+.navbar-inverse .navbar-inner, .navbar-inner {
+    background-image: none;
+    filter: none;
+}
+ul.nav li a img {
+    height: 25px;
+    width: 80px;
+}
+.navbar-inverse .nav-collapse .nav > li > a, .navbar-inverse .nav-collapse .dropdown-menu a {
+    color: black;
+}
+.navbar-inverse .nav-collapse .nav > li > a:hover, .navbar-inverse .nav-collapse .dropdown-menu a:hover {
+    color: white;
+}
+
+.brand img {
+    height: 20px;
+}
+
+#myCarousel h2 {
+    text-align: center;
 }

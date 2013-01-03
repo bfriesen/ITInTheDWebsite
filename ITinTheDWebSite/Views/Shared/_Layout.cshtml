@@ -11,95 +11,103 @@
     @Styles.Render("~/Content/bootswatch")
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
-  
+    <script type="text/javascript" src="@Url.Content("~/Scripts/modernizr-2.6.2.js")"></script>
     <link href="/Content/bootstrap-responsive.css" rel="Stylesheet" />
-
 </head>
 <body class="preview" data-spy="scroll" data-target=".subnav" data-offset="100">
     <div class="container">
-        <header id="overview" class="jumbotron subhead">
-            <div class="navbar navbar-inverse">
-                <div class="navbar-inner">
-                    <div style="width: auto;height=10px;" class="container">
-                        <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar"><span
-                            class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                        <div class="nav-collapse">
-                            <ul class="nav">
-                                <li class="active">
-                                <li style="height=0px;"><a href="../Home/Index"><img src="../../Images/Carousel/ITintheD_logo.png" width="80" height="50" alt="img" /></a></li>
-                                <li style="height=0px;">@Html.ActionLink("Home", "Index", "Home")</li>
-                                <li style="height=0px;">@Html.ActionLink("About Us", "Index", "About")</li>
-                                <li style="height=0px;">@Html.ActionLink("FAQ", "Index", "FAQ")</li>
-                                <li style="height=0px;">@Html.ActionLink("Sponsors", "Index", "Sponsors")</li>
-                                <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle" href="#">More
-                                    <b class="caret"></b></a>
-                                    <ul class="dropdown-menu">
-                                        <li>@Html.ActionLink("Graduate Students", "Index", "GraduateStudents")</li>
-                                        <li>@Html.ActionLink("Academic Institutions", "Index", "AcademicInstitution")</li>
-                                        <li>@Html.ActionLink("Trainers", "Index", "Trainers")</li>
-                                        <li>@Html.ActionLink("Curriculum", "Index","Curriculum")</li>
-                                        <li>@Html.ActionLink("Events", "Index","Events")</li>
-                                        <li>@Html.ActionLink("Contact Us", "Index", "Contact")</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <ul class="nav pull-right">
-                                <section id="login">
-                                    @Html.Partial("_LoginPartial")
-                                </section>
-                            </ul>
+    <header id="overview">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class=""container">
+                    <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a href="~/Home" class="brand">
+                        <img src="../../Images/Carousel/ITintheD_logo.png" alt="img" /></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li class="active">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("About Us", "Index", "About")</li>
+                            <li>@Html.ActionLink("FAQ", "Index", "FAQ")</li>
+                            <li>@Html.ActionLink("Sponsors", "Index", "Sponsors")</li>
+                            <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle" href="#">More
+                                <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Graduate Students", "Index", "GraduateStudents")</li>
+                                    <li>@Html.ActionLink("Academic Institutions", "Index", "AcademicInstitution")</li>
+                                    <li>@Html.ActionLink("Trainers", "Index", "Trainers")</li>
+                                    <li>@Html.ActionLink("Curriculum", "Index", "Curriculum")</li>
+                                    <li>@Html.ActionLink("Events", "Index", "Events")</li>
+                                    <li>@Html.ActionLink("Contact Us", "Index", "Contact")</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div class="pull-right">
+                            <section id="login">
+                                @Html.Partial("_LoginPartial")
+                            </section>
                         </div>
-                        <!-- /.nav-collapse -->
                     </div>
                 </div>
-                <!-- /navbar-inner -->
+                            <!-- /.nav-collapse -->
             </div>
-        </header>
+                <!-- /navbar-inner -->
+        </div>
+    </header>
         @RenderBody()
         <!-- Footer ================================================== -->
-         
- <footer class="footer row">
-
-<h3>Our Sponsors:</h3>
-
-<!--"sponsor" images/links-->
-    <center>
-    <a href="http://www.quickenloans.com/" target="_blank"><img style="padding: 25px" src="../../Images/Carousel/quicken_logo.png" alt="quicken loans" /></a>
-	<a href="http://www.compuware.com/" target="_blank"><img style="padding: 25px" src="../../Images/Carousel/compuwarelogosmall.png" alt="compuware" /></a>
-	<a href="http://www.fathead.com/" target="_blank"><img style="padding: 25px" src="../../Images/Carousel/fathead.png" alt="fathead" /></a>
-	<a href="http://www.galaxesolutions.com/" target="_blank"><img style="padding: 25px" src="../../Images/Carousel/galaxe solutions.png" alt="galaxe solutions" /></a>
-    <a href="http://marketingassociates.com/" target="_blank"><img style="padding: 25px" src="../../Images/Carousel/mrktg_assoc_logo.png" alt="marketing associates" /></a>
-    </center>
-<!--end "sponsor" images/links-->
-        
-                <div class="navbar">
-                <div class="navbar-inner">
-                    <div class=pull-left>
-                    <!--social media links-->
-                        <h6>Follow us on:</h6>
-                        <a href="http://www.facebook.com/ITinDetroit" target="_blank"><img src="../../images/facebook_icon.png" height="40" width="40" alt="facebook" /></a>
-                        <a href="http://www.twitter.com/ITinDetroit" target="_blank"><img src="../../Images/twitter_icon.png" height="40" width="40" alt="twitter" /></a>
-                        <a href=" http://www.linkedin.com/groups/IT-in-D-Your-Detroit-4471137?itemaction=mclk&anetid=4471137&impid=4471137-4685117&pgkey=anet_about_guest&actpref=anet_about-gbm&trk=anet_about-gbm-group&goback=%2Eanb_4685117_*2_*1_*1_*1_*1_*1" target="_blank"><img src="../../Images/linkedin_icon.png" height="40" width="40" alt="linked in" /></a>
-                        <p /><a href="#">Back to top</a>
-                    </div>
-                    <div class="container">
-                        <div class="content-wrapper">
-                                 <div class="pull-right">
-                                    @Html.Partial("_ErrorReport", new sbContact.Models.EmailFields())
-                                    <br />© 2013 ITInTheD, Inc.
-                                    <br />· <a href="../Home/DisplayPrivacy">Privacy</a> · <a href="../Home/DisplayTerms">Terms</a>
-                                </div>
-                        </div>
-                    </div>
-                    <!--container -->
+        <footer class="footer">
+            <div class="row">
+                <h4 class="span12">Our Sponsors:</h4>
+            </div>
+            <div class="row sponsors">
+                <div class="span2 offset1 sponsor">
+                    <a href="http://www.quickenloans.com/" target="_blank"><img src="../../Images/Carousel/quicken_logo.png" alt="quicken loans" height="24" width="124" /></a>
                 </div>
-                <!-- nav-bar-inner -->
+                <div class="span2 sponsor">
+	                <a href="http://www.compuware.com/" target="_blank"><img src="../../Images/Carousel/compuwarelogosmall.png" alt="compuware" /></a>
                 </div>
-</footer>
-
+                <div class="span2 sponsor">
+	                <a href="http://www.fathead.com/" target="_blank"><img src="../../Images/Carousel/fathead.png" alt="fathead" /></a>
+                </div>
+                <div class="span2 sponsor">
+	                <a href="http://www.galaxesolutions.com/" target="_blank"><img src="../../Images/Carousel/galaxe solutions.png" alt="galaxe solutions" /></a>
+                </div>
+                <div class="span2 sponsor">
+                    <a href="http://marketingassociates.com/" target="_blank"><img src="../../Images/Carousel/mrktg_assoc_logo.png" alt="marketing associates" /></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span6">
+                    <h6>Follow us on:</h6>
+                    <a href="http://www.facebook.com/ITinDetroit" target="_blank">
+                        <img src="../../images/facebook_icon.png" height="40" width="40" alt="facebook" /></a>
+                    <a href="http://www.twitter.com/ITinDetroit" target="_blank">
+                        <img src="../../Images/twitter_icon.png" height="40" width="40" alt="twitter" /></a>
+                    <a href=" http://www.linkedin.com/groups/IT-in-D-Your-Detroit-4471137?itemaction=mclk&anetid=4471137&impid=4471137-4685117&pgkey=anet_about_guest&actpref=anet_about-gbm&trk=anet_about-gbm-group&goback=%2Eanb_4685117_*2_*1_*1_*1_*1_*1"
+                        target="_blank">
+                        <img src="../../Images/linkedin_icon.png" height="40" width="40" alt="linked in" /></a>
+                    <br />
+                    <a href="#">Back to top</a>
+                </div>
+                <div class="span6">
+                    <div class="pull-right">
+                        @Html.Partial("_ErrorReport", new sbContact.Models.EmailFields())
+                        <br />
+                        &copy; 2013 ITInTheD, Inc.
+                        <br />
+                        · <a href="../Home/DisplayPrivacy">Privacy</a> · <a href="../Home/DisplayTerms">Terms</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jqueryui")
-      @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryval")
 </body>
 </html>
