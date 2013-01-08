@@ -56,6 +56,7 @@
 else
 {
     <ul>
+        <font="black">
         @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
         <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle" href="#">Register
             <b class="caret"></b></a>
@@ -66,5 +67,6 @@ else
             </ul>
         </li>
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        </font>
     </ul>
 }

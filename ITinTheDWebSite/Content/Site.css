@@ -30,8 +30,11 @@ a {
    
 }
 
-    a:link, a:visited,
-    a:active, a:hover {
+    a:link {
+        color: Blue;
+        }
+    
+    a:visited, a:active, a:hover {
         color: black;
     }
 
