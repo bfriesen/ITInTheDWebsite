@@ -2674,20 +2674,20 @@ input[type="button"].btn-block {
 .btn-primary {
   color: #F38F44;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: Black;
+  background-color: black;
   background-image: -moz-linear-gradient(top, #F38F44, #777777);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#848484), to(#777777));
-  background-image: -webkit-linear-gradient(top, #848484, #777777);
-  background-image: -o-linear-gradient(top, #848484, #777777);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#F38F44), to(#777777));
+  background-image: -webkit-linear-gradient(top, #F38F44, #777777);
+  background-image: -o-linear-gradient(top, #F38F44, #777777);
   background-image: linear-gradient(to bottom, #F38F44, #777777);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff848484', endColorstr='#ff777777', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#F38F44', endColorstr='#F38F44', GradientType=0);
   border-color: #777777 #777777 #515151;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   *background-color: #777777;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
 
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+ 
 }
 .btn-primary:hover,
 .btn-primary:active,
@@ -3860,10 +3860,9 @@ input[type="submit"].btn.btn-mini {
 .navbar-inverse .navbar-inner 
 { 
  background-color: #bf5f00;
-background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.5, transparent), to(transparent));
-background-image: -moz-linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+background-image: -webkit-gradient( 0 0, 0 100%, color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.5, transparent), to(transparent));
+background-image: -moz-linear-gradient(rgba(255, 255, 255, .2), transparent, transparent);
 background-image: -o-linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
-background-image:  linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
 progid:DXImageTransform.Microsoft.gradient(startColorstr='#bf5f00', endColorstr='#bf5f00', GradientType=0); BORDER-LEFT: #bf5f00 1px solid;
 }
 .navbar-inverse .brand,
