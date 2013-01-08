@@ -289,6 +289,7 @@
     <Content Include="Images\Carousel\bg_navbar.png" />
     <Content Include="Images\Carousel\bg_technews_body.png" />
     <Content Include="Images\Carousel\bg_technews_head.png" />
+    <Content Include="Images\Carousel\CompuwareBldgAM.jpg" />
     <Content Include="Images\Carousel\compuwarelogosmall.png" />
     <Content Include="Images\Carousel\detroit-black-and-white-cindy-lindow.jpg" />
     <Content Include="Images\Carousel\fathead.png" />
@@ -302,6 +303,7 @@
     <Content Include="Images\Carousel\galaxe solutions.png" />
     <Content Include="Images\Carousel\Grey-website-background.jpg" />
     <Content Include="Images\Carousel\ITdGroup.jpg" />
+    <Content Include="Images\Carousel\ITdGroup2.jpg" />
     <Content Include="Images\Carousel\ITintheD_logo.png" />
     <Content Include="Images\Carousel\modified-hyundai-veloster-turbo-coupe-3-doors-wide-body-kit-eyelids-.jpg" />
     <Content Include="Images\Carousel\mrktg_assoc_logo.png" />
@@ -313,6 +315,8 @@
     <Content Include="Images\Carousel\quicken_logo.png" />
     <Content Include="Images\Carousel\Quicken.jpg" />
     <Content Include="Images\Carousel\Screen shot 2010-07-22 at 1.03.29 PM.png" />
+    <Content Include="Images\Carousel\sponsors2.jpg" />
+    <Content Include="Images\Carousel\students.jpg" />
     <Content Include="Images\Carousel\technews_button.png" />
     <Content Include="Images\Carousel\Veloster-Turbo-1_2354063b.jpg" />
     <Content Include="Images\Carousel\waynesworldautobloguk-hyundai-veloster-turbo-se-31.jpg" />

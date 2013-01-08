@@ -4898,6 +4898,7 @@ a.badge:hover {
 .carousel .next.left,
 .carousel .prev.right {
   left: 0;
+  
 }
 .carousel .active.left {
   left: -100%;
@@ -4928,7 +4929,15 @@ a.badge:hover {
 .carousel-control.right {
   left: auto;
   right: 15px;
+  color: #E62E00;
 }
+.carousel-control.left {
+  left: auto;
+  left: 15px;
+  color: #E62E00;
+}
+
+
 .carousel-control:hover {
   color: #ffffff;
   text-decoration: none;

@@ -1,4 +1,7 @@
-﻿<!-- Carousel
+﻿@{
+    ViewBag.Title = "Index";
+}
+<!-- Carousel
     ================================================== -->
 <h2 class="img">
     <img src="../../Images/Carousel/ITintheD_logo.png" />
@@ -6,30 +9,54 @@
 <div id="myCarousel" class="carousel slide span8 offset2">
     <div class="carousel-inner">
         <div class="item active">
+            <img src="../../Images/Carousel/ITdGroup2.jpg" alt="" />
+            <div class="container">
+                <div class="carousel-caption">
+                    <a class="btn btn-large btn-primary" @Html.ActionLink("Learn more", "Index", "About")
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="../../Images/Carousel/CompuwareBldgAM.jpg" alt="" />
+            <div class="container">
+                <div class="carousel-caption">
+                    <a class="btn btn-large btn-primary" @Html.ActionLink("Learn more", "Index", "About")
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="../../Images/Carousel/Sponsors2.jpg" alt="" />
+            <div class="container">
+                <div class="carousel-caption">
+                    <a class="btn btn-large btn-primary" @Html.ActionLink("Learn more", "Index", "About")
+                </div>
+            </div>
+        </div>
+        <div class="item">
             <img src="../../Images/Carousel/OutsourceDetroit2.jpg" alt="" />
             <div class="container">
                 <div class="carousel-caption">
                     <a class="btn btn-large btn-primary" @Html.ActionLink("Learn more", "Index", "About")
                 </div>
             </div>
-            <div class="item">
-                <img src="../../Images/Carousel/ITdGroup.jpg" alt="" />
-                <div class="container">
-                    <div class="carousel-caption">
-                        <a class="btn btn-large btn-primary" @Html.ActionLink("Learn more", "Index", "About")
-                    </div>
+        </div>
+         <div class="item">
+            <img src="../../Images/Carousel/students.jpg" alt="" />
+            <div class="container">
+                <div class="carousel-caption">
+                    <a class="btn btn-large btn-primary" @Html.ActionLink("Learn more", "Index", "About")
                 </div>
             </div>
-            <div class="item">
-                <img src="../../Images/Carousel/Quicken.jpg" alt="" />
-                <div class="container">
-                    <div class="carousel-caption">
-                        <a class="btn btn-large btn-primary" @Html.ActionLink("Learn more", "Index", "About")
-                    </div>
+        </div>
+        <div class="item">
+            <img src="../../Images/Carousel/Quicken.jpg" alt="" />
+            <div class="container">
+                <div class="carousel-caption">
+                    <a class="btn btn-large btn-primary" @Html.ActionLink("Learn more", "Index", "About")
                 </div>
             </div>
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
         </div>
     </div>
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
 </div>
