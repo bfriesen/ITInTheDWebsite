@@ -31,13 +31,37 @@
             @Html.ValidationMessageFor(model => model.Subject)
         </div>
  
-        <div class="editor-label">
+        @*<div class="editor-label">
             @Html.LabelFor(model => model.Message)
-        </div>
-        <div class="editor-field">
+        </div>*@
+        @*<div class="editor-field">
             @Html.EditorFor(model => model.Message)
             @Html.ValidationMessageFor(model => model.Message)
+             <br />
+            <input style="width: 37px" onblur="textCounter(this.form.recipients,this,4000);"
+                disabled onfocus="this.blur();" tabindex="999" maxlength="4" size="4" value="4000"
+                name="counter" id="counter" />
+            <small>characters remaining.</small>
+        </div>*@
+
+
+
+
+
+
+        <div class="editor-label" >
+            @Html.LabelFor(model => model.Message)
+            @Html.TextAreaFor(m => m.Message, new { @class = "chars-remaining-text-area", style="width: 220px; height: 100px", @cols = 10, @rows = 1, @onblur = "textCounter(this,this.form.counter,4000);", @onkeyup = "textCounter(this,this.form.counter,4000);" })
+            <br />
+            <input style="width: 37px" onblur="textCounter(this.form.recipients,this,4000);"
+                disabled onfocus="this.blur();" tabindex="999" maxlength="4" size="4" value="4000"
+                name="counter" id="counter" />
+            <small>characters remaining.</small>
         </div>
+
+
+
+
  
 <p>
 <input type="submit" value="Send email" />
@@ -67,3 +91,19 @@ Detroit, MI 48226<br />
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+<script type="text/javascript">
+    function textCounter(field, countfield, maxlimit) {
+        if (field.value.length > maxlimit) {
+            field.value = field.value.substring(0, maxlimit);
+            field.blur();
+            field.focus();
+            return false;
+        } else {
+            countfield.value = maxlimit - field.value.length;
+        }
+    };
+
+    $(document).ready(function () { textCounter($("#Reason")[0], $("#counter")[0], 4000) });
+    //    TODO: Figure out how to call textCounter function after the dom has loaded (jquery ready function?)
+    
+    </script>
