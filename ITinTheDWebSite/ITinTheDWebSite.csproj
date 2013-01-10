@@ -181,6 +181,7 @@
     <Compile Include="Controllers\FAQController.cs" />
     <Compile Include="Controllers\GraduateStudentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ResumeController.cs" />
     <Compile Include="Controllers\SponsorsController.cs" />
     <Compile Include="Controllers\TrainersController.cs" />
@@ -474,6 +475,7 @@
     <Content Include="Views\Account\StoreAcademicPage.cshtml" />
     <Content Include="Views\Account\StoreSponsorPage.cshtml" />
     <Content Include="Views\Account\DisplaySponsorPage.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
