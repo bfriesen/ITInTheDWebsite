@@ -57,7 +57,7 @@ else
 {
     <ul>
         @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
-        <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle" href="#">Register
+        <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle" href="#" style="color:Black">Register
             <b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li>@Html.ActionLink("Prospective Student", "DisplayProspect", "Account")</li>
@@ -65,6 +65,6 @@ else
                 <li>@Html.ActionLink("Corporate Sponsor", "DisplaySponsor", "Account")</li>
             </ul>
         </li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { style = "color:Black" })</li>
     </ul>
 }

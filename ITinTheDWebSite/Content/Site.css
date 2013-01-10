@@ -30,18 +30,11 @@ a {
    
 }
 
-    a:link, a:visited {
-        color: Blue;
-        }
-    
-    a:active, a:hover {
-        color: black;
-    }
-
-    a:hover {
-        background-color: #c7d1d6;
-    }
-    
+    a:link { color: Blue; }
+    a:visited { color: Red; }
+    a:active { color: Black; } 
+    a:hover { color: Black; }
+    a:hover { background-color: #c7d1d6; }
     a.darklink {color: Black;}
 
 header, hgroup,
