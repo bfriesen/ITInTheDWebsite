@@ -63,7 +63,7 @@ namespace ITinTheDWebSite.Controllers
             if (ModelState.IsValid)
             {
                 bool edit = false;
-
+        //This code solves the bug when registering a new student
                 if (prospect.AccountStatus < 1)
                 {
                     prospect.AccountStatus = 1;
@@ -76,11 +76,17 @@ namespace ITinTheDWebSite.Controllers
 
                 if (prospect.ProspectiveStudentTextField == null)
                 {
-                    ProspectModel oldProspect = new ProspectModel();
+                    if (WebSecurity.GetUserId(prospect.EmailAddress) < 1)
+                    {
 
-                    string field = DatabaseHelper.GetProspectData(oldProspect, WebSecurity.GetUserId(prospect.EmailAddress)).ProspectiveStudentTextField;
+                    }
 
-                    prospect.ProspectiveStudentTextField = field;
+                    else
+                    {
+                        ProspectModel oldProspect = new ProspectModel();
+                        string field = DatabaseHelper.GetProspectData(oldProspect, WebSecurity.GetUserId(prospect.EmailAddress)).ProspectiveStudentTextField;
+                        prospect.ProspectiveStudentTextField = field;
+                    }
                 }
 
                 if (DatabaseHelper.StoreProspectData(prospect, ref edit))
