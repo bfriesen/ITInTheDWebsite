@@ -30,7 +30,7 @@ a {
    
 }
 
-    a:link, visited {
+    a:link, a:visited {
         color: Blue;
         }
     
