@@ -200,7 +200,7 @@ namespace ITinTheDWebSite.Controllers
                     if (edit == true)
                     {
                         TempData["Message"] = "Successfully edited your information.";
-                        return RedirectToAction("Account", "Manage");
+                        return RedirectToAction("Manage", "Account");
                     }
 
                     else

@@ -74,19 +74,11 @@ namespace ITinTheDWebSite.Controllers
                     prospect.AccountStatus = 4;
                 }
 
-                if (prospect.ProspectiveStudentTextField == null)
+                if (prospect.ProspectiveStudentTextField == null && WebSecurity.GetUserId(prospect.EmailAddress) > 0)
                 {
-                    if (WebSecurity.GetUserId(prospect.EmailAddress) < 1)
-                    {
-
-                    }
-
-                    else
-                    {
                         ProspectModel oldProspect = new ProspectModel();
                         string field = DatabaseHelper.GetProspectData(oldProspect, WebSecurity.GetUserId(prospect.EmailAddress)).ProspectiveStudentTextField;
                         prospect.ProspectiveStudentTextField = field;
-                    }
                 }
 
                 if (DatabaseHelper.StoreProspectData(prospect, ref edit))
@@ -201,13 +193,13 @@ namespace ITinTheDWebSite.Controllers
                 if (DatabaseHelper.StoreProspectData(prospect, ref edit))
                 {
                     TempData["Message"] = "Successfully deleted your story as a graduate student.";
-                    return RedirectToAction("Index", "AcademicInstitution");
+                    return RedirectToAction("Index", "GraduateStudents");
                 }
 
                 else
                 {
                     TempData["Message"] = "Failed to delete your story as a graduate student.";
-                    return RedirectToAction("Index", "AcademicInstitution");
+                    return RedirectToAction("Index", "GraduateStudents");
                 }
             }
 
@@ -269,7 +261,7 @@ namespace ITinTheDWebSite.Controllers
                     academic.AccountStatus = 3;
                 }
 
-                if (academic.AcademicInstitutionTextField == null)
+                if (academic.AcademicInstitutionTextField == null && WebSecurity.GetUserId(academic.PrimaryEmailAddress) > 0)
                 {
                     AcademicModel oldAcademic = new AcademicModel();
 
@@ -410,7 +402,7 @@ namespace ITinTheDWebSite.Controllers
                     sponsor.AccountStatus = 3;
                 }
 
-                if (sponsor.SponsorTextField == null)
+                if (sponsor.SponsorTextField == null && WebSecurity.GetUserId(sponsor.EmailAddress) > 0)
                 {
                     SponsorModel oldSponsor = new SponsorModel();
 
