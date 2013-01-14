@@ -31,7 +31,7 @@ a {
 }
 
     a:link { color: Blue; }
-    a:visited { color: Red; }
+    a:visited { color: Purple; }
     a:active { color: Black; } 
     a:hover { color: Black; }
     a:hover { background-color: #c7d1d6; }
