@@ -454,7 +454,7 @@ namespace ITinTheDWebSite.Controllers
             SponsorModel spons = new SponsorModel();
             if (DatabaseHelper.GetSponsorData(spons, -1) == null)
             {
-                TempData["RegistrationMessage"] = "Sponsor registration form.";
+                TempData["RegistrationMessage"] = "Corporate Sponsor registration form.";
             }
 
             return View(spons);
