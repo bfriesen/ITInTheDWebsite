@@ -29,8 +29,8 @@ namespace sbContact.Controllers
                 Subject = Mailer.Subject,
                 Body = Mailer.Message
             };
-            email.To.Add(new MailAddress("whover.@whatver.com"));
-            //email.To.Add(new System.Configuration.ConfigurationManager.AppSettings["EmailTo"].ToString());
+            //email.To.Add(new MailAddress("whover.@whatver.com"));
+            email.To.Add(System.Configuration.ConfigurationManager.AppSettings["EmailTo"].ToString());
             SmtpClient client = new SmtpClient();
             //client.Credentials = new NetworkCredential(username, password);
             client.Send(email);
