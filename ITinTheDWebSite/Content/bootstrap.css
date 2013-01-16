@@ -2702,6 +2702,25 @@ input[type="button"].btn-block {
 .btn-primary.active {
   background-color: #5e5e5e \9;
 }
+
+.btn-about
+{
+  color: #DB9900;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: black;
+  background-image: -moz-linear-gradient(top, #F38F44, #777777);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#F38F44), to(#777777));
+  background-image: -webkit-linear-gradient(top, #F38F44, #777777);
+  background-image: -o-linear-gradient(top, #F38F44, #777777);
+  background-image: linear-gradient(to bottom, #F38F44, #777777);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#F38F44', endColorstr='#F38F44', GradientType=0);
+  border-color: #777777 #777777 #515151;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  *background-color: #777777;
+  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+  
+}
 .btn-warning {
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
