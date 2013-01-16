@@ -315,6 +315,7 @@
     <Content Include="Images\Carousel\QLogo.jpg" />
     <Content Include="Images\Carousel\quicken_logo.png" />
     <Content Include="Images\Carousel\Quicken.jpg" />
+    <Content Include="Images\Carousel\quicken_logo2.jpg" />
     <Content Include="Images\Carousel\Screen shot 2010-07-22 at 1.03.29 PM.png" />
     <Content Include="Images\Carousel\sponsors2.jpg" />
     <Content Include="Images\Carousel\students.jpg" />
@@ -326,6 +327,11 @@
     <Content Include="Images\facebook_icon.png" />
     <Content Include="Images\Files Upload Check\SQLDatabase_CheckMark.PNG" />
     <Content Include="Images\Files Upload Check\SQLDatabse_CheckX.PNG" />
+    <Content Include="Images\Footer\compuwarelogosmall.png" />
+    <Content Include="Images\Footer\fathead2.png" />
+    <Content Include="Images\Footer\galaxe2.gif" />
+    <Content Include="Images\Footer\mrktg_assoc_logo2.jpg" />
+    <Content Include="Images\Footer\quicken_logo2.jpg" />
     <Content Include="Images\ITintheD_logo.jpg" />
     <Content Include="Images\linkedin_icon.png" />
     <Content Include="Images\SponsorsAccordion\220px-CompuwareLogo.png" />
