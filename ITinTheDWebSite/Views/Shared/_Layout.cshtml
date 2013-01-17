@@ -57,33 +57,31 @@
                             <!-- /.nav-collapse -->
             </div>
                 <!-- /navbar-inner -->
+                <!-- /search box powered by google cse -->
+                <div class="pull-right" id="cse-search-form" style="width: 40%; position:absolute; right:0px;">Loading</div>
+                    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+                    <script type="text/javascript">
+                        google.load('search', '1', { language: 'en', style: google.loader.themes.V2_DEFAULT });
+                        google.setOnLoadCallback(function () {
+                        var customSearchOptions = {}; var customSearchControl = new google.search.CustomSearchControl(
+                        '006072065711276741272:zgvsbzocwco', customSearchOptions);
+                        customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+                        var options = new google.search.DrawOptions();
+                        options.enableSearchboxOnly("http://www.google.com/cse?cx=006072065711276741272:zgvsbzocwco");
+                        customSearchControl.draw('cse-search-form', options);
+                        }, true);
+                </script>
+                <style type="text/css">
+                    input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus {
+                    border-color: #D9D9D9;
+                }
+                    input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+                    border-color: #2F5BB7;
+                    background-color: #357AE8;
+                    background-image: none;
+                    filter: none;
+                }</style>
         </div>
-
-        <!-- /search box powered by google cse -->
-        <div class="pull-right" id="cse-search-form" style="width: 40%; position:absolute; right:0px;">Loading</div>
-<script src="http://www.google.com/jsapi" type="text/javascript"></script>
-<script type="text/javascript">
-    google.load('search', '1', { language: 'en', style: google.loader.themes.V2_DEFAULT });
-    google.setOnLoadCallback(function () {
-        var customSearchOptions = {}; var customSearchControl = new google.search.CustomSearchControl(
-      '006072065711276741272:zgvsbzocwco', customSearchOptions);
-        customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
-        var options = new google.search.DrawOptions();
-        options.enableSearchboxOnly("http://www.google.com/cse?cx=006072065711276741272:zgvsbzocwco");
-        customSearchControl.draw('cse-search-form', options);
-    }, true);
-</script>
-
-<style type="text/css">
-  input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus {
-    border-color: #D9D9D9;
-  }
-  input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
-    border-color: #2F5BB7;
-    background-color: #357AE8;
-    background-image: none;
-    filter: none;
-  }</style>
         <br />
 
     </header>
