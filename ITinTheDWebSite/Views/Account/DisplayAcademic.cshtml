@@ -10,7 +10,7 @@
 
 @if ((User.IsInRole("Admin") && ITinTheDWebSite.Helpers.DatabaseHelper.GetAdminData(regAdmin, WebSecurity.GetUserId(User.Identity.Name)).AccountStatus < 3) || !User.IsInRole("Admin") && (Model.AccountStatus == 1))
 {
-    <h4>You are not verified by the admin yet, your account status is 1.</h4>
+    <h4>You are not verified by the admin yet, your account status is pending.</h4>
 }
 
 else
