@@ -836,7 +836,7 @@ ul.nav li a img {
     color: black;
 }
 .navbar-inverse .nav-collapse .nav > li > a:hover, .navbar-inverse .nav-collapse .dropdown-menu a:hover {
-    color: white;
+    color: black;
 }
 
 .brand img {
