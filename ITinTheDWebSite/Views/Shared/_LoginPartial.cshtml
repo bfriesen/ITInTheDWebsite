@@ -45,7 +45,14 @@
     
     if (User.IsInRole("Student"))
     {
-        @Html.ActionLink("Apply Online", "DisplayProspectFiles", "Account")
+        ITinTheDWebSite.Models.ProspectModel prospect = new ITinTheDWebSite.Models.ProspectModel();
+        
+        int status = ITinTheDWebSite.Helpers.DatabaseHelper.GetProspectData(prospect, WebSecurity.GetUserId(User.Identity.Name)).AccountStatus;
+
+        if (status > 0 && status < 3)
+        {
+            @Html.ActionLink("Apply Online", "DisplayProspectFiles", "Account")
+        }
     }
 
     else if (User.IsInRole("Admin"))

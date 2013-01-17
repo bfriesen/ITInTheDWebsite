@@ -27,13 +27,13 @@ else
             @if (Model.ImageUploaded == "Yes")
             {
                 <p>
-                    Avatar</p>
+                    Image</p>
                 <img src="/GetFileImage.ashx?id=@WebSecurity.GetUserId(Model.EmailAddress)" / style="width: 128px; height: 128px;">
 
             }
             <div class="editor-label">
                 <br />
-                @Html.Label("Upload Avatar")
+                @Html.Label("Upload Image")
             </div>
             <input type="file" name="ImageFile" />
         </div>

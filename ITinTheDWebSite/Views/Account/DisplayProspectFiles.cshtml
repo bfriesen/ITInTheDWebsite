@@ -27,11 +27,6 @@
                 <a href="/GetFileResume.ashx?id=@WebSecurity.GetUserId(Model.EmailAddress)">Get Resume
                     (@FileName)</a> 
             }
-
-            else if (Model.ResumeUploaded == "No")
-            {
-                <img src="../../Images/Files%20Upload%20Check/SQLDatabse_CheckX.PNG" / style="width: 32px; height: 32px;">
-            }
         </div>
         <div class="editor-label">
             @Html.Label("Upload Transcript - Optional")
@@ -46,11 +41,6 @@
                 
                 <a href="/GetFileTranscript.ashx?id=@WebSecurity.GetUserId(Model.EmailAddress)">Get
                     Transcript (@FileName)</a> 
-            }
-
-            else if (Model.TranscriptUploaded == "No")
-            {
-                <img src="../../Images/Files%20Upload%20Check/SQLDatabse_CheckX.PNG" / style="width: 32px; height: 32px;">
             }
         </div>
         <p>

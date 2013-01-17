@@ -26,12 +26,12 @@ else
             @if (Model.ImageUploaded == "Yes")
             {
                 <p>
-                    Avatar</p>
-                <img src="/GetFileImage.ashx?id=@WebSecurity.GetUserId(Model.EmailAddress)" / style="width: 128px; height: 128px;">
+                    Image</p>
+                <img src="/GetFileImage.ashx?id=@WebSecurity.GetUserId(Model.EmailAddress)" />
             }
             <div class="editor-label">
                 <br />
-                @Html.Label("Upload Avatar")
+                @Html.Label("Upload Image")
             </div>
             <input type="file" name="ImageFile" />
         </div>
@@ -147,11 +147,6 @@ else
                 
                 <a href="/GetFileResume.ashx?id=@WebSecurity.GetUserId(Model.EmailAddress)">Get Resume (@FileName)</a> 
             }
-
-            else if (Model.ResumeUploaded == "No")
-            {
-                <img src="../../Images/Files%20Upload%20Check/SQLDatabse_CheckX.PNG" / style="width: 32px; height: 32px;">
-            }
         </div>
         <div class="editor-label">
             @Html.Label("Upload Transcript")
@@ -165,11 +160,6 @@ else
                 string FileName = ITinTheDWebSite.Helpers.DatabaseHelper.GetTranscript(WebSecurity.GetUserId(Model.EmailAddress)).FileName;
                 
                 <a href="/GetFileTranscript.ashx?id=@WebSecurity.GetUserId(Model.EmailAddress)">Get Transcript (@FileName)</a> 
-            }
-
-            else if (Model.TranscriptUploaded == "No")
-            {
-                <img src="../../Images/Files%20Upload%20Check/SQLDatabse_CheckX.PNG" / style="width: 32px; height: 32px;">
             }
         </div>
         <p>
