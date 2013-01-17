@@ -15,27 +15,25 @@ ViewBag.Title = "Events";
 
 <table class="table table-striped">
 <tr>
-<th width="150">
+<th width="150" align="left">
    Event Link
 </th>
-<th width="300">
+<th width="300" align="left">
    Details
 </th>
 </tr> 
 @foreach (var item in Model) {
 
 <tr>
-<td>
+<td align="left">
    <a href="@item.Link" target="_blank">@Html.Encode(item.Title)</a>
    
 </td>
-<td>
+<td align="left">
   @System.Web.HttpUtility.HtmlDecode(item.Description)
   <a href="@item.Link" target="_blank">Read More...</a>
 </td>
-</tr>   
-    
-    
+</tr>
 }
 </table>
 </body>
