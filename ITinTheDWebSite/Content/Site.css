@@ -30,7 +30,7 @@ a {
    
 }
 
-    a:link { color: white; }
+    a:link { color: Blue; }
     a:visited { color: Purple; }
     a:active { color: Black; } 
     a:hover { color: Black; }
