@@ -4,15 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITinTheDWebSite", "ITinTheDWebSite\ITinTheDWebSite.csproj", "{EE9BCB3C-187E-441A-BF00-1508605BEDA1}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://redacted:8080/tfs/training
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ITinTheDWebSite\\ITinTheDWebSite.csproj
-		SccProjectName1 = ITinTheDWebSite
-		SccLocalPath1 = ITinTheDWebSite
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
