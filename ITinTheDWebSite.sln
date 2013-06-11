@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Express 2012 for Web
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITinTheDWebSite", "ITinTheDWebSite\ITinTheDWebSite.csproj", "{EE9BCB3C-187E-441A-BF00-1508605BEDA1}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ITinTheDWebSite.Database", "ITinTheDWebSite.Database\ITinTheDWebSite.Database.sqlproj", "{C9A9DD42-CF67-4D63-8EDB-0F50965BD8EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITinTheDWebSite.DataMigrations", "ITinTheDWebSite.DataMigrations\ITinTheDWebSite.DataMigrations.csproj", "{A1934B4B-47C1-449D-8DEB-0241163235BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,12 +15,10 @@ Global
 		{EE9BCB3C-187E-441A-BF00-1508605BEDA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE9BCB3C-187E-441A-BF00-1508605BEDA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE9BCB3C-187E-441A-BF00-1508605BEDA1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C9A9DD42-CF67-4D63-8EDB-0F50965BD8EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C9A9DD42-CF67-4D63-8EDB-0F50965BD8EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C9A9DD42-CF67-4D63-8EDB-0F50965BD8EA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{C9A9DD42-CF67-4D63-8EDB-0F50965BD8EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C9A9DD42-CF67-4D63-8EDB-0F50965BD8EA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C9A9DD42-CF67-4D63-8EDB-0F50965BD8EA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A1934B4B-47C1-449D-8DEB-0241163235BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1934B4B-47C1-449D-8DEB-0241163235BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1934B4B-47C1-449D-8DEB-0241163235BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1934B4B-47C1-449D-8DEB-0241163235BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

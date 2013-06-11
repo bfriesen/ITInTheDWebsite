@@ -1,9 +1,0 @@
-﻿CREATE TABLE [dbo].[14_Student_EducationLevel](
-	[EducationLevelId] [int] IDENTITY(1,1) NOT NULL,
-	[Title] [nchar](50) NOT NULL,
-	[Description] [nchar](1000) NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[EducationLevelId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
